@@ -16,7 +16,7 @@
       gap: 48px;
       max-width: 1100px;
       margin: 0 auto;
-      align-items: start;
+      align-items: center;
     }
     @media (max-width: 820px) {
       .cha-footer-top { grid-template-columns: 1fr; gap: 28px; text-align: center; }
