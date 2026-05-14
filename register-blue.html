@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>블루관 어린이반 가입 신청서 – 차 태권도</title>
+  <meta name="description" content="차 태권도 블루관(서초2동) 어린이반 가입 신청서. 온라인으로 간편하게 접수하세요.">
+  <link rel="icon" href="https://chataekwondo.com/wp-content/uploads/2025/05/cropped-logo-01-32x32.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --accent: #fcaf3b; --dark: #14171c; --light: #f8f8f8; --branch: #1a73e8; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; color: #333; line-height: 1.6; padding-bottom: 56px; background: var(--light); }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* NAV */
+    .cha-header { background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.08); position: sticky; top: 0; z-index: 1000; }
+    .cha-nav { display: flex; align-items: center; justify-content: space-between; height: 72px; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .cha-logo img { height: 50px; width: auto; }
+    .cha-nav-links { display: flex; align-items: center; gap: 24px; }
+    .cha-nav-links > a { font-size: 14px; font-weight: 600; color: #333; transition: color .2s; }
+    .cha-nav-links > a:hover { color: var(--accent); }
+    .cha-nav-dropdown { position: relative; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; }
+    .cha-nav-dropdown:hover { color: var(--accent); }
+    .cha-dropdown { display: none; position: absolute; top: calc(100% + 12px); left: 0; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.12); border-radius: 10px; min-width: 180px; padding: 8px 0; z-index: 100; }
+    .cha-nav-dropdown:hover .cha-dropdown { display: block; }
+    .cha-dropdown a { display: block; padding: 10px 20px; font-size: 13px; font-weight: 600; transition: background .15s; }
+    .cha-dropdown a:hover { background: var(--light); color: var(--accent); }
+    .cha-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+    .cha-hamburger span { width: 24px; height: 2px; background: var(--dark); display: block; }
+    @media (max-width: 820px) {
+      .cha-hamburger { display: flex; }
+      .cha-nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: #fff; flex-direction: column; align-items: flex-start; padding: 20px 24px; gap: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.1); border-top: 1px solid #eee; }
+      .cha-nav-links.open { display: flex; }
+      .cha-dropdown { position: static; box-shadow: none; border-radius: 0; padding-left: 16px; margin-top: 8px; }
+      .cha-nav-dropdown:hover .cha-dropdown { display: none; }
+    }
+
+    /* PAGE HERO */
+    .page-hero { background: linear-gradient(135deg, #0d47a1 0%, #1a73e8 100%); color: #fff; padding: 72px 24px 60px; text-align: center; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,.2) 0%, transparent 60%); }
+    .page-hero .breadcrumb { font-size: 12px; letter-spacing: 2px; opacity: .7; margin-bottom: 20px; position: relative; }
+    .page-hero .breadcrumb a { color: rgba(255,255,255,.7); }
+    .page-hero .breadcrumb a:hover { color: #fff; }
+    .page-hero .emoji { font-size: 52px; margin-bottom: 16px; display: block; position: relative; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 48px); font-weight: 900; margin-bottom: 10px; position: relative; }
+    .page-hero .sub { font-size: 15px; opacity: .85; margin-bottom: 24px; position: relative; }
+    .page-hero p.tagline { font-size: 15px; opacity: .75; position: relative; }
+
+    .cross-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px; position: relative; }
+    .cross-link { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid rgba(255,255,255,.4); border-radius: 30px; padding: 8px 18px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.85); transition: border-color .2s, background .2s; }
+    .cross-link:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+
+    /* INFO BAR */
+    .info-bar { background: #fff; border-bottom: 2px solid #f0f0f0; }
+    .info-bar-inner { max-width: 780px; margin: 0 auto; padding: 16px 24px; display: flex; gap: 28px; flex-wrap: wrap; align-items: center; justify-content: center; }
+    .info-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #555; }
+    .info-item strong { color: var(--dark); }
+
+    /* FORM AREA */
+    .form-area { padding: 52px 24px 72px; }
+    .gform-wrap { max-width: 780px; margin: 0 auto; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 32px rgba(0,0,0,.08); border-top: 5px solid var(--branch); }
+    .gform-wrap iframe { display: block; width: 100%; min-height: 600px; height: 960px; border: none; }
+    @media (max-width: 640px) { .gform-wrap iframe { height: 1200px; } }
+
+    /* FOOTER */
+    .cha-footer { background: var(--dark); color: rgba(255,255,255,.55); padding: 48px 24px; text-align: center; font-size: 13px; line-height: 2.2; }
+    .cha-footer a { color: var(--accent); }
+
+    /* STICKY BAR */
+    .cha-sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; display: flex; height: 56px; box-shadow: 0 -2px 12px rgba(0,0,0,.18); }
+    .cha-sticky-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px; font-weight: 700; color: #fff; text-decoration: none; font-family: 'Outfit', sans-serif; }
+    .cha-sticky-btn.call  { background: var(--branch); }
+    .cha-sticky-btn.red   { background: #e53935; }
+    .cha-sticky-btn.adult { background: var(--accent); color: var(--dark); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="cha-header">
+  <nav class="cha-nav">
+    <a href="index.html" class="cha-logo">
+      <img src="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png" alt="차 태권도">
+    </a>
+    <div class="cha-nav-links" id="navLinks">
+      <a href="index.html">HOME</a>
+      <div class="cha-nav-dropdown">
+        <span>도장 소개 ▾</span>
+        <div class="cha-dropdown">
+          <a href="instructor.html">지도자 소개</a>
+          <a href="greeting.html">관장님 인사말</a>
+          <a href="philosophy.html">교육 철학</a>
+          <a href="facility.html">시설 안내</a>
+        </div>
+      </div>
+      <a href="programs.html">수련 프로그램</a>
+      <a href="schedule.html">시간표</a>
+      <a href="gallery.html">갤러리</a>
+      <a href="contact.html">오시는 길</a>
+      <a href="news.html">도장 소식</a>
+      <a href="register-adult.html" style="background:var(--accent);color:var(--dark);padding:8px 18px;border-radius:30px;font-weight:800;">가입 신청</a>
+    </div>
+    <button class="cha-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="register-kids.html">어린이반</a> &nbsp;›&nbsp; 블루관
+  </div>
+  <span class="emoji">🔵</span>
+  <h1>블루관 가입 신청서</h1>
+  <p class="sub">서초 2동 어린이반</p>
+  <p class="tagline">차 태권 도장에서 도전과 꿈을 응원합니다.</p>
+  <div class="cross-links">
+    <a href="register-kids.html" class="cross-link">← 어린이반 선택으로 돌아가기</a>
+    <a href="register-red.html" class="cross-link">🔴 레드관 (서초1동) 신청서 →</a>
+  </div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-bar-inner">
+    <div class="info-item">📍 <span><strong>주소</strong> &nbsp;서울시 서초구 사임당로 158, 리더스원 빌딩 4층</span></div>
+    <div class="info-item">📞 <span><strong>전화</strong> &nbsp;<a href="tel:01031809209" style="color:var(--branch);font-weight:700;">010-3180-9209</a></span></div>
+    <div class="info-item">🚇 <span>2호선 강남역 / 3호선 교대역 도보 10분</span></div>
+  </div>
+</div>
+
+<!-- GOOGLE FORM -->
+<div class="form-area">
+  <div class="gform-wrap">
+    <iframe
+      src="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe8OM0OMMVysJeu3i0WbNRhVl5I917jekw56i7mJGC8OpuLXw/formResponse?embedded=true"
+      width="100%"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0"
+      title="차 태권도 블루관 어린이반 가입 신청서"
+    >로딩 중…</iframe>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="cha-footer">
+  <div style="max-width:1100px;margin:0 auto;">
+    <img src="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png" alt="차 태권도" style="height:44px;margin:0 auto 20px;">
+    <p>
+      <strong style="color:#fff;">🔴 레드관 (서초1동)</strong> &nbsp;남부순환로339길 33, 송하빌딩 2층 &nbsp;|&nbsp; 010-4952-9397<br>
+      <strong style="color:#fff;">🔵 블루관 (서초2동)</strong> &nbsp;사임당로 158, 리더스원 4층 &nbsp;|&nbsp; 010-3180-9209
+    </p>
+    <p style="margin-top:20px;">&copy; 2025 차 태권도. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="cha-sticky-bar">
+  <a href="tel:01031809209" class="cha-sticky-btn call">📞 블루관 전화</a>
+  <a href="register-red.html" class="cha-sticky-btn red">🔴 레드관 신청</a>
+  <a href="register-adult.html" class="cha-sticky-btn adult">🏀 성인반 신청</a>
+</div>
+
+</body>
+</html>
