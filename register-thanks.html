@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>신청 완료 – 차 태권도</title>
+  <link rel="icon" href="https://chataekwondo.com/wp-content/uploads/2025/05/cropped-logo-01-32x32.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --accent: #fcaf3b; --dark: #14171c; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background: var(--dark); color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 24px; }
+    .card { background: #1e232b; border-radius: 28px; padding: 64px 52px; max-width: 520px; width: 100%; text-align: center; box-shadow: 0 8px 48px rgba(0,0,0,.4); }
+    @media (max-width: 480px) { .card { padding: 44px 28px; } }
+    .icon { font-size: 72px; margin-bottom: 28px; }
+    .badge { display: inline-block; background: var(--accent); color: var(--dark); font-size: 11px; font-weight: 800; padding: 4px 14px; border-radius: 20px; letter-spacing: 2px; margin-bottom: 24px; }
+    h1 { font-size: clamp(22px, 4vw, 32px); font-weight: 900; margin-bottom: 16px; }
+    p { font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.8; margin-bottom: 12px; }
+    .divider { width: 48px; height: 3px; background: var(--accent); border-radius: 2px; margin: 28px auto; }
+    .info-box { background: rgba(252,175,59,.08); border: 1px solid rgba(252,175,59,.2); border-radius: 14px; padding: 20px 24px; text-align: left; margin: 24px 0 36px; }
+    .info-row { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(255,255,255,.8); margin-bottom: 10px; }
+    .info-row:last-child { margin-bottom: 0; }
+    .info-row .label { font-weight: 700; min-width: 60px; color: var(--accent); }
+    .btn-group { display: flex; flex-direction: column; gap: 12px; }
+    .btn { display: block; padding: 15px 24px; border-radius: 12px; font-size: 15px; font-weight: 800; text-decoration: none; transition: transform .2s, opacity .2s; }
+    .btn:hover { transform: translateY(-2px); opacity: .9; }
+    .btn.primary { background: var(--accent); color: var(--dark); }
+    .btn.secondary { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">✅</div>
+    <div class="badge">SUBMITTED</div>
+    <h1>신청이 완료되었습니다!</h1>
+    <p>가입 신청서가 정상적으로 접수되었습니다.<br>담당 사범님께서 <strong style="color:#fff;">24시간 이내</strong>에 연락드리겠습니다.</p>
+    <div class="divider"></div>
+    <div class="info-box">
+      <div class="info-row"><span class="label">강남점</span><span>📞 010-3180-9209</span></div>
+      <div class="info-row"><span class="label">서초점</span><span>📞 010-4952-9397</span></div>
+      <div class="info-row"><span class="label">운영 시간</span><span>평일 14:00 – 21:00 / 주말 10:00 – 14:00</span></div>
+    </div>
+    <div class="btn-group">
+      <a href="index.html" class="btn primary">🏠 홈으로 돌아가기</a>
+      <a href="register.html" class="btn secondary">✍️ 다른 신청서 작성</a>
+    </div>
+  </div>
+</body>
+</html>
