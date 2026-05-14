@@ -11,20 +11,22 @@
     }
     .cha-footer-unified a { color: #fcaf3b; text-decoration: none; }
     .cha-footer-top {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 48px;
       max-width: 1100px;
       margin: 0 auto;
-      align-items: center;
     }
     @media (max-width: 820px) {
-      .cha-footer-top { grid-template-columns: 1fr; gap: 28px; text-align: center; }
+      .cha-footer-top { flex-direction: column; gap: 28px; text-align: center; align-items: center; }
       .cha-footer-social { align-items: center; }
     }
-    .cha-footer-logo { height: 44px; margin-bottom: 12px; display: block; }
-    @media (max-width: 820px) { .cha-footer-logo { margin: 0 auto 12px; } }
-    .cha-footer-director { font-weight: 700; color: #fff; font-size: 14px; }
+    .cha-footer-brand { display: flex; flex-direction: column; }
+    .cha-footer-logo { height: 44px; margin-bottom: 10px; display: block; }
+    @media (max-width: 820px) { .cha-footer-logo { margin: 0 auto 10px; } }
+    .cha-footer-director { font-weight: 700; color: #fff; font-size: 14px; margin-top: 10px; }
+    .cha-footer-info { flex: 1; }
     .cha-footer-info p { margin-bottom: 6px; }
     .cha-footer-info .legal { margin-top: 12px; font-size: 12px; opacity: .65; }
     .cha-footer-social { display: flex; flex-direction: column; gap: 8px; min-width: 148px; }
@@ -63,20 +65,19 @@
         <div class="cha-footer-brand">
           <img src="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png"
                alt="차 태권도" class="cha-footer-logo">
+          <div class="cha-footer-info">
+            <p>
+              <strong style="color:#fff;">🔵 차 태권도 블루관</strong>&nbsp;
+              서울시 서초구 사임당로 158, 래미안리더스원 상가 4층 &nbsp;|&nbsp;
+              <a href="tel:01031809209">010-3180-9209</a>
+            </p>
+            <p>
+              <strong style="color:#fff;">🔴 차 태권도 레드관</strong>&nbsp;
+              서울시 서초구 남부순환로339길 33, 송하빌딩 2층 &nbsp;|&nbsp;
+              <a href="tel:01049529397">010-4952-9397</a>
+            </p>
+          </div>
           <p class="cha-footer-director">관장 차동술</p>
-        </div>
-
-        <div class="cha-footer-info">
-          <p>
-            <strong style="color:#fff;">🔵 차 태권도 블루관</strong>&nbsp;
-            서울시 서초구 사임당로 158, 래미안리더스원 상가 4층 &nbsp;|&nbsp;
-            <a href="tel:01031809209">010-3180-9209</a>
-          </p>
-          <p>
-            <strong style="color:#fff;">🔴 차 태권도 레드관</strong>&nbsp;
-            서울시 서초구 남부순환로339길 33, 송하빌딩 2층 &nbsp;|&nbsp;
-            <a href="tel:01049529397">010-4952-9397</a>
-          </p>
         </div>
 
         <div class="cha-footer-social">
