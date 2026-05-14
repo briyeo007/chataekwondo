@@ -24,7 +24,7 @@
     }
     .cha-footer-logo { height: 44px; margin-bottom: 12px; display: block; }
     @media (max-width: 820px) { .cha-footer-logo { margin: 0 auto 12px; } }
-    .cha-footer-director { font-weight: 700; color: #fff; font-size: 14px; }
+    .cha-footer-director { font-weight: 700; color: #fff; font-size: 14px; margin: 0; }
     .cha-footer-info p { margin-bottom: 6px; }
     .cha-footer-info .legal { margin-top: 12px; font-size: 12px; opacity: .65; }
     .cha-footer-social { display: flex; flex-direction: column; gap: 8px; min-width: 148px; }
