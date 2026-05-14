@@ -140,6 +140,152 @@ display: none;}
 /*# sourceURL=core-block-supports-inline-css */
 </style>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<style>
+/* ── 히어로 오버레이 ── */
+.cha-hero-overlay {
+  position: absolute; inset: 0; z-index: 10;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.55) 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; color: #fff;
+  padding: 24px;
+  pointer-events: none;
+}
+.cha-hero-overlay .cha-hero-tag {
+  font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
+  opacity: .85; margin-bottom: 16px; font-weight: 600;
+}
+.cha-hero-overlay h1 {
+  font-size: clamp(28px, 5vw, 64px); font-weight: 900;
+  line-height: 1.2; margin-bottom: 16px;
+  text-shadow: 0 2px 20px rgba(0,0,0,.6);
+}
+.cha-hero-overlay p {
+  font-size: clamp(14px, 2vw, 20px);
+  opacity: .92; max-width: 600px; line-height: 1.6;
+}
+.video-container { position: relative; }
+
+/* ── 통계 스트립 ── */
+.cha-stats {
+  background: #14171c; padding: 40px 20px;
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+}
+.cha-stat {
+  flex: 1 1 180px; max-width: 220px;
+  text-align: center; color: #fff;
+  padding: 20px 16px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.cha-stat:last-child { border-right: none; }
+.cha-stat .num {
+  font-size: clamp(32px, 4vw, 48px); font-weight: 900;
+  color: #fcaf3b; line-height: 1;
+  display: block; margin-bottom: 8px;
+}
+.cha-stat .label { font-size: 13px; opacity: .75; letter-spacing: 1px; }
+
+/* ── 시간표 탭 ── */
+.cha-schedule { padding: 64px 20px; background: #f9f9f9; }
+.cha-schedule h2 { text-align: center; font-size: clamp(22px,3vw,36px); font-weight: 900; margin-bottom: 32px; }
+.cha-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+.cha-tab {
+  padding: 10px 28px; border: 2px solid #14171c;
+  background: #fff; font-size: 15px; font-weight: 700;
+  cursor: pointer; border-radius: 30px; transition: all .2s;
+}
+.cha-tab.active, .cha-tab:hover { background: #14171c; color: #fff; }
+.cha-panel { display: none; max-width: 720px; margin: 0 auto; }
+.cha-panel.active { display: block; }
+.cha-schedule-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.cha-schedule-table th {
+  background: #14171c; color: #fff;
+  padding: 12px 16px; text-align: center; font-weight: 700;
+}
+.cha-schedule-table td {
+  padding: 12px 16px; text-align: center;
+  border-bottom: 1px solid #eee;
+}
+.cha-schedule-table tr:nth-child(even) td { background: #f5f5f5; }
+
+/* ── 후기 섹션 ── */
+.cha-reviews { padding: 72px 20px; background: #fff; }
+.cha-reviews h2 { text-align: center; font-size: clamp(22px,3vw,36px); font-weight: 900; margin-bottom: 12px; }
+.cha-reviews .sub { text-align: center; color: #777; margin-bottom: 48px; font-size: 15px; }
+.cha-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; max-width: 1100px; margin: 0 auto;
+}
+.cha-review-card {
+  background: #f9f9f9; border-radius: 16px;
+  padding: 28px 24px; position: relative;
+  transition: transform .25s, box-shadow .25s;
+}
+.cha-review-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.09); }
+.cha-review-card .quote {
+  font-size: 48px; line-height: 1; color: #fcaf3b;
+  font-family: Georgia, serif; margin-bottom: 8px;
+}
+.cha-review-card p { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 20px; }
+.cha-review-author { display: flex; align-items: center; gap: 12px; }
+.cha-review-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: #14171c; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 18px; flex-shrink: 0;
+}
+.cha-review-name { font-weight: 700; font-size: 14px; }
+.cha-review-meta { font-size: 12px; color: #999; }
+.cha-stars { color: #fcaf3b; font-size: 14px; margin-bottom: 4px; }
+
+/* ── 네이버 지도 ── */
+.cha-map-section { padding: 64px 20px; background: #f0f0f0; }
+.cha-map-section h2 { text-align: center; font-size: clamp(22px,3vw,32px); font-weight: 900; margin-bottom: 40px; }
+.cha-map-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 28px; max-width: 1100px; margin: 0 auto;
+}
+@media(max-width:680px){ .cha-map-grid { grid-template-columns: 1fr; } }
+.cha-map-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+.cha-map-card iframe { width: 100%; height: 240px; border: none; display: block; }
+.cha-map-info { padding: 20px 24px; }
+.cha-map-info .branch { font-weight: 900; font-size: 17px; margin-bottom: 12px; color: #14171c; }
+.cha-map-info p { font-size: 13.5px; color: #444; line-height: 1.8; }
+.cha-map-info a { color: #fcaf3b; font-weight: 700; }
+
+/* ── 하단 고정 상담 바 ── */
+.cha-sticky-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  display: flex; height: 56px;
+  box-shadow: 0 -2px 12px rgba(0,0,0,.18);
+}
+.cha-sticky-btn {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  gap: 7px; font-size: 14px; font-weight: 700;
+  color: #fff; text-decoration: none;
+  transition: filter .2s;
+}
+.cha-sticky-btn:hover { filter: brightness(1.12); }
+.cha-sticky-btn.call  { background: #1a73e8; }
+.cha-sticky-btn.kakao { background: #fee500; color: #3c1e1e; }
+.cha-sticky-btn.map   { background: #03c75a; }
+.cha-sticky-icon { font-size: 20px; }
+body { padding-bottom: 56px; }
+
+/* ── 통계 카운트업 ── */
+@keyframes countUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.cha-stat { animation: countUp .6s ease both; }
+.cha-stat:nth-child(2) { animation-delay:.1s; }
+.cha-stat:nth-child(3) { animation-delay:.2s; }
+.cha-stat:nth-child(4) { animation-delay:.3s; }
+
+@media(max-width:600px){
+  .cha-stat { flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .cha-tab { padding: 8px 18px; font-size: 13px; }
+}
+</style>
 </head>
 
 <body  class="home wp-singular page-template-default page page-id-559 wp-custom-logo wp-theme-neve wp-child-theme-neve-child-master  nv-blog-grid nv-sidebar-full-width nv-without-title menu_sidebar_slide_left" id="neve_body"  >
@@ -298,6 +444,11 @@ display: none;}
 <div class="wp-block-columns alignfull is-layout-flex wp-container-core-columns-is-layout-9d6595d7 wp-block-columns-is-layout-flex">
 <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:100%">
 <div class="video-container">
+    <div class="cha-hero-overlay">
+      <span class="cha-hero-tag">🇫🇷 프랑스가 감탄한 태권도</span>
+      <h1>차 태권도에서<br/>시작하세요</h1>
+      <p>20년 이상의 지도력 · KBS 방송 출연 · 국기원 공인<br/>강남 &amp; 서초에서 여러분을 기다립니다</p>
+    </div>
     <iframe src="https://www.youtube.com/embed/kugTDSEbQBs?autoplay=1&loop=1&playlist=kugTDSEbQBs&controls=0&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
@@ -423,6 +574,13 @@ display: none;}
 
 
 
+<!-- ★ 통계 스트립 -->
+<section class="cha-stats">
+  <div class="cha-stat"><span class="num" data-target="20">0</span><span class="label">년 이상 지도 경력</span></div>
+  <div class="cha-stat"><span class="num" data-target="15">0</span><span class="label">개국 시범 공연</span></div>
+  <div class="cha-stat"><span class="num" data-target="8">0</span><span class="label">단 공인 태권도</span></div>
+  <div class="cha-stat"><span class="num" data-target="3">0</span><span class="label">+ 방송 출연</span></div>
+</section>
 <div style="height:200px" aria-hidden="true" class="wp-block-spacer"></div>
 
 
@@ -493,6 +651,46 @@ display: none;}
 
 
 
+<!-- ★ 시간표 탭 -->
+<section class="cha-schedule">
+  <h2>📅 수업 시간표</h2>
+  <div class="cha-tabs">
+    <button class="cha-tab active" onclick="showTab('유치부',this)">유치부</button>
+    <button class="cha-tab" onclick="showTab('초등부',this)">초등부</button>
+    <button class="cha-tab" onclick="showTab('성인부',this)">성인부</button>
+  </div>
+  <div id="tab-유치부" class="cha-panel active">
+    <table class="cha-schedule-table">
+      <thead><tr><th>요일</th><th>시간</th><th>대상</th></tr></thead>
+      <tbody>
+        <tr><td>월·수·금</td><td>16:00 – 17:00</td><td>유치부 A반</td></tr>
+        <tr><td>월·수·금</td><td>17:00 – 18:00</td><td>유치부 B반</td></tr>
+        <tr><td>화·목</td><td>16:00 – 17:00</td><td>유치부 특별반</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="tab-초등부" class="cha-panel">
+    <table class="cha-schedule-table">
+      <thead><tr><th>요일</th><th>시간</th><th>대상</th></tr></thead>
+      <tbody>
+        <tr><td>월·수·금</td><td>17:00 – 18:30</td><td>초등 저학년</td></tr>
+        <tr><td>월·수·금</td><td>18:30 – 20:00</td><td>초등 고학년</td></tr>
+        <tr><td>화·목</td><td>17:00 – 18:30</td><td>품새 전문반</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="tab-성인부" class="cha-panel">
+    <table class="cha-schedule-table">
+      <thead><tr><th>요일</th><th>시간</th><th>대상</th></tr></thead>
+      <tbody>
+        <tr><td>월·수·금</td><td>06:30 – 08:00</td><td>성인 아침반</td></tr>
+        <tr><td>월·수·금</td><td>20:00 – 21:30</td><td>성인 저녁반</td></tr>
+        <tr><td>토</td><td>10:00 – 12:00</td><td>성인 주말반</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="text-align:center;margin-top:20px;font-size:13px;color:#999;">※ 시간표는 변동될 수 있으니 전화로 확인해 주세요.</p>
+</section>
 <div style="height:200px" aria-hidden="true" class="wp-block-spacer"></div>
 
 
@@ -524,6 +722,49 @@ display: none;}
 </div></div>
 
 
+<!-- ★ 후기 섹션 -->
+<section class="cha-reviews">
+  <h2>학부모님들의 이야기</h2>
+  <p class="sub">차 태권도와 함께 성장한 아이들의 실제 후기입니다.</p>
+  <div class="cha-reviews-grid">
+    <div class="cha-review-card">
+      <div class="quote">"</div>
+      <div class="cha-stars">★★★★★</div>
+      <p>입소문만 듣고 왔는데 관장님의 열정이 남달랐어요. 아이가 자신감이 생기고 학교에서도 태도가 달라졌다는 말을 들었을 때 정말 뿌듯했습니다.</p>
+      <div class="cha-review-author">
+        <div class="cha-review-avatar">김</div>
+        <div>
+          <div class="cha-review-name">김○○ 학부모</div>
+          <div class="cha-review-meta">초등 2학년 자녀, 강남점 1년 수련</div>
+        </div>
+      </div>
+    </div>
+    <div class="cha-review-card">
+      <div class="quote">"</div>
+      <div class="cha-stars">★★★★★</div>
+      <p>성인반인데도 수준 맞춰서 꼼꼼히 가르쳐 주세요. 다이어트 목적으로 시작했는데 6개월 만에 8kg 감량하고 국기원 심사도 붙었습니다!</p>
+      <div class="cha-review-author">
+        <div class="cha-review-avatar">박</div>
+        <div>
+          <div class="cha-review-name">박○○님</div>
+          <div class="cha-review-meta">성인반, 서초점 6개월 수련</div>
+        </div>
+      </div>
+    </div>
+    <div class="cha-review-card">
+      <div class="quote">"</div>
+      <div class="cha-stars">★★★★★</div>
+      <p>프랑스 투어 소식 보고 정말 놀랐어요. 이런 글로벌한 경험까지 시켜주는 도장이 있다니! 아이가 태권도를 통해 세계를 바라보는 눈이 생긴 것 같아요.</p>
+      <div class="cha-review-author">
+        <div class="cha-review-avatar">이</div>
+        <div>
+          <div class="cha-review-name">이○○ 학부모</div>
+          <div class="cha-review-meta">초등 5학년 자녀, 강남점 2년 수련</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
 
@@ -893,6 +1134,77 @@ var themeisleGutenbergSlider = {"isRTL":""};
 const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
 //# sourceURL=https://chataekwondo.com/wp-includes/js/wp-emoji-loader.min.js
 </script>
+<!-- ★ 오시는 길 지도 -->
+<section class="cha-map-section">
+  <h2>📍 오시는 길</h2>
+  <div class="cha-map-grid">
+    <div class="cha-map-card">
+      <iframe src="https://map.naver.com/v5/api/mapWidget/v1/oauth/iframe?clientId=bj5oiHn2KGNiLjgW2yXl&pinType=place&pinTitle=차태권도+강남점&lat=37.4869&lng=127.0049&zoom=16" title="강남점 지도"></iframe>
+      <div class="cha-map-info">
+        <p class="branch">강남점</p>
+        <p>📍 서울시 서초구 사임당로 158, 리더스원 빌딩 4F<br/>
+           📞 <a href="tel:01031809209">010-3180-9209</a><br/>
+           🚇 2호선 강남역 / 3호선 교대역 도보 10분<br/>
+           🅿️ 건물 내 주차 가능 (1시간 무료)</p>
+        <a href="https://map.naver.com/v5/search/서울시 서초구 사임당로 158" target="_blank" style="display:inline-block;margin-top:12px;padding:8px 18px;background:#03c75a;color:#fff;border-radius:4px;font-size:13px;font-weight:700;">네이버 지도로 보기</a>
+      </div>
+    </div>
+    <div class="cha-map-card">
+      <iframe src="https://map.naver.com/v5/api/mapWidget/v1/oauth/iframe?clientId=bj5oiHn2KGNiLjgW2yXl&pinType=place&pinTitle=차태권도+서초점&lat=37.4794&lng=126.9946&zoom=16" title="서초점 지도"></iframe>
+      <div class="cha-map-info">
+        <p class="branch">서초점</p>
+        <p>📍 서울시 서초구 남부순환로339길 33, 송하 빌딩 2F<br/>
+           📞 <a href="tel:01049529397">010-4952-9397</a><br/>
+           🚇 3호선 남부터미널역 도보 5분<br/>
+           🅿️ 건물 앞 주차 가능 (30분 무료)</p>
+        <a href="https://map.naver.com/v5/search/서울시 서초구 남부순환로339길 33" target="_blank" style="display:inline-block;margin-top:12px;padding:8px 18px;background:#03c75a;color:#fff;border-radius:4px;font-size:13px;font-weight:700;">네이버 지도로 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ★ 하단 고정 상담 바 -->
+<div class="cha-sticky-bar">
+  <a href="tel:01031809209" class="cha-sticky-btn call">
+    <span class="cha-sticky-icon">📞</span> 전화상담
+  </a>
+  <a href="https://open.kakao.com/o/sCHATK" target="_blank" class="cha-sticky-btn kakao">
+    <span class="cha-sticky-icon">💬</span> 카톡상담
+  </a>
+  <a href="directions.html" class="cha-sticky-btn map">
+    <span class="cha-sticky-icon">📍</span> 오시는 길
+  </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+// 시간표 탭
+function showTab(id, btn) {
+  document.querySelectorAll('.cha-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.cha-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// 숫자 카운트업
+const counters = document.querySelectorAll('.cha-stat .num');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = +el.dataset.target;
+    let cur = 0;
+    const step = Math.ceil(target / 30);
+    const timer = setInterval(() => {
+      cur = Math.min(cur + step, target);
+      el.textContent = cur + (el.nextSibling && el.nextSibling.textContent.includes('+') ? '' : '');
+      if (cur >= target) clearInterval(timer);
+    }, 40);
+    observer.unobserve(el);
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => observer.observe(c));
+</script>
 </body>
 
 </html>
@@ -901,4 +1213,5 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 <!-- Cached page generated by WP-Super-Cache on 2026-05-14 13:29:56 -->
 
 <!-- super cache -->
+
 
