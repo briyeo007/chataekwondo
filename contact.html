@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=NAVER_CLIENT_ID"></script>
   <style>
     :root { --accent: #fcaf3b; --dark: #14171c; --light: #f8f8f8; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -352,40 +352,26 @@
   <a href="contact.html" class="cha-sticky-btn map" style="background:#555;">📍 오시는 길</a>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function () {
-  var tile = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  var attr = '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>';
-
-  function buildMap(id, lat, lng, popup) {
-    var m = L.map(id, { scrollWheelZoom: false }).setView([lat, lng], 17);
-    L.tileLayer(tile, { attribution: attr }).addTo(m);
-    L.marker([lat, lng]).addTo(m).bindPopup(popup).openPopup();
+  function initMap(id, lat, lng, label) {
+    var loc = new naver.maps.LatLng(lat, lng);
+    var map = new naver.maps.Map(id, {
+      center: loc,
+      zoom: 17,
+      mapTypeControl: false,
+      scaleControl: false,
+      mapDataControl: false
+    });
+    var marker = new naver.maps.Marker({ position: loc, map: map });
+    var iw = new naver.maps.InfoWindow({
+      content: '<div style="padding:8px 14px;font-size:13px;font-weight:700;font-family:sans-serif;">' + label + '</div>'
+    });
+    iw.open(map, marker);
   }
 
-  function geocodeAndBuild(id, query, popup, fbLat, fbLng) {
-    fetch('https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(query) + '&format=json&limit=1&countrycodes=kr', { headers: { 'Accept-Language': 'ko' } })
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        if (d && d.length) buildMap(id, +d[0].lat, +d[0].lon, popup);
-        else buildMap(id, fbLat, fbLng, popup);
-      })
-      .catch(function () { buildMap(id, fbLat, fbLng, popup); });
-  }
-
-  geocodeAndBuild(
-    'map-gangnam',
-    '서울특별시 서초구 사임당로 158',
-    '<b>차 태권도 강남점</b><br>사임당로 158, 래미안리더스원 상가 4층',
-    37.4921, 127.0262
-  );
-  geocodeAndBuild(
-    'map-seocho',
-    '서울특별시 서초구 남부순환로339길 33',
-    '<b>차 태권도 서초점</b><br>남부순환로339길 33, 송하빌딩 2층',
-    37.4862, 127.0163
-  );
+  initMap('map-gangnam', 37.4921, 127.0262, '차 태권도 강남점<br>래미안리더스원 상가 4층');
+  initMap('map-seocho', 37.4862, 127.0163, '차 태권도 서초점<br>송하빌딩 2층');
 })();
 </script>
 </body>
