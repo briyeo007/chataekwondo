@@ -80,7 +80,7 @@
         </div>
 
         <div class="cha-footer-social">
-          <a href="#" target="_blank" class="cha-soc-btn insta">📸 Instagram</a>
+          <a href="https://www.instagram.com/cha.taekwondo/" target="_blank" class="cha-soc-btn insta">📸 Instagram</a>
           <a href="#" target="_blank" class="cha-soc-btn yt">▶ YouTube</a>
           <a href="https://map.naver.com/v5/search/차+태권도+서초구+서울"
              target="_blank" class="cha-soc-btn naver">🗺 네이버 지도</a>
