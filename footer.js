@@ -77,10 +77,7 @@
             서울시 서초구 남부순환로339길 33, 송하빌딩 2층 &nbsp;|&nbsp;
             <a href="tel:01049529397">010-4952-9397</a>
           </p>
-          <p class="legal">
-            사업자등록번호: 000-00-00000 &nbsp;|&nbsp;
-            <a href="#">개인정보 처리방침</a>
-          </p>
+          <p class="legal"><a href="#">개인정보 처리방침</a></p>
         </div>
 
         <div class="cha-footer-social">
