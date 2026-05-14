@@ -28,7 +28,7 @@
     .cha-nav-links > a:hover, .cha-nav-links > a.active { color: var(--accent); }
     .cha-nav-dropdown { position: relative; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; }
     .cha-nav-dropdown:hover { color: var(--accent); }
-    .cha-dropdown { display: none; position: absolute; top: calc(100% + 12px); left: 0; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.12); border-radius: 10px; min-width: 180px; padding: 8px 0; z-index: 100; }
+    .cha-dropdown { display: none; position: absolute; top: calc(100% + 12px); left: 0; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.12); border-radius: 10px; min-width: 180px; padding: 8px 0; z-index: 100; } .cha-dropdown::before { content: ""; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
     .cha-nav-dropdown:hover .cha-dropdown { display: block; }
     .cha-dropdown a { display: block; padding: 10px 20px; font-size: 13px; font-weight: 600; transition: background .15s; }
     .cha-dropdown a:hover { background: var(--light); color: var(--accent); }
