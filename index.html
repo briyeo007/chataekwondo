@@ -1102,6 +1102,35 @@ body { padding-bottom: 56px; }
 	</div>
 </footer>
 
+<!-- ★ 오시는 길 지도 -->
+<section class="cha-map-section">
+  <h2>📍 오시는 길</h2>
+  <div class="cha-map-grid">
+    <div class="cha-map-card">
+      <iframe src="https://map.naver.com/v5/api/mapWidget/v1/oauth/iframe?clientId=bj5oiHn2KGNiLjgW2yXl&pinType=place&pinTitle=차태권도+강남점&lat=37.4869&lng=127.0049&zoom=16" title="강남점 지도"></iframe>
+      <div class="cha-map-info">
+        <p class="branch">강남점</p>
+        <p>📍 서울시 서초구 사임당로 158, 리더스원 빌딩 4F<br/>
+           📞 <a href="tel:01031809209">010-3180-9209</a><br/>
+           🚇 2호선 강남역 / 3호선 교대역 도보 10분<br/>
+           🅿️ 건물 내 주차 가능 (1시간 무료)</p>
+        <a href="contact.html" style="display:inline-block;margin-top:12px;padding:8px 18px;background:#03c75a;color:#fff;border-radius:4px;font-size:13px;font-weight:700;">오시는 길 자세히 보기</a>
+      </div>
+    </div>
+    <div class="cha-map-card">
+      <iframe src="https://map.naver.com/v5/api/mapWidget/v1/oauth/iframe?clientId=bj5oiHn2KGNiLjgW2yXl&pinType=place&pinTitle=차태권도+서초점&lat=37.4794&lng=126.9946&zoom=16" title="서초점 지도"></iframe>
+      <div class="cha-map-info">
+        <p class="branch">서초점</p>
+        <p>📍 서울시 서초구 남부순환로339길 33, 송하 빌딩 2F<br/>
+           📞 <a href="tel:01049529397">010-4952-9397</a><br/>
+           🚇 3호선 남부터미널역 도보 5분<br/>
+           🅿️ 건물 앞 주차 가능 (30분 무료)</p>
+        <a href="contact.html" style="display:inline-block;margin-top:12px;padding:8px 18px;background:#03c75a;color:#fff;border-radius:4px;font-size:13px;font-weight:700;">오시는 길 자세히 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 </div><!--/.wrapper-->
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/neve-child-master/*","/wp-content/themes/neve/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
@@ -1186,35 +1215,6 @@ var themeisleGutenbergSlider = {"isRTL":""};
 const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
 //# sourceURL=https://chataekwondo.com/wp-includes/js/wp-emoji-loader.min.js
 </script>
-<!-- ★ 오시는 길 지도 -->
-<section class="cha-map-section">
-  <h2>📍 오시는 길</h2>
-  <div class="cha-map-grid">
-    <div class="cha-map-card">
-      <iframe src="https://map.naver.com/v5/api/mapWidget/v1/oauth/iframe?clientId=bj5oiHn2KGNiLjgW2yXl&pinType=place&pinTitle=차태권도+강남점&lat=37.4869&lng=127.0049&zoom=16" title="강남점 지도"></iframe>
-      <div class="cha-map-info">
-        <p class="branch">강남점</p>
-        <p>📍 서울시 서초구 사임당로 158, 리더스원 빌딩 4F<br/>
-           📞 <a href="tel:01031809209">010-3180-9209</a><br/>
-           🚇 2호선 강남역 / 3호선 교대역 도보 10분<br/>
-           🅿️ 건물 내 주차 가능 (1시간 무료)</p>
-        <a href="https://map.naver.com/v5/search/서울시 서초구 사임당로 158" target="_blank" style="display:inline-block;margin-top:12px;padding:8px 18px;background:#03c75a;color:#fff;border-radius:4px;font-size:13px;font-weight:700;">네이버 지도로 보기</a>
-      </div>
-    </div>
-    <div class="cha-map-card">
-      <iframe src="https://map.naver.com/v5/api/mapWidget/v1/oauth/iframe?clientId=bj5oiHn2KGNiLjgW2yXl&pinType=place&pinTitle=차태권도+서초점&lat=37.4794&lng=126.9946&zoom=16" title="서초점 지도"></iframe>
-      <div class="cha-map-info">
-        <p class="branch">서초점</p>
-        <p>📍 서울시 서초구 남부순환로339길 33, 송하 빌딩 2F<br/>
-           📞 <a href="tel:01049529397">010-4952-9397</a><br/>
-           🚇 3호선 남부터미널역 도보 5분<br/>
-           🅿️ 건물 앞 주차 가능 (30분 무료)</p>
-        <a href="https://map.naver.com/v5/search/서울시 서초구 남부순환로339길 33" target="_blank" style="display:inline-block;margin-top:12px;padding:8px 18px;background:#03c75a;color:#fff;border-radius:4px;font-size:13px;font-weight:700;">네이버 지도로 보기</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ★ 하단 고정 상담 바 -->
 <div class="cha-sticky-bar">
   <a href="tel:01031809209" class="cha-sticky-btn call">
