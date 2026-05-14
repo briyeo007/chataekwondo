@@ -6,7 +6,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
-		<title>차 태권도</title>
+		<title>차 태권도 | 강남·서초 태권도장</title>
+<meta name="description" content="20년 이상의 지도 경력, KBS 방송 출연, 국기원 8단 공인. 프랑스도 감탄한 차 태권도에서 시작하세요. 강남·서초 태권도 전문 도장.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="차 태권도 | 강남·서초 태권도장">
+<meta property="og:description" content="20년 이상의 지도 경력, KBS 방송 출연, 국기원 8단 공인. 프랑스도 감탄한 차 태권도에서 시작하세요.">
+<meta property="og:image" content="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png">
+<meta property="og:url" content="https://briyeo007.github.io/chataekwondo/">
+<meta property="og:site_name" content="차 태권도">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="차 태권도 | 강남·서초 태권도장">
+<meta name="twitter:description" content="20년 이상의 지도 경력, KBS 방송 출연, 국기원 8단 공인. 프랑스도 감탄한 차 태권도에서 시작하세요.">
+<meta name="twitter:image" content="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png">
 <meta name='robots' content='max-image-preview:large' />
 <link rel='dns-prefetch' href='//fonts.googleapis.com' />
 <link rel="alternate" type="application/rss+xml" title="차 태권도 &raquo; 피드" href="https://chataekwondo.com/feed/" />
@@ -151,6 +162,7 @@ display: none;}
   text-align: center; color: #fff;
   padding: 24px;
   pointer-events: none;
+  padding: 40px 24px;
 }
 .cha-hero-overlay .cha-hero-tag {
   font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
@@ -164,7 +176,17 @@ display: none;}
 .cha-hero-overlay p {
   font-size: clamp(14px, 2vw, 20px);
   opacity: .92; max-width: 600px; line-height: 1.6;
+  margin-bottom: 32px;
 }
+.cha-hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; pointer-events: all; }
+.cha-hero-btn {
+  display: inline-block; padding: 14px 32px;
+  border-radius: 30px; font-size: 15px; font-weight: 700;
+  text-decoration: none; transition: transform .2s, opacity .2s;
+}
+.cha-hero-btn:hover { transform: translateY(-2px); opacity: .92; }
+.cha-hero-btn.primary { background: #fcaf3b; color: #14171c; }
+.cha-hero-btn.outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.8); }
 .video-container { position: relative; }
 
 /* ── 통계 스트립 ── */
@@ -179,12 +201,14 @@ display: none;}
   border-right: 1px solid rgba(255,255,255,0.1);
 }
 .cha-stat:last-child { border-right: none; }
+.cha-stat-icon { font-size: 36px; display: block; margin-bottom: 10px; line-height: 1; }
+.cha-stat-row { display: flex; align-items: baseline; justify-content: center; gap: 2px; margin-bottom: 8px; }
 .cha-stat .num {
-  font-size: clamp(32px, 4vw, 48px); font-weight: 900;
+  font-size: clamp(32px, 4vw, 52px); font-weight: 900;
   color: #fcaf3b; line-height: 1;
-  display: block; margin-bottom: 8px;
 }
-.cha-stat .label { font-size: 13px; opacity: .75; letter-spacing: 1px; }
+.num-suffix { font-size: clamp(16px, 2vw, 24px); font-weight: 900; color: #fcaf3b; line-height: 1; }
+.cha-stat .label { font-size: 13px; opacity: .75; letter-spacing: 1px; display: block; }
 
 /* ── 시간표 탭 ── */
 .cha-schedule { padding: 64px 20px; background: #f9f9f9; }
@@ -447,7 +471,11 @@ body { padding-bottom: 56px; }
     <div class="cha-hero-overlay">
       <span class="cha-hero-tag">🇫🇷 프랑스가 감탄한 태권도</span>
       <h1>차 태권도에서<br/>시작하세요</h1>
-      <p>20년 이상의 지도력 · KBS 방송 출연 · 국기원 공인<br/>강남 &amp; 서초에서 여러분을 기다립니다</p>
+      <p>20년 이상의 지도력 · KBS 방송 출연 · 국기원 8단 공인<br/>강남 &amp; 서초에서 여러분을 기다립니다</p>
+      <div class="cha-hero-btns">
+        <a href="tel:01031809209" class="cha-hero-btn primary">📞 무료 상담 전화</a>
+        <a href="greeting.html" class="cha-hero-btn outline">도장 소개 보기</a>
+      </div>
     </div>
     <iframe src="https://www.youtube.com/embed/kugTDSEbQBs?autoplay=1&loop=1&playlist=kugTDSEbQBs&controls=0&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
@@ -456,17 +484,21 @@ body { padding-bottom: 56px; }
 .video-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 비율 유지 (16 / 9 = 1.777...) */
-  height: 0;
+  height: 85vh;
+  min-height: 420px;
   overflow: hidden;
 }
 
 .video-container iframe {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  min-width: 100%;
+  height: 100vh;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 </style>
 </div>
@@ -576,10 +608,26 @@ body { padding-bottom: 56px; }
 
 <!-- ★ 통계 스트립 -->
 <section class="cha-stats">
-  <div class="cha-stat"><span class="num" data-target="20">0</span><span class="label">년 이상 지도 경력</span></div>
-  <div class="cha-stat"><span class="num" data-target="15">0</span><span class="label">개국 시범 공연</span></div>
-  <div class="cha-stat"><span class="num" data-target="8">0</span><span class="label">단 공인 태권도</span></div>
-  <div class="cha-stat"><span class="num" data-target="3">0</span><span class="label">+ 방송 출연</span></div>
+  <div class="cha-stat">
+    <span class="cha-stat-icon">🏅</span>
+    <div class="cha-stat-row"><span class="num" data-target="20">0</span><span class="num-suffix">년+</span></div>
+    <span class="label">지도 경력</span>
+  </div>
+  <div class="cha-stat">
+    <span class="cha-stat-icon">🌍</span>
+    <div class="cha-stat-row"><span class="num" data-target="15">0</span><span class="num-suffix">개국+</span></div>
+    <span class="label">해외 시범 공연</span>
+  </div>
+  <div class="cha-stat">
+    <span class="cha-stat-icon">🥋</span>
+    <div class="cha-stat-row"><span class="num" data-target="8">0</span><span class="num-suffix">단</span></div>
+    <span class="label">국기원 공인</span>
+  </div>
+  <div class="cha-stat">
+    <span class="cha-stat-icon">📺</span>
+    <div class="cha-stat-row"><span class="num" data-target="3">0</span><span class="num-suffix">회+</span></div>
+    <span class="label">방송 출연</span>
+  </div>
 </section>
 <div style="height:200px" aria-hidden="true" class="wp-block-spacer"></div>
 
