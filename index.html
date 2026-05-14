@@ -309,162 +309,64 @@ body { padding-bottom: 56px; }
   .cha-stat { flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); }
   .cha-tab { padding: 8px 18px; font-size: 13px; }
 }
+
+/* ── 공통 NAV ── */
+.cha-header { background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.08); position: sticky; top: 0; z-index: 1000; }
+.cha-nav { display: flex; align-items: center; justify-content: space-between; height: 72px; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.cha-logo img { height: 50px; width: auto; display: block; }
+.cha-nav-links { display: flex; align-items: center; gap: 24px; }
+.cha-nav-links > a { font-size: 14px; font-weight: 600; color: #333; text-decoration: none; transition: color .2s; }
+.cha-nav-links > a:hover, .cha-nav-links > a.active { color: var(--accent); }
+.cha-nav-dropdown { position: relative; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; }
+.cha-nav-dropdown:hover { color: var(--accent); }
+.cha-dropdown { display: none; position: absolute; top: calc(100% + 12px); left: 0; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.12); border-radius: 10px; min-width: 180px; padding: 8px 0; z-index: 100; }
+.cha-nav-dropdown:hover .cha-dropdown { display: block; }
+.cha-dropdown a { display: block; padding: 10px 20px; font-size: 13px; font-weight: 600; color: #333; text-decoration: none; transition: background .15s; }
+.cha-dropdown a:hover { background: #f8f8f8; color: var(--accent); }
+.cha-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+.cha-hamburger span { width: 24px; height: 2px; background: #14171c; display: block; }
+@media (max-width: 820px) {
+  .cha-hamburger { display: flex; }
+  .cha-nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: #fff; flex-direction: column; align-items: flex-start; padding: 20px 24px; gap: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.1); border-top: 1px solid #eee; z-index: 999; }
+  .cha-nav-links.open { display: flex; }
+  .cha-dropdown { position: static; box-shadow: none; border-radius: 0; padding-left: 16px; margin-top: 8px; display: none; }
+  .cha-nav-dropdown.open .cha-dropdown { display: block; }
+  .cha-nav-dropdown:hover .cha-dropdown { display: none; }
+}
 </style>
 </head>
 
-<body  class="home wp-singular page-template-default page page-id-559 wp-custom-logo wp-theme-neve wp-child-theme-neve-child-master  nv-blog-grid nv-sidebar-full-width nv-without-title menu_sidebar_slide_left" id="neve_body"  >
+<body class="home" id="neve_body">
 <div class="wrapper">
-	
-	<header class="header"  >
-		<a class="neve-skip-link show-on-focus" href="#content" >
-			콘텐츠로 건너뛰기		</a>
-		<div id="header-grid"  class="hfg_header site-header">
-	
-<nav class="header--row header-main hide-on-mobile hide-on-tablet layout-full-contained nv-navbar header--row"
-	data-row-id="main" data-show-on="desktop">
 
-	<div
-		class="header--row-inner header-main-inner">
-		<div class="container">
-			<div
-				class="row row--wrapper"
-				data-section="hfg_header_layout_main" >
-				<div class="hfg-slot left"><div class="builder-item desktop-left"><div class="item--inner builder-item--logo"
-		data-section="title_tagline"
-		data-item-id="logo">
-	
-<div class="site-logo">
-	<a class="brand" href="index.html" aria-label="차 태권도" rel="home"><div class="title-with-logo"><img width="1580" height="1010" src="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png" class="neve-site-logo skip-lazy" alt="" data-variant="logo" decoding="async" fetchpriority="high" srcset="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png 1580w, https://chataekwondo.com/wp-content/uploads/2025/05/logo-01-300x192.png 300w, https://chataekwondo.com/wp-content/uploads/2025/05/logo-01-1024x655.png 1024w, https://chataekwondo.com/wp-content/uploads/2025/05/logo-01-768x491.png 768w, https://chataekwondo.com/wp-content/uploads/2025/05/logo-01-1536x982.png 1536w" sizes="(max-width: 1580px) 100vw, 1580px" /><div class="nv-title-tagline-wrap"><p class="site-title">차 태권도</p></div></div></a></div>
-	</div>
-
-</div></div><div class="hfg-slot right"><div class="builder-item has-nav"><div class="item--inner builder-item--primary-menu has_menu"
-		data-section="header_menu_primary"
-		data-item-id="primary-menu">
-	<div class="nv-nav-wrap">
-	<div role="navigation" class="nav-menu-primary style-border-bottom m-style"
-			aria-label="주 메뉴">
-
-		<ul id="nv-primary-navigation-main" class="primary-menu-ul nav-ul menu-desktop"><li id="menu-item-801" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-559 current_page_item menu-item-801 nv-active"><div class="wrap"><a href="index.html" aria-current="page">HOME</a></div></li>
-<li id="menu-item-400" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-400"><div class="wrap"><a href="instructor.html"><span class="menu-item-title-wrap dd-title">도장 소개</span></a><div role="button" aria-pressed="false" aria-label="하위 메뉴 열기" tabindex="0" class="caret-wrap caret 2" style="margin-left:5px;"><span class="caret"><svg fill="currentColor" aria-label="드롭다운" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"/></svg></span></div></div>
-<ul class="sub-menu">
-	<li class="menu-item"><div class="wrap"><a href="instructor.html">지도자 소개</a></div></li>
-	<li id="menu-item-401" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-401"><div class="wrap"><a href="greeting.html">관장님 인사말</a></div></li>
-	<li id="menu-item-404" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-404"><div class="wrap"><a href="philosophy.html">교육 철학</a></div></li>
-	<li id="menu-item-402" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-402"><div class="wrap"><a href="facility.html">시설 안내</a></div></li>
-</ul>
-</li>
-<li class="menu-item"><div class="wrap"><a href="programs.html">수련 프로그램</a></div></li>
-<li class="menu-item"><div class="wrap"><a href="schedule.html">시간표</a></div></li>
-<li class="menu-item"><div class="wrap"><a href="gallery.html">갤러리</a></div></li>
-<li class="menu-item"><div class="wrap"><a href="contact.html">오시는 길</a></div></li>
-<li id="menu-item-355" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-355"><div class="wrap"><a href="news.html">도장 소식</a></div></li>
-<li class="menu-item"><div class="wrap"><a href="register-adult.html" style="background:var(--accent);color:var(--dark);padding:8px 18px;border-radius:30px;font-weight:800;">가입 신청</a></div></li>
-</ul>	</div>
-</div>
-
-	</div>
-
-</div></div>							</div>
-		</div>
-	</div>
-</nav>
-
-
-<nav class="header--row header-main hide-on-desktop layout-full-contained nv-navbar header--row"
-	data-row-id="main" data-show-on="mobile">
-
-	<div
-		class="header--row-inner header-main-inner">
-		<div class="container">
-			<div
-				class="row row--wrapper"
-				data-section="hfg_header_layout_main" >
-				<div class="hfg-slot left"><div class="builder-item tablet-left mobile-left"><div class="item--inner builder-item--logo"
-		data-section="title_tagline"
-		data-item-id="logo">
-	
-<div class="site-logo">
-	<a class="brand" href="index.html" aria-label="차 태권도" rel="home"><div class="title-with-logo"><img width="1580" height="1010" src="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png" class="neve-site-logo skip-lazy" alt="" data-variant="logo" decoding="async" srcset="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png 1580w, https://chataekwondo.com/wp-content/uploads/2025/05/logo-01-300x192.png 300w, https://chataekwondo.com/wp-content/uploads/2025/05/logo-01-1024x655.png 1024w, https://chataekwondo.com/wp-content/uploads/2025/05/logo-01-768x491.png 768w, https://chataekwondo.com/wp-content/uploads/2025/05/logo-01-1536x982.png 1536w" sizes="(max-width: 1580px) 100vw, 1580px" /><div class="nv-title-tagline-wrap"><p class="site-title">차 태권도</p></div></div></a></div>
-	</div>
-
-</div></div><div class="hfg-slot right"><div class="builder-item tablet-left mobile-left"><div class="item--inner builder-item--nav-icon"
-		data-section="header_menu_icon"
-		data-item-id="nav-icon">
-	<div class="menu-mobile-toggle item-button navbar-toggle-wrapper">
-	<button type="button" class=" navbar-toggle"
-			value="내비게이션 메뉴"
-					aria-label="내비게이션 메뉴 "
-			aria-expanded="false" onclick="if('undefined' !== typeof toggleAriaClick ) { toggleAriaClick() }">
-					<span class="bars">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</span>
-					<span class="screen-reader-text">내비게이션 메뉴</span>
-	</button>
-</div> <!--.navbar-toggle-wrapper-->
-
-
-	</div>
-
-</div></div>							</div>
-		</div>
-	</div>
-</nav>
-
-<div
-		id="header-menu-sidebar" class="header-menu-sidebar tcb menu-sidebar-panel slide_left hfg-pe"
-		data-row-id="sidebar">
-	<div id="header-menu-sidebar-bg" class="header-menu-sidebar-bg">
-				<div class="close-sidebar-panel navbar-toggle-wrapper">
-			<button type="button" class="hamburger is-active  navbar-toggle active" 					value="내비게이션 메뉴"
-					aria-label="내비게이션 메뉴 "
-					aria-expanded="false" onclick="if('undefined' !== typeof toggleAriaClick ) { toggleAriaClick() }">
-								<span class="bars">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</span>
-								<span class="screen-reader-text">
-			내비게이션 메뉴					</span>
-			</button>
-		</div>
-					<div id="header-menu-sidebar-inner" class="header-menu-sidebar-inner tcb ">
-						<div class="builder-item has-nav"><div class="item--inner builder-item--primary-menu has_menu"
-		data-section="header_menu_primary"
-		data-item-id="primary-menu">
-	<div class="nv-nav-wrap">
-	<div role="navigation" class="nav-menu-primary style-border-bottom m-style"
-			aria-label="주 메뉴">
-
-		<ul id="nv-primary-navigation-sidebar" class="primary-menu-ul nav-ul menu-mobile"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-559 current_page_item menu-item-801 nv-active"><div class="wrap"><a href="index.html" aria-current="page">HOME</a></div></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-400"><div class="wrap"><a href="greeting.html"><span class="menu-item-title-wrap dd-title">도장 소개</span></a><button tabindex="0" type="button" class="caret-wrap navbar-toggle 2 " style="margin-left:5px;"  aria-label="토글 도장 소개"><span class="caret"><svg fill="currentColor" aria-label="드롭다운" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"/></svg></span></button></div>
-<ul class="sub-menu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-401"><div class="wrap"><a href="greeting.html">관장님 인사말</a></div></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-404"><div class="wrap"><a href="philosophy.html">차 태권도의 철학 및 교육 목표</a></div></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-402"><div class="wrap"><a href="facility.html">도장 시설 안내</a></div></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-403"><div class="wrap"><a href="directions.html">오시는 길</a></div></li>
-</ul>
-</li>
-<li class="menu-item"><div class="wrap"><a href="programs.html">수련 프로그램</a></div></li>
-<li class="menu-item"><div class="wrap"><a href="schedule.html">시간표</a></div></li>
-<li class="menu-item"><div class="wrap"><a href="gallery.html">갤러리</a></div></li>
-<li class="menu-item"><div class="wrap"><a href="contact.html">오시는 길</a></div></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-355"><div class="wrap"><a href="news.html">도장 소식</a></div></li>
-<li class="menu-item"><div class="wrap"><a href="register-adult.html" style="background:var(--accent);color:var(--dark);padding:8px 18px;border-radius:30px;font-weight:800;">가입 신청</a></div></li>
-</ul>	</div>
-</div>
-
-	</div>
-
-</div>					</div>
-	</div>
-</div>
-<div class="header-menu-sidebar-overlay hfg-ov hfg-pe" onclick="if('undefined' !== typeof toggleAriaClick ) { toggleAriaClick() }"></div>
-</div>
-	</header>
-
-	<style>.is-menu-sidebar .header-menu-sidebar { visibility: visible; }.is-menu-sidebar.menu_sidebar_slide_left .header-menu-sidebar { transform: translate3d(0, 0, 0); left: 0; }.is-menu-sidebar.menu_sidebar_slide_right .header-menu-sidebar { transform: translate3d(0, 0, 0); right: 0; }.is-menu-sidebar.menu_sidebar_pull_right .header-menu-sidebar, .is-menu-sidebar.menu_sidebar_pull_left .header-menu-sidebar { transform: translateX(0); }.is-menu-sidebar.menu_sidebar_dropdown .header-menu-sidebar { height: auto; }.is-menu-sidebar.menu_sidebar_dropdown .header-menu-sidebar-inner { max-height: 400px; padding: 20px 0; }.is-menu-sidebar.menu_sidebar_full_canvas .header-menu-sidebar { opacity: 1; }.header-menu-sidebar .menu-item-nav-search:not(.floating) { pointer-events: none; }.header-menu-sidebar .menu-item-nav-search .is-menu-sidebar { pointer-events: unset; }.nav-ul li:focus-within .wrap.active + .sub-menu { opacity: 1; visibility: visible; }.nav-ul li.neve-mega-menu:focus-within .wrap.active + .sub-menu { display: grid; }.nav-ul li > .wrap { display: flex; align-items: center; position: relative; padding: 0 4px; }.nav-ul:not(.menu-mobile):not(.neve-mega-menu) > li > .wrap > a { padding-top: 1px }</style><style>.header-menu-sidebar .nav-ul li .wrap { padding: 0 4px; }.header-menu-sidebar .nav-ul li .wrap a { flex-grow: 1; display: flex; }.header-menu-sidebar .nav-ul li .wrap a .dd-title { width: var(--wrapdropdownwidth); }.header-menu-sidebar .nav-ul li .wrap button { border: 0; z-index: 1; background: 0; }.header-menu-sidebar .nav-ul li:not([class*=block]):not(.menu-item-has-children) > .wrap > a { padding-right: calc(1em + (18px*2)); text-wrap: wrap; white-space: normal;}.header-menu-sidebar .nav-ul li.menu-item-has-children:not([class*=block]) > .wrap > a { margin-right: calc(-1em - (18px*2)); padding-right: 46px;}</style>
+<header class="cha-header">
+  <nav class="cha-nav">
+    <a href="index.html" class="cha-logo">
+      <img src="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png" alt="차 태권도">
+    </a>
+    <div class="cha-nav-links" id="navLinks">
+      <a href="index.html" class="active">HOME</a>
+      <div class="cha-nav-dropdown">
+        <span>도장 소개 ▾</span>
+        <div class="cha-dropdown">
+          <a href="instructor.html">지도자 소개</a>
+          <a href="greeting.html">관장님 인사말</a>
+          <a href="philosophy.html">교육 철학</a>
+          <a href="facility.html">시설 안내</a>
+        </div>
+      </div>
+      <a href="programs.html">수련 프로그램</a>
+      <a href="schedule.html">시간표</a>
+      <a href="gallery.html">갤러리</a>
+      <a href="contact.html">오시는 길</a>
+      <a href="news.html">도장 소식</a>
+      <a href="register-adult.html" style="background:var(--accent);color:var(--dark);padding:8px 18px;border-radius:30px;font-weight:800;">가입 신청</a>
+    </div>
+    <button class="cha-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
 
 	
 	<main id="content" class="neve-main">
