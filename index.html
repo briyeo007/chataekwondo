@@ -250,7 +250,7 @@ display: none;}
 }
 @media(max-width:680px){ .cha-map-grid { grid-template-columns: 1fr; } }
 .cha-map-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
-.cha-map-card iframe { width: 100%; height: 240px; border: none; display: block; }
+.cha-map-card iframe, .cha-map-card .map-div { width: 100%; height: 240px; border: none; display: block; z-index: 0; }
 .cha-map-info { padding: 20px 24px; }
 .cha-map-info .branch { font-weight: 900; font-size: 17px; margin-bottom: 12px; color: #14171c; }
 .cha-map-info p { font-size: 13.5px; color: #444; line-height: 1.8; }
@@ -313,6 +313,7 @@ body { padding-bottom: 56px; }
   .cha-nav-dropdown:hover .cha-dropdown { display: none; }
 }
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 
 <body class="home" id="neve_body">
@@ -863,7 +864,7 @@ body { padding-bottom: 56px; }
   <h2>📍 오시는 길</h2>
   <div class="cha-map-grid">
     <div class="cha-map-card">
-      <iframe src="https://map.naver.com/v5/api/mapWidget/v1/oauth/iframe?clientId=bj5oiHn2KGNiLjgW2yXl&pinType=place&pinTitle=차태권도+강남점&lat=37.4869&lng=127.0049&zoom=16" title="강남점 지도"></iframe>
+      <div id="idx-map-gangnam" class="map-div"></div>
       <div class="cha-map-info">
         <p class="branch">강남점</p>
         <p>📍 서울시 서초구 사임당로 158, 래미안리더스원 상가 4F<br/>
@@ -874,7 +875,7 @@ body { padding-bottom: 56px; }
       </div>
     </div>
     <div class="cha-map-card">
-      <iframe src="https://map.naver.com/v5/api/mapWidget/v1/oauth/iframe?clientId=bj5oiHn2KGNiLjgW2yXl&pinType=place&pinTitle=차태권도+서초점&lat=37.4794&lng=126.9946&zoom=16" title="서초점 지도"></iframe>
+      <div id="idx-map-seocho" class="map-div"></div>
       <div class="cha-map-info">
         <p class="branch">서초점</p>
         <p>📍 서울시 서초구 남부순환로339길 33, 송하 빌딩 2F<br/>
@@ -1093,6 +1094,20 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.5 });
 counters.forEach(c => observer.observe(c));
+</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  var tile = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  var attr = '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>';
+  function makeMap(id, lat, lng, popup) {
+    var m = L.map(id, { scrollWheelZoom: false, zoomControl: true }).setView([lat, lng], 17);
+    L.tileLayer(tile, { attribution: attr }).addTo(m);
+    L.marker([lat, lng]).addTo(m).bindPopup(popup).openPopup();
+  }
+  makeMap('idx-map-gangnam', 37.4921, 127.0262, '<b>차 태권도 강남점</b><br>사임당로 158, 래미안리더스원 상가 4층');
+  makeMap('idx-map-seocho', 37.4862, 127.0163, '<b>차 태권도 서초점</b><br>남부순환로339길 33, 송하빌딩 2층');
+})();
 </script>
 </body>
 
