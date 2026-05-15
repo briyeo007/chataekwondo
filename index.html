@@ -210,37 +210,6 @@ display: none;}
 .num-suffix { font-size: clamp(16px, 2vw, 24px); font-weight: 900; color: #fcaf3b; line-height: 1; }
 .cha-stat .label { font-size: 13px; opacity: .75; letter-spacing: 1px; display: block; }
 
-/* ── 후기 섹션 ── */
-.cha-reviews { padding: 72px 20px; background: #fff; }
-.cha-reviews h2 { text-align: center; font-size: clamp(22px,3vw,36px); font-weight: 900; margin-bottom: 12px; }
-.cha-reviews .sub { text-align: center; color: #777; margin-bottom: 48px; font-size: 15px; }
-.cha-reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px; max-width: 1100px; margin: 0 auto;
-}
-.cha-review-card {
-  background: #f9f9f9; border-radius: 16px;
-  padding: 28px 24px; position: relative;
-  transition: transform .25s, box-shadow .25s;
-}
-.cha-review-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.09); }
-.cha-review-card .quote {
-  font-size: 48px; line-height: 1; color: #fcaf3b;
-  font-family: Georgia, serif; margin-bottom: 8px;
-}
-.cha-review-card p { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 20px; }
-.cha-review-author { display: flex; align-items: center; gap: 12px; }
-.cha-review-avatar {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: #14171c; color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 18px; flex-shrink: 0;
-}
-.cha-review-name { font-weight: 700; font-size: 14px; }
-.cha-review-meta { font-size: 12px; color: #999; }
-.cha-stars { color: #fcaf3b; font-size: 14px; margin-bottom: 4px; }
-
 /* ── 네이버 지도 ── */
 .cha-map-section { padding: 64px 20px; background: #f0f0f0; }
 .cha-map-section h2 { text-align: center; font-size: clamp(22px,3vw,32px); font-weight: 900; margin-bottom: 40px; }
@@ -627,49 +596,6 @@ body { padding-bottom: 56px; }
 </div></div>
 
 
-<!-- ★ 후기 섹션 -->
-<section class="cha-reviews">
-  <h2>학부모님들의 이야기</h2>
-  <p class="sub">차 태권도와 함께 성장한 아이들의 실제 후기입니다.</p>
-  <div class="cha-reviews-grid">
-    <div class="cha-review-card">
-      <div class="quote">"</div>
-      <div class="cha-stars">★★★★★</div>
-      <p>입소문만 듣고 왔는데 관장님의 열정이 남달랐어요. 아이가 자신감이 생기고 학교에서도 태도가 달라졌다는 말을 들었을 때 정말 뿌듯했습니다.</p>
-      <div class="cha-review-author">
-        <div class="cha-review-avatar">김</div>
-        <div>
-          <div class="cha-review-name">김○○ 학부모</div>
-          <div class="cha-review-meta">초등 2학년 자녀, 차 태권도 블루관 1년 수련</div>
-        </div>
-      </div>
-    </div>
-    <div class="cha-review-card">
-      <div class="quote">"</div>
-      <div class="cha-stars">★★★★★</div>
-      <p>성인반인데도 수준 맞춰서 꼼꼼히 가르쳐 주세요. 다이어트 목적으로 시작했는데 6개월 만에 8kg 감량하고 국기원 심사도 붙었습니다!</p>
-      <div class="cha-review-author">
-        <div class="cha-review-avatar">박</div>
-        <div>
-          <div class="cha-review-name">박○○님</div>
-          <div class="cha-review-meta">성인반, 차 태권도 레드관 6개월 수련</div>
-        </div>
-      </div>
-    </div>
-    <div class="cha-review-card">
-      <div class="quote">"</div>
-      <div class="cha-stars">★★★★★</div>
-      <p>프랑스 투어 소식 보고 정말 놀랐어요. 이런 글로벌한 경험까지 시켜주는 도장이 있다니! 아이가 태권도를 통해 세계를 바라보는 눈이 생긴 것 같아요.</p>
-      <div class="cha-review-author">
-        <div class="cha-review-avatar">이</div>
-        <div>
-          <div class="cha-review-name">이○○ 학부모</div>
-          <div class="cha-review-meta">초등 5학년 자녀, 차 태권도 블루관 2년 수련</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
 
