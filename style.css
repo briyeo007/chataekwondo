@@ -600,3 +600,23 @@ img { max-width: 100%; display: block; }
   .btn { padding: 12px 22px; font-size: 13px; }
   .facility-gallery { grid-template-columns: 1fr; }
 }
+
+/* =====================
+   MOBILE STICKY BAR
+===================== */
+.cha-sticky-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  display: flex; height: 56px;
+  box-shadow: 0 -2px 12px rgba(0,0,0,.18);
+}
+.cha-sticky-btn {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  gap: 7px; font-size: 14px; font-weight: 700;
+  color: #fff; text-decoration: none;
+  transition: filter .2s;
+}
+.cha-sticky-btn:hover { filter: brightness(1.12); }
+.cha-sticky-btn.call  { background: #1a73e8; }
+.cha-sticky-btn.kakao { background: #fee500; color: #3c1e1e; }
+.cha-sticky-btn.map   { background: #03c75a; }
+.cha-sticky-icon { font-size: 20px; }
