@@ -52,7 +52,7 @@
   /* ── HTML ─────────────────────────────────────────────────────────────── */
   /* 수정이 필요한 항목:
      - Instagram URL (현재 #)
-     - YouTube URL   (현재 #)
+     - YouTube URL   (완료)
      - 사업자등록번호  (현재 000-00-00000)
      - 개인정보 처리방침 링크 (현재 #)
   */
@@ -81,7 +81,7 @@
 
         <div class="cha-footer-social">
           <a href="https://www.instagram.com/cha.taekwondo/" target="_blank" class="cha-soc-btn insta">📸 Instagram</a>
-          <a href="#" target="_blank" class="cha-soc-btn yt">▶ YouTube</a>
+          <a href="https://www.youtube.com/@%EC%B0%A8%ED%83%9C%EA%B6%8C%EB%8F%84" target="_blank" class="cha-soc-btn yt">▶ YouTube</a>
           <a href="https://map.naver.com/v5/search/차+태권도+서초구+서울"
              target="_blank" class="cha-soc-btn naver">🗺 네이버 지도</a>
         </div>
