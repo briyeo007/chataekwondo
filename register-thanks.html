@@ -50,5 +50,17 @@
 <div id="cha-footer-placeholder"></div>
 <script src="footer.js"></script>
 <script src="animations.js"></script>
+<script>
+function toggleDropdown(e) {
+  if (window.innerWidth > 820) return;
+  e.stopPropagation();
+  document.getElementById('navDropdown').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  var dd = document.getElementById('navDropdown');
+  if (dd && !e.target.closest('#navDropdown')) dd.classList.remove('open');
+});
+</script>
 </body>
 </html>
+

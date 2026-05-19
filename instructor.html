@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>지도자 소개 – 차 태권도</title>
-  <meta name="description" content="국기원 8단, KBS 방송 출연, 15개국 해외 시범. 차 태권도 관장님의 철학과 경력을 소개합니다.">
+  <meta name="description" content="국기원 8단, KBS 방송 출연, 세계 각국 해외 시범. 차 태권도 관장님의 철학과 경력을 소개합니다.">
   <meta property="og:title" content="지도자 소개 – 차 태권도">
   <meta property="og:image" content="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png">
   <link rel="icon" href="https://chataekwondo.com/wp-content/uploads/2025/05/cropped-logo-01-32x32.png" sizes="32x32">
@@ -40,7 +40,7 @@
       .cha-nav-links.open { display: flex; }
       .cha-nav-dropdown .cha-dropdown { position: static; box-shadow: none; border-radius: 0; padding: 0 0 0 16px; margin-top: 8px; }
       .cha-nav-dropdown:hover .cha-dropdown { display: none; }
-      .cha-nav-dropdown.mob-open .cha-dropdown { display: block; }
+      .cha-nav-dropdown.open .cha-dropdown { display: block; }
     }
 
     /* PAGE HERO */
@@ -111,8 +111,7 @@
     </a>
     <div class="cha-nav-links" id="navLinks">
       <a href="index.html">HOME</a>
-      <div class="cha-nav-dropdown">
-        <span>도장 소개 ▾</span>
+      <div class="cha-nav-dropdown" id="navDropdown"><span onclick="toggleDropdown(event)">도장 소개 ▾</span>
         <div class="cha-dropdown">
           <a href="instructor.html" class="active">지도자 소개</a>
           <a href="greeting.html">관장님 인사말</a>
@@ -159,7 +158,7 @@
       <p class="profile-desc">
         20년 넘게 아이들과 함께 도장에 서 왔습니다. 단순히 발차기를 가르치는 것이 아니라,
         아이들이 땀을 흘리며 스스로 뿌듯함을 느끼는 그 순간을 만들어주는 것이 제 역할이라고 생각합니다.
-        국내 수련을 넘어 프랑스 투어에서 15개국 친구들과 함께한 경험, KBS 방송에서 우리 아이들의
+        국내 수련을 넘어 미국, 유럽, 호주 등 세계 각국에서 함께한 해외 시범 경험, KBS 방송에서 우리 아이들의
         모습을 세상에 알린 경험은 차 태권도가 단순한 도장이 아님을 증명합니다.
       </p>
       <p class="profile-desc">
@@ -171,7 +170,7 @@
         <span class="chip accent">국기원 태권도 8단</span>
         <span class="chip">KBS 방송 출연</span>
         <span class="chip">프랑스 시범단장</span>
-        <span class="chip">15개국 해외 시범</span>
+        <span class="chip">세계 각국 해외 시범</span>
         <span class="chip">20년+ 지도 경력</span>
         <span class="chip">대한태권도협회 정회원</span>
       </div>
@@ -197,8 +196,8 @@
         <div class="tl-dot">🌍</div>
         <div class="tl-content">
           <p class="tl-year">GLOBAL</p>
-          <h3 class="tl-title">15개국 해외 시범 공연 완수</h3>
-          <p class="tl-desc">미국, 프랑스, 독일, 호주 등 전 세계 15개국 이상에서 태권도 시범을 선보였습니다. 현지 관중들로부터 기립 박수를 받은 무대가 다수입니다.</p>
+          <h3 class="tl-title">세계 각국 해외 시범 공연</h3>
+          <p class="tl-desc">미국, 유럽, 중국, 호주 등 세계 각국에서 태권도 시범 및 문화 교류를 이끌어왔습니다. 현지 관중들로부터 기립 박수를 받은 무대가 다수입니다.</p>
         </div>
       </div>
       <div class="tl-item">
@@ -290,5 +289,18 @@
 
 <script src="footer.js"></script>
 <script src="animations.js"></script>
+<script>
+function toggleDropdown(e) {
+  if (window.innerWidth > 820) return;
+  e.stopPropagation();
+  document.getElementById('navDropdown').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  var dd = document.getElementById('navDropdown');
+  if (dd && !e.target.closest('#navDropdown')) dd.classList.remove('open');
+});
+</script>
 </body>
 </html>
+
+
