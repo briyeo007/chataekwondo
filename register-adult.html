@@ -37,6 +37,7 @@
       .cha-nav-links.open { display: flex; }
       .cha-dropdown { position: static; box-shadow: none; border-radius: 0; padding-left: 16px; margin-top: 8px; }
       .cha-nav-dropdown:hover .cha-dropdown { display: none; }
+      .cha-nav-dropdown.open .cha-dropdown { display: block; }
     }
 
     /* PAGE HERO */
@@ -77,7 +78,7 @@
     <div class="cha-nav-links" id="navLinks">
       <a href="index.html">HOME</a>
       <div class="cha-nav-dropdown">
-        <span>도장 소개 ▾</span>
+        <span onclick="this.parentElement.classList.toggle('open')">도장 소개 ▾</span>
         <div class="cha-dropdown">
           <a href="instructor.html">지도자 소개</a>
           <a href="greeting.html">관장님 인사말</a>
@@ -132,3 +133,5 @@
 <script src="animations.js"></script>
 </body>
 </html>
+
+
