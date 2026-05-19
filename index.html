@@ -923,23 +923,34 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
 // 숫자 카운트업
-const counters = document.querySelectorAll('.cha-stat .num');
-const observer = new IntersectionObserver(entries => {
+function runCounter(el) {
+  if (el.dataset.counted) return;
+  el.dataset.counted = '1';
+  const target = +el.dataset.target;
+  const step = Math.ceil(target / 40);
+  let cur = 0;
+  const timer = setInterval(() => {
+    cur = Math.min(cur + step, target);
+    el.textContent = cur;
+    if (cur >= target) clearInterval(timer);
+  }, 30);
+}
+const counters = document.querySelectorAll('.cha-stat .num[data-target]');
+const statObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
-    const el = entry.target;
-    const target = +el.dataset.target;
-    let cur = 0;
-    const step = Math.ceil(target / 30);
-    const timer = setInterval(() => {
-      cur = Math.min(cur + step, target);
-      el.textContent = cur + (el.nextSibling && el.nextSibling.textContent.includes('+') ? '' : '');
-      if (cur >= target) clearInterval(timer);
-    }, 40);
-    observer.unobserve(el);
+    runCounter(entry.target);
+    statObserver.unobserve(entry.target);
   });
-}, { threshold: 0.5 });
-counters.forEach(c => observer.observe(c));
+}, { threshold: 0 });
+counters.forEach(c => statObserver.observe(c));
+// 페이지 로드 시 이미 보이는 경우 즉시 실행
+window.addEventListener('load', () => {
+  counters.forEach(c => {
+    const rect = c.getBoundingClientRect();
+    if (rect.top < window.innerHeight) runCounter(c);
+  });
+});
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
