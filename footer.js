@@ -61,7 +61,7 @@
       <div class="cha-footer-top">
 
         <div class="cha-footer-brand">
-          <img src="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png"
+          <img src="/logo-01.png"
                alt="차 태권도" class="cha-footer-logo">
           <p class="cha-footer-director">관장 차동술</p>
         </div>
