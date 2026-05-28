@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🏆 차태권도 품새 한마당 대회: 승급을 넘어, 마음을 키우는 시간 – 차 태권도</title>
+  <link rel="icon" href="/logo-01.png">
+  <link rel="stylesheet" href="/wp-content/themes/neve/style-main-new.min.css">
+  <link rel="stylesheet" href="/wp-content/plugins/otter-blocks/build/blocks/advanced-columns/style.css">
+  <link rel="stylesheet" href="/wp-content/plugins/otter-blocks/build/blocks/posts-grid/style.css">
+  <link rel="stylesheet" href="/wp-content/plugins/otter-blocks/assets/glide/glide.core.min.css">
+  <link rel="stylesheet" href="/wp-content/plugins/otter-blocks/assets/glide/glide.theme.min.css">
+  <link rel="stylesheet" href="/wp-content/plugins/otter-blocks/build/blocks/slider/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    :root { --accent: #fcaf3b; --dark: #14171c; --light: #f8f8f8; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', 'Outfit', sans-serif; color: #333; line-height: 1.6; background: #fff; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
+    .cha-header { background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.08); position: sticky; top: 0; z-index: 1000; }
+    .cha-nav { display: flex; align-items: center; justify-content: space-between; height: 72px; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .cha-logo img { height: 50px; width: auto; }
+    .cha-nav-links { display: flex; align-items: center; gap: 24px; }
+    .cha-nav-links > a { font-size: 14px; font-weight: 600; color: #333; transition: color .2s; }
+    .cha-nav-links > a:hover { color: var(--accent); }
+    .cha-nav-dropdown { position: relative; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; }
+    .cha-nav-dropdown:hover { color: var(--accent); }
+    .cha-dropdown { display: none; position: absolute; top: calc(100% + 12px); left: 0; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.12); border-radius: 10px; min-width: 220px; padding: 8px 0; z-index: 100; }
+    .cha-dropdown::before { content: ""; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+    .cha-nav-dropdown:hover .cha-dropdown { display: block; }
+    .cha-dropdown a { display: block; padding: 10px 20px; font-size: 13px; font-weight: 600; transition: background .15s; }
+    .cha-dropdown a:hover { background: var(--light); color: var(--accent); }
+    .cha-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+    .cha-hamburger span { width: 24px; height: 2px; background: var(--dark); display: block; }
+    @media (max-width: 820px) {
+      .cha-hamburger { display: flex; }
+      .cha-nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: #fff; flex-direction: column; align-items: flex-start; padding: 20px 24px; gap: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.1); border-top: 1px solid #eee; }
+      .cha-nav-links.open { display: flex; }
+      .cha-dropdown { position: static; box-shadow: none; border-radius: 0; padding-left: 16px; margin-top: 8px; }
+      .cha-nav-dropdown:hover .cha-dropdown { display: none; }
+      .cha-nav-dropdown.open .cha-dropdown { display: block; }
+    }
+    .article-wrap { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #888; margin-bottom: 24px; transition: color .2s; }
+    .back-link:hover { color: var(--accent); }
+    .article-cat { display: inline-block; font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .article-title { font-size: clamp(22px, 4vw, 36px); font-weight: 800; color: var(--dark); line-height: 1.3; margin-bottom: 16px; }
+    .article-meta { font-size: 13px; color: #aaa; margin-bottom: 32px; }
+    .article-hero { width: 100%; border-radius: 16px; margin-bottom: 40px; max-height: 480px; object-fit: cover; }
+    .article-body { font-size: 16px; color: #444; line-height: 1.9; }
+    .article-body p { margin-bottom: 20px; }
+    .article-body h2, .article-body h3 { font-size: 20px; font-weight: 700; color: var(--dark); margin: 32px 0 12px; }
+    .info-table { width: 100%; border-collapse: collapse; margin: 20px 0 32px; font-size: 15px; }
+    .info-table th, .info-table td { padding: 12px 16px; border: 1px solid #eee; text-align: left; }
+    .info-table th { background: #f8f8f8; font-weight: 700; color: var(--dark); width: 120px; }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 48px; padding: 12px 28px; background: var(--dark); color: #fff; border-radius: 30px; font-size: 14px; font-weight: 700; transition: background .2s; }
+    .back-btn:hover { background: var(--accent); color: var(--dark); }
+  </style>
+</head>
+<body>
+
+<header class="cha-header">
+  <nav class="cha-nav">
+    <a href="index.html" class="cha-logo"><img src="/logo-01.png" alt="차 태권도"></a>
+    <div class="cha-nav-links" id="navLinks">
+      <a href="index.html">HOME</a>
+      <div class="cha-nav-dropdown">
+        <span onclick="this.parentElement.classList.toggle('open')">도장 소개 ▾</span>
+        <div class="cha-dropdown">
+          <a href="greeting.html">관장님 인사말</a>
+          <a href="philosophy.html">차 태권도의 철학 및 교육 목표</a>
+          <a href="facility.html">도장 시설 안내</a>
+          <a href="directions.html">오시는 길</a>
+        </div>
+      </div>
+      <a href="news.html" style="color:var(--accent)">도장 소식</a>
+      <a href="register-adult.html" style="background:var(--accent);color:var(--dark);padding:8px 18px;border-radius:30px;font-weight:800;">가입 신청</a>
+    </div>
+    <button class="cha-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <div class="article-wrap">
+    <a href="news.html" class="back-link">← 도장 소식</a>
+    <div class="article-cat">도장소식</div>
+    <h1 class="article-title">🏆 차태권도 품새 한마당 대회: 승급을 넘어, 마음을 키우는 시간</h1>
+    <div class="article-meta">2025년 9월 2일 · 차 태권도</div>
+    <img src="/images/cha-red-poomsae.jpg" alt="차태권도 품새 한마당 대회" class="article-hero">
+    <div class="article-body">
+      <h2>📅 특별 승급심사 개요</h2>
+      <table class="info-table">
+        <tr><th>행사명</th><td>품새 한마당 대회</td></tr>
+        <tr><th>형식</th><td>승급심사</td></tr>
+        <tr><th>일시</th><td>2025년 8월 29일 금요일</td></tr>
+        <tr><th>목적</th><td>단순히 실력 겨루기가 아닌, 아이들의 성장 과정에 집중</td></tr>
+      </table>
+
+      <p>안녕하세요. 지난 8월 29일 금요일, 저희 차태권도장에서 평소와 달리 대회 형식으로 진행된 특별한 승급심사가 있었습니다.</p>
+
+      <p>저희는 이번 심사를 단순히 급수를 올리는 시험이 아니라, 아이들이 준비 과정부터 발표까지 스스로 성장을 경험하는 무대로 기획했습니다. 아이들은 자신의 품새를 당당하게 선보이며, 서로를 응원하고 박수를 보냈습니다.</p>
+
+      <h2>🌟 승급보다 빛났던 순간들</h2>
+      <p>결과보다 과정이 빛났던 하루였습니다. 처음 무대에 서는 긴장감을 극복하고 최선을 다한 아이들, 그리고 그 모습을 따뜻하게 지켜봐주신 가족분들 덕분에 도장 전체가 하나가 되는 감동적인 시간이었습니다.</p>
+
+      <p>앞으로도 차태권도는 아이들의 성장을 응원하며, 이런 특별한 경험을 지속적으로 만들어나가겠습니다.</p>
+    </div>
+    <a href="news.html" class="back-btn">← 목록으로 돌아가기</a>
+  </div>
+</main>
+
+<div id="cha-footer-placeholder"></div>
+<script src="footer.js"></script>
+<script src="animations.js"></script>
+</body>
+</html>
