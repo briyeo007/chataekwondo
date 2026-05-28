@@ -3,7 +3,7 @@ const CURRENT_PAGE = document.body.dataset.page || '';
 
 const LOGO_HTML = `
   <a href="index.html" class="logo">
-    <img src="https://chataekwondo.com/wp-content/uploads/2025/05/logo-01.png" alt="차 태권도" class="logo-img" />
+    <img src="/logo-01.png" alt="차 태권도" class="logo-img" />
   </a>
 `;
 
