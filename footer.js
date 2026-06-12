@@ -147,9 +147,17 @@
 
   var SKIP_KEY = 'cha_skip_translate';
   var isEnglish = false;
-  var cooldown = false;
+  var busy = false; // 번역 진행 중 추가 클릭 차단
 
-  /* ── GT 로드 (온디맨드, 중복 방지) ── */
+  function setBtns(label, active) {
+    document.querySelectorAll('.cha-translate-btn').forEach(function (b) {
+      b.querySelector('span').textContent = label;
+      b.classList.toggle('en-active', active);
+      b.style.opacity = (label === '...' ? '0.55' : '1');
+    });
+  }
+
+  /* ── GT 로드 (중복 방지) ── */
   function loadGT() {
     if (document.querySelector('script[src*="translate.google.com"]')) return;
     window.googleTranslateElementInit = function () {
@@ -163,16 +171,18 @@
     document.body.appendChild(s);
   }
 
-  /* ── EN 번역 적용 (combo 나타날 때까지 대기, 최대 5초) ── */
+  /* ── EN 번역: combo 나타날 때까지 폴링, 완료 후 잠금 해제 ── */
   function applyEN(tries) {
     tries = tries || 0;
-    if (tries > 33) return;
+    if (tries > 40) { setBtns('KO', false); isEnglish = false; busy = false; return; }
     var select = document.querySelector('.goog-te-combo');
     if (!select) { setTimeout(function () { applyEN(tries + 1); }, 150); return; }
     select.value = 'en';
     var ev = document.createEvent('HTMLEvents');
     ev.initEvent('change', true, true);
     select.dispatchEvent(ev);
+    // 번역 적용 완료 후 버튼 업데이트 + 잠금 해제
+    setTimeout(function () { setBtns('EN', true); busy = false; }, 1200);
   }
 
   /* ── KO 복원 ── */
@@ -187,10 +197,9 @@
     window.location.replace(window.location.pathname + window.location.search);
   }
 
-  /* ── 페이지 로드 시: 복원 플래그 체크, 없으면 GT 미리 로드 ── */
+  /* ── 페이지 로드 시 GT 미리 로드 (복원 플래그 있으면 건너뜀) ── */
   if (sessionStorage.getItem(SKIP_KEY)) {
     sessionStorage.removeItem(SKIP_KEY);
-    // GT 스크립트 로드 안 함 → 한국어 유지
   } else {
     loadGT();
   }
@@ -208,21 +217,17 @@
     btn.setAttribute('aria-label', '언어 전환');
     btn.innerHTML = svgGlobe + '<span>KO</span>';
     btn.addEventListener('click', function () {
-      if (cooldown) return;           // 빠른 연속 클릭 방지
-      cooldown = true;
-      setTimeout(function () { cooldown = false; }, 800);
-
+      if (busy) return; // 번역 완료 전 추가 클릭 무시
+      busy = true;
       isEnglish = !isEnglish;
-      document.querySelectorAll('.cha-translate-btn').forEach(function (b) {
-        b.querySelector('span').textContent = isEnglish ? 'EN' : 'KO';
-        b.classList.toggle('en-active', isEnglish);
-      });
 
       if (isEnglish) {
-        loadGT();    // GT가 아직 안 로드됐으면 지금 로드
-        applyEN();   // combo 나타나면 번역 적용
+        setBtns('...', true);  // 로딩 표시
+        loadGT();
+        applyEN();             // 완료 시 EN으로 업데이트 + busy 해제
       } else {
-        restoreKO();
+        setBtns('KO', false);
+        restoreKO();           // 페이지 이동이므로 busy 해제 불필요
       }
     });
     return btn;
