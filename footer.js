@@ -145,56 +145,44 @@
   div.id = 'google_translate_element';
   document.body.appendChild(div);
 
-  var SKIP_KEY = 'cha_skip_translate';
+  var isEnglish = false;
+  var gtLoaded = false;
 
-  // 매 페이지 로드 시 googtrans 쿠키 삭제 → 새로고침해도 한국어 유지
-  (function () {
+  // GT 스크립트는 사용자가 EN을 클릭할 때만 로드 (페이지 로드 시 절대 자동 로드 안 함)
+  function loadGT(callback) {
+    if (gtLoaded) { if (callback) callback(); return; }
+    window.googleTranslateElementInit = function () {
+      new google.translate.TranslateElement({
+        pageLanguage: 'ko', includedLanguages: 'en', autoDisplay: false
+      }, 'google_translate_element');
+      gtLoaded = true;
+      if (callback) setTimeout(callback, 300);
+    };
+    var s = document.createElement('script');
+    s.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+
+  function applyEN(tries) {
+    tries = tries || 0;
+    if (tries > 40) return;
+    var select = document.querySelector('.goog-te-combo');
+    if (!select) { setTimeout(function () { applyEN(tries + 1); }, 150); return; }
+    select.value = 'en';
+    var ev = document.createEvent('HTMLEvents');
+    ev.initEvent('change', true, true);
+    select.dispatchEvent(ev);
+  }
+
+  function restoreKO() {
     var exp = new Date(0).toUTCString();
     [location.hostname, '.' + location.hostname, ''].forEach(function (d) {
       var c = 'googtrans=; expires=' + exp + '; path=/';
       if (d) c += '; domain=' + d;
       document.cookie = c;
     });
-  })();
-
-  var isEnglish = false;
-
-  function doTranslate(toEnglish) {
-    if (toEnglish) {
-      var select = document.querySelector('.goog-te-combo');
-      if (!select) { setTimeout(function () { doTranslate(true); }, 200); return; }
-      select.value = 'en';
-      var ev = document.createEvent('HTMLEvents');
-      ev.initEvent('change', true, true);
-      select.dispatchEvent(ev);
-    } else {
-      // Set flag BEFORE navigation so it's ready when page loads
-      sessionStorage.setItem(SKIP_KEY, '1');
-      // Clear googtrans cookie on all domain variants
-      var exp = new Date(0).toUTCString();
-      [location.hostname, '.' + location.hostname, ''].forEach(function (d) {
-        var c = 'googtrans=; expires=' + exp + '; path=/';
-        if (d) c += '; domain=' + d;
-        document.cookie = c;
-      });
-      window.location.replace(window.location.pathname + window.location.search);
-    }
-  }
-
-  // Only load Google Translate script when NOT restoring Korean
-  if (sessionStorage.getItem(SKIP_KEY)) {
-    sessionStorage.removeItem(SKIP_KEY);
-    // Script not loaded — page stays in Korean
-  } else {
-    window.googleTranslateElementInit = function () {
-      new google.translate.TranslateElement({
-        pageLanguage: 'ko', includedLanguages: 'en', autoDisplay: false
-      }, 'google_translate_element');
-    };
-    var gtScript = document.createElement('script');
-    gtScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    gtScript.async = true;
-    document.body.appendChild(gtScript);
+    window.location.replace(window.location.pathname + window.location.search);
   }
 
   var svgGlobe =
@@ -215,7 +203,11 @@
         b.querySelector('span').textContent = isEnglish ? 'EN' : 'KO';
         b.classList.toggle('en-active', isEnglish);
       });
-      doTranslate(isEnglish);
+      if (isEnglish) {
+        loadGT(applyEN); // EN 클릭 시에만 GT 로드 후 번역
+      } else {
+        restoreKO();     // KO 클릭 시 쿠키 삭제 후 리로드
+      }
     });
     return btn;
   }
