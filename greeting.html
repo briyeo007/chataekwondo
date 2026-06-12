@@ -1,18 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko-KR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>관장님 인사말 – 차 태권도</title>
   <link rel="icon" href="/logo-01.png">
-  <link rel="stylesheet" href="/wp-content/themes/neve/style-main-new.min.css">
-<link rel="stylesheet" href="/wp-content/plugins/otter-blocks/build/blocks/advanced-columns/style.css">
-<link rel="stylesheet" href="/wp-content/plugins/otter-blocks/build/blocks/posts-grid/style.css">
-<link rel="stylesheet" href="/wp-content/plugins/otter-blocks/assets/glide/glide.core.min.css">
-<link rel="stylesheet" href="/wp-content/plugins/otter-blocks/assets/glide/glide.theme.min.css">
-<link rel="stylesheet" href="/wp-content/plugins/otter-blocks/build/blocks/slider/style.css"><link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
   <style>
     :root { --accent: #fcaf3b; --dark: #14171c; --light: #f8f8f8; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,7 +25,8 @@
     .cha-nav-links > a:hover { color: var(--accent); }
     .cha-nav-dropdown { position: relative; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; }
     .cha-nav-dropdown:hover { color: var(--accent); }
-    .cha-dropdown { display: none; position: absolute; top: calc(100% + 12px); left: 0; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.12); border-radius: 10px; min-width: 180px; padding: 8px 0; z-index: 100; } .cha-dropdown::before { content: ""; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+    .cha-dropdown { display: none; position: absolute; top: calc(100% + 12px); left: 0; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.12); border-radius: 10px; min-width: 180px; padding: 8px 0; z-index: 100; }
+    .cha-dropdown::before { content: ""; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
     .cha-nav-dropdown:hover .cha-dropdown { display: block; }
     .cha-dropdown a { display: block; padding: 10px 20px; font-size: 13px; font-weight: 600; transition: background .15s; }
     .cha-dropdown a:hover { background: var(--light); color: var(--accent); }
@@ -37,43 +34,37 @@
     .cha-hamburger span { width: 24px; height: 2px; background: var(--dark); display: block; }
     @media (max-width: 820px) {
       .cha-hamburger { display: flex; }
-      .cha-nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: #fff; flex-direction: column; align-items: flex-start; padding: 20px 24px; gap: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.1); border-top: 1px solid #eee; }
+      .cha-nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: #fff; flex-direction: column; align-items: flex-start; padding: 20px 24px; gap: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.1); border-top: 1px solid #eee; z-index: 999; }
       .cha-nav-links.open { display: flex; }
       .cha-dropdown { position: static; box-shadow: none; border-radius: 0; padding-left: 16px; margin-top: 8px; }
       .cha-nav-dropdown:hover .cha-dropdown { display: none; }
       .cha-nav-dropdown.open .cha-dropdown { display: block; }
     }
 
+    /* HERO */
+    .page-hero { background: var(--dark); color: #fff; padding: 80px 24px 64px; text-align: center; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(252,175,59,.12) 0%, transparent 60%); }
+    .page-hero .kicker { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 48px); font-weight: 900; margin-bottom: 16px; }
+    .page-hero p { font-size: 16px; opacity: .75; max-width: 500px; margin: 0 auto; }
+
     /* CONTENT */
-    .page-content { max-width: 1100px; margin: 0 auto; padding: 60px 24px 80px; }
-    .page-content h1, .page-content h2 { font-size: clamp(20px,3vw,26px); font-weight: 800; margin: 32px 0 14px; color: var(--dark); }
-    .page-content p { margin-bottom: 16px; font-size: 15px; color: #444; }
+    .page-content { max-width: 860px; margin: 0 auto; padding: 60px 24px 80px; }
+    .page-content h2 { font-size: clamp(20px,3vw,26px); font-weight: 800; margin: 32px 0 14px; color: var(--dark); }
+    .page-content p { margin-bottom: 16px; font-size: 15px; color: #444; line-height: 1.8; }
     .page-content ul, .page-content ol { padding-left: 24px; margin-bottom: 16px; }
     .page-content li { font-size: 15px; color: #444; margin-bottom: 8px; }
     .page-content strong { color: var(--dark); }
-    .page-content figure { margin: 24px 0; }
-    .page-content figure img { border-radius: 12px; max-width: 500px; }
-    .wp-block-cover { display: none; }
-    .wp-block-spacer { display: none; }
-
-    /* FOOTER */
-    .cha-footer { background: var(--dark); color: rgba(255,255,255,.55); padding: 48px 24px; text-align: center; font-size: 13px; line-height: 2.2; }
-    .cha-footer a { color: var(--accent); }
+    .page-content figure { margin: 32px 0; }
+    .page-content figure img { border-radius: 12px; max-width: 460px; }
   </style>
-<link rel="stylesheet" href="/wp-content/themes/neve/style-main-new.min.css">
-<link rel="stylesheet" href="/wp-content/plugins/otter-blocks/build/blocks/advanced-columns/style.css">
-<link rel="stylesheet" href="/wp-content/plugins/otter-blocks/build/blocks/posts-grid/style.css">
-<link rel="stylesheet" href="/wp-content/plugins/otter-blocks/assets/glide/glide.core.min.css">
-<link rel="stylesheet" href="/wp-content/plugins/otter-blocks/assets/glide/glide.theme.min.css">
-<link rel="stylesheet" href="/wp-content/plugins/otter-blocks/build/blocks/slider/style.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap"><link rel="stylesheet" href="/style.css"></head>
+</head>
 <body>
 
 <!-- HEADER -->
 <header class="cha-header">
   <nav class="cha-nav">
-    <a href="index.html" class="cha-logo">
-      <img src="/logo-01.png" alt="차 태권도">
-    </a>
+    <a href="index.html" class="cha-logo"><img src="/logo-01.png" alt="차 태권도"></a>
     <div class="cha-nav-links" id="navLinks">
       <a href="index.html">HOME</a>
       <div class="cha-nav-dropdown">
@@ -96,97 +87,43 @@
   </nav>
 </header>
 
+<!-- HERO -->
+<section class="page-hero">
+  <p class="kicker">MASTER'S GREETING</p>
+  <h1>관장님 인사말</h1>
+  <p>차 태권도 대표 사범 차동술의<br>수련생 여러분께 드리는 인사말입니다.</p>
+</section>
+
 <div class="page-content">
-<div class="wp-block-cover alignfull is-light"><img decoding="async" width="966" height="544" class="wp-block-cover__image-background wp-image-387 size-full" alt="" src="/images/cha-red-summer.jpg" style="object-position:48% 73%" data-object-fit="cover" data-object-position="48% 73%" /><span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#a17975"></span><div class="wp-block-cover__inner-container is-layout-constrained wp-block-cover-is-layout-constrained">
-<h2 class="wp-block-heading has-text-align-center has-nv-site-bg-color has-text-color has-link-color has-large-font-size wp-elements-d2e4a36fd4339e4450914c1854c7c490">관장님 인사말</h2>
-</div></div>
 
+<p>CHA태권도장에서 수련을 시작하게 된 수련생 여러분 환영합니다.</p>
 
+<p>여러분은 CHA의 얼굴이자 상징입니다.<br>자신에 대한 사랑과 성공에 대한 확신을 갖고 수련하게 된 여러분들을 자랑스럽게 생각합니다.</p>
 
-<div style="height:200px" aria-hidden="true" class="wp-block-spacer"></div>
+<p>수련을 지속적으로 병행해 나가는 과정에서 여러분은 건강과 자신감,<br>자신에 대한 자긍심을 얻게 될 것입니다.<br>그렇기 위해서 매일 자기 향상과 실력 배양을 위해 도장에 출석해야 하며,<br>이런 자기와의 약속은 최선을 다해 지켜져야 합니다.</p>
 
+<p>CHA태권도장의 모든 수련생은 미래 사회에서 필요로 하는 능동적인 사람이 되기 위해 부단히 노력해야 합니다.<br>지혜와 창의가 빛나는 사람, 도덕성을 갖춘 사람, 남을 이해하고 더불어 살아가는 사람,<br>자기의 특기와 소질을 계발하고 신장시켜 나가는 사람이 되어야 합니다.</p>
 
+<p>그러기 위해서 여러 가지 덕목을 실천하고 마음과 행동을 갈고 닦는다면,<br>다가오는 미래는 모두 여러분들이 스스로 이끌어 나가는 꿈의 장이 될 것입니다.</p>
 
-<p>존경하는 학부모님, 그리고 태권도를 사랑하는 모든 분들께.</p>
+<p>차태권도 차동술 대표 사범</p>
 
+<figure>
+  <img src="/images/instructor.jpg" alt="차동술 관장">
+</figure>
 
+<h2><strong>차동술관장 약력</strong></h2>
 
-<p>안녕하십니까? 차태권도 관장 차동술입니다.</p>
+<p>■ 태권도 공인 8단<br>■ 한국체육대학교 석사<br>■ 경기지도자 2급<br>■ 경호무술 6단, 환검도 6단<br>■ 서일초등학교 태권도부 명예교사</p>
 
+<p>■ 서울시 태권도협회 기술전문위원회 임원<br>■ 서초구 태권도협회 심사분과 부위원장</p>
 
-
-<p>푸른 소나무처럼 올곧은 정신과 흔들림 없는 강인함으로 수련생들을 이끌어온 지 어느덧 [경력 기간]년이 되었습니다. 저는 어린 시절 태권도를 처음 접하며 몸과 마음이 함께 성장하는 놀라운 경험을 했습니다. 그 경험을 바탕으로 아이들에게는 꿈과 자신감을 심어주고, 성인들에게는 일상에 활력을 더하는 건강한 수련 공간을 만들고자 차태권도의 문을 열었습니다.</p>
-
-
-
-<p>차태권도에서는 단순한 기술 연마를 넘어 <strong>&#8216;예(禮), 의(義), 염(廉), 치(恥)&#8217;</strong>의 태권도 정신을 중요하게 생각합니다. 서로를 존중하고 배려하는 마음, 불의를 보면 맞설 용기, 스스로에게 떳떳한 청렴함, 그리고 부끄러움을 아는 겸손함. 이러한 가치들은 우리 아이들이 건강한 사회 구성원으로 성장하는 데 밑거름이 될 것입니다.</p>
-
-
-
-<p>또한, 저는 시대의 변화에 발맞춰 전통 태권도의 깊이와 현대적인 트레이닝 기법을 접목한 차태권도만의 특별한 교육 시스템을 개발하였습니다. [차태권도만의 특별한 교육 방식이나 프로그램 언급 &#8211; 예: 인성 교육 프로그램, 최첨단 체력 측정 시스템, 특별 훈련 방식 등]. 이를 통해 모든 수련생들이 자신의 잠재력을 최대한 발휘하고 태권도를 통해 긍정적인 변화를 경험하도록 열정적인 지도를 약속드립니다.</p>
-
-
-
-<p>차태권도는 단순한 태권도장이 아닙니다. 함께 땀 흘리며 성장하고 서로를 응원하는 따뜻한 공동체입니다. 저희 도장에서 태권도의 진정한 가치를 배우고 여러분의 삶에 긍정적인 에너지를 가득 채우시길 바랍니다.</p>
-
-
-
-<p>언제나 수련생들의 빛나는 성장을 응원하며, 차태권도에서 뵙겠습니다.</p>
-
-
-
-<p>감사합니다.</p>
-
-
-
-<p>차태권도 관장 차동술 올림</p>
-
-
-
-<figure class="wp-block-image size-large is-resized"><img decoding="async" src="/images/instructor.jpg" alt="차동술 관장" style="width:500px"/></figure>
-
-
-
-<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
-
-
-
-<h2 class="wp-block-heading" id="SE-fe5ca2cf-c17d-11ed-852b-f1e0cdf1b738"><strong>차동술관장 약력</strong></h2>
-
-
-
-<p id="SE-fe5cc9e3-c17d-11ed-852b-c734ecf829c0">​■ 태권도 공인 8단<br>​■ 한국체육대학교 석사<br>​■ 경기지도자 2급<br>​■ 경호무술 6단, 환검도 6단<br>■ 서일초등학교 태권도부 명예교사</p>
-
-
-
-<p>■ 서울시 태권도협회 기술전문위원회임원<br>​■ 서초구 태권도협회 심사분과 부위원장</p>
-
-
-
-<p id="SE-fe5d185b-c17d-11ed-852b-cd10c5ba14b8">■ 생활체육 / 유아체육지도 관련 자격증 / 장애인태권도심판 / 스쿠버다이버 겨루기,품새심판 외 다수<br>■ 음악줄넘기, 유아체육교사, 운동처방사, 레크리에이션<br>​■ 스포츠 경영사, 한국스포츠학회 이사, 한국체육대학교 석⦁박사동문회이사, 오산대 외래교수 등.<br>■ 전) 한국초등학교태권도연맹 심판</p>
-
-
-
-<div style="height:300px" aria-hidden="true" class="wp-block-spacer"></div>
-
-
-
-<p></p>
-</div>		</div>
-			</div>
-</div>
-
-</main><!--/.neve-main-->
-
+<p>■ 생활체육 / 유아체육지도 관련 자격증 / 장애인태권도심판 / 스쿠버다이버 겨루기,품새심판 외 다수<br>■ 음악줄넘기, 유아체육교사, 운동처방사, 레크리에이션<br>■ 스포츠 경영사, 한국스포츠학회 이사, 한국체육대학교 석·박사동문회이사, 오산대 외래교수 등.<br>■ 전) 한국초등학교태권도연맹 심판</p>
 
 </div>
 
-<!-- FOOTER -->
 <div id="cha-footer-placeholder"></div>
-
 <script src="footer.js"></script>
 <script src="animations.js"></script>
 </body>
 </html>
-
-

@@ -102,3 +102,118 @@
   var el = document.getElementById('cha-footer-placeholder');
   if (el) el.outerHTML = html;
 })();
+
+/* ═══════════════════════════════════════════════════════════════
+   TRANSLATE — globe button + Google Translate (all pages)
+   ═══════════════════════════════════════════════════════════════ */
+(function () {
+  var css = `
+    .cha-translate-btn {
+      display: flex; align-items: center; gap: 5px;
+      background: none; border: 1.5px solid #ccc; border-radius: 20px;
+      padding: 5px 12px; font-size: 13px; font-weight: 600;
+      cursor: pointer; color: #333; font-family: 'Outfit', sans-serif;
+      transition: border-color .2s, color .2s, background .2s;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .cha-translate-btn:hover { border-color: #fcaf3b; color: #fcaf3b; }
+    .cha-translate-btn.en-active {
+      border-color: #fcaf3b; color: #fcaf3b;
+      background: rgba(252,175,59,.10);
+    }
+    .cha-translate-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+    /* Desktop: hide mobile button / Mobile: hide desktop button */
+    @media (max-width: 820px) {
+      .cha-translate-btn.tr-desktop { display: none !important; }
+      .cha-translate-btn.tr-mobile  { display: flex; margin-left: auto; margin-right: 6px; }
+    }
+    @media (min-width: 821px) {
+      .cha-translate-btn.tr-mobile  { display: none !important; }
+    }
+    .goog-te-banner-frame,
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    .goog-te-gadget { display: none !important; }
+    #google_translate_element { display: none !important; }
+    .skiptranslate { display: none !important; }
+    body { top: 0 !important; }
+  `;
+  var s = document.createElement('style');
+  s.textContent = css;
+  document.head.appendChild(s);
+
+  var div = document.createElement('div');
+  div.id = 'google_translate_element';
+  document.body.appendChild(div);
+
+  window.googleTranslateElementInit = function () {
+    new google.translate.TranslateElement({
+      pageLanguage: 'ko', includedLanguages: 'en', autoDisplay: false
+    }, 'google_translate_element');
+  };
+
+  var gtScript = document.createElement('script');
+  gtScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  gtScript.async = true;
+  document.body.appendChild(gtScript);
+
+  var isEnglish = false;
+
+  function doTranslate(toEnglish) {
+    var select = document.querySelector('.goog-te-combo');
+    if (!select) { setTimeout(function () { doTranslate(toEnglish); }, 200); return; }
+    if (toEnglish) {
+      select.value = 'en';
+      var ev = document.createEvent('HTMLEvents');
+      ev.initEvent('change', true, true);
+      select.dispatchEvent(ev);
+    } else {
+      // Restore to Korean: clear Google Translate cookie and reload
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.' + location.hostname;
+      window.location.reload();
+    }
+  }
+
+  var svgGlobe =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      '<circle cx="12" cy="12" r="10"/>' +
+      '<line x1="2" y1="12" x2="22" y2="12"/>' +
+      '<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' +
+    '</svg>';
+
+  function buildBtn(extraClass) {
+    var btn = document.createElement('button');
+    btn.className = 'cha-translate-btn ' + extraClass;
+    btn.setAttribute('aria-label', '언어 전환');
+    btn.innerHTML = svgGlobe + '<span>KO</span>';
+    btn.addEventListener('click', function () {
+      isEnglish = !isEnglish;
+      document.querySelectorAll('.cha-translate-btn').forEach(function (b) {
+        b.querySelector('span').textContent = isEnglish ? 'EN' : 'KO';
+        b.classList.toggle('en-active', isEnglish);
+      });
+      doTranslate(isEnglish);
+    });
+    return btn;
+  }
+
+  function injectBtn() {
+    var nav = document.querySelector('.cha-nav');
+    var navLinks = document.getElementById('navLinks');
+    if (!nav || document.querySelector('.cha-translate-btn')) return;
+
+    // Desktop: inside navLinks (keeps space-between layout correct)
+    if (navLinks) navLinks.appendChild(buildBtn('tr-desktop'));
+
+    // Mobile: before hamburger button
+    var hamburger = nav.querySelector('.cha-hamburger');
+    if (hamburger) { nav.insertBefore(buildBtn('tr-mobile'), hamburger); }
+    else { nav.appendChild(buildBtn('tr-mobile')); }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectBtn);
+  } else {
+    injectBtn();
+  }
+})();
