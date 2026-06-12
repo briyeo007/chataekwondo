@@ -146,45 +146,53 @@
   document.body.appendChild(div);
 
   var SKIP_KEY = 'cha_skip_translate';
-
   var isEnglish = false;
+  var cooldown = false;
 
-  function doTranslate(toEnglish) {
-    if (toEnglish) {
-      var select = document.querySelector('.goog-te-combo');
-      if (!select) { setTimeout(function () { doTranslate(true); }, 200); return; }
-      select.value = 'en';
-      var ev = document.createEvent('HTMLEvents');
-      ev.initEvent('change', true, true);
-      select.dispatchEvent(ev);
-    } else {
-      // Set flag BEFORE navigation so it's ready when page loads
-      sessionStorage.setItem(SKIP_KEY, '1');
-      // Clear googtrans cookie on all domain variants
-      var exp = new Date(0).toUTCString();
-      [location.hostname, '.' + location.hostname, ''].forEach(function (d) {
-        var c = 'googtrans=; expires=' + exp + '; path=/';
-        if (d) c += '; domain=' + d;
-        document.cookie = c;
-      });
-      window.location.replace(window.location.pathname + window.location.search);
-    }
-  }
-
-  // Only load Google Translate script when NOT restoring Korean
-  if (sessionStorage.getItem(SKIP_KEY)) {
-    sessionStorage.removeItem(SKIP_KEY);
-    // Script not loaded — page stays in Korean
-  } else {
+  /* ── GT 로드 (온디맨드, 중복 방지) ── */
+  function loadGT() {
+    if (document.querySelector('script[src*="translate.google.com"]')) return;
     window.googleTranslateElementInit = function () {
       new google.translate.TranslateElement({
         pageLanguage: 'ko', includedLanguages: 'en', autoDisplay: false
       }, 'google_translate_element');
     };
-    var gtScript = document.createElement('script');
-    gtScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    gtScript.async = true;
-    document.body.appendChild(gtScript);
+    var s = document.createElement('script');
+    s.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+
+  /* ── EN 번역 적용 (combo 나타날 때까지 대기, 최대 5초) ── */
+  function applyEN(tries) {
+    tries = tries || 0;
+    if (tries > 33) return;
+    var select = document.querySelector('.goog-te-combo');
+    if (!select) { setTimeout(function () { applyEN(tries + 1); }, 150); return; }
+    select.value = 'en';
+    var ev = document.createEvent('HTMLEvents');
+    ev.initEvent('change', true, true);
+    select.dispatchEvent(ev);
+  }
+
+  /* ── KO 복원 ── */
+  function restoreKO() {
+    sessionStorage.setItem(SKIP_KEY, '1');
+    var exp = new Date(0).toUTCString();
+    [location.hostname, '.' + location.hostname, ''].forEach(function (d) {
+      var c = 'googtrans=; expires=' + exp + '; path=/';
+      if (d) c += '; domain=' + d;
+      document.cookie = c;
+    });
+    window.location.replace(window.location.pathname + window.location.search);
+  }
+
+  /* ── 페이지 로드 시: 복원 플래그 체크, 없으면 GT 미리 로드 ── */
+  if (sessionStorage.getItem(SKIP_KEY)) {
+    sessionStorage.removeItem(SKIP_KEY);
+    // GT 스크립트 로드 안 함 → 한국어 유지
+  } else {
+    loadGT();
   }
 
   var svgGlobe =
@@ -200,12 +208,22 @@
     btn.setAttribute('aria-label', '언어 전환');
     btn.innerHTML = svgGlobe + '<span>KO</span>';
     btn.addEventListener('click', function () {
+      if (cooldown) return;           // 빠른 연속 클릭 방지
+      cooldown = true;
+      setTimeout(function () { cooldown = false; }, 800);
+
       isEnglish = !isEnglish;
       document.querySelectorAll('.cha-translate-btn').forEach(function (b) {
         b.querySelector('span').textContent = isEnglish ? 'EN' : 'KO';
         b.classList.toggle('en-active', isEnglish);
       });
-      doTranslate(isEnglish);
+
+      if (isEnglish) {
+        loadGT();    // GT가 아직 안 로드됐으면 지금 로드
+        applyEN();   // combo 나타나면 번역 적용
+      } else {
+        restoreKO();
+      }
     });
     return btn;
   }
