@@ -145,7 +145,14 @@
   div.id = 'google_translate_element';
   document.body.appendChild(div);
 
+  var SKIP_KEY = 'cha_skip_translate';
+
+  // If user just requested Korean, skip translate init entirely this load
   window.googleTranslateElementInit = function () {
+    if (sessionStorage.getItem(SKIP_KEY)) {
+      sessionStorage.removeItem(SKIP_KEY);
+      return;
+    }
     new google.translate.TranslateElement({
       pageLanguage: 'ko', includedLanguages: 'en', autoDisplay: false
     }, 'google_translate_element');
@@ -159,23 +166,24 @@
   var isEnglish = false;
 
   function doTranslate(toEnglish) {
-    var select = document.querySelector('.goog-te-combo');
-    if (!select) { setTimeout(function () { doTranslate(toEnglish); }, 200); return; }
     if (toEnglish) {
+      var select = document.querySelector('.goog-te-combo');
+      if (!select) { setTimeout(function () { doTranslate(true); }, 200); return; }
       select.value = 'en';
       var ev = document.createEvent('HTMLEvents');
       ev.initEvent('change', true, true);
       select.dispatchEvent(ev);
     } else {
-      // Restore to Korean: expire googtrans cookie on every domain variant, then hard-navigate
+      // Flag: skip translation init on next load
+      sessionStorage.setItem(SKIP_KEY, '1');
+      // Also clear googtrans cookie just in case
       var exp = new Date(0).toUTCString();
       [location.hostname, '.' + location.hostname, ''].forEach(function (d) {
         var c = 'googtrans=; expires=' + exp + '; path=/';
         if (d) c += '; domain=' + d;
         document.cookie = c;
       });
-      // Use href assignment (not reload) to force a fresh GET, bypassing bfcache
-      window.location.href = window.location.pathname + window.location.search;
+      window.location.replace(window.location.pathname + window.location.search);
     }
   }
 
