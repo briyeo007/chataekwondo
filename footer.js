@@ -167,10 +167,15 @@
       ev.initEvent('change', true, true);
       select.dispatchEvent(ev);
     } else {
-      // Restore to Korean: clear Google Translate cookie and reload
-      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.' + location.hostname;
-      window.location.reload();
+      // Restore to Korean: expire googtrans cookie on every domain variant, then hard-navigate
+      var exp = new Date(0).toUTCString();
+      [location.hostname, '.' + location.hostname, ''].forEach(function (d) {
+        var c = 'googtrans=; expires=' + exp + '; path=/';
+        if (d) c += '; domain=' + d;
+        document.cookie = c;
+      });
+      // Use href assignment (not reload) to force a fresh GET, bypassing bfcache
+      window.location.href = window.location.pathname + window.location.search;
     }
   }
 
