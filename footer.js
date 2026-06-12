@@ -147,6 +147,16 @@
 
   var SKIP_KEY = 'cha_skip_translate';
 
+  // 매 페이지 로드 시 googtrans 쿠키 삭제 → 새로고침해도 한국어 유지
+  (function () {
+    var exp = new Date(0).toUTCString();
+    [location.hostname, '.' + location.hostname, ''].forEach(function (d) {
+      var c = 'googtrans=; expires=' + exp + '; path=/';
+      if (d) c += '; domain=' + d;
+      document.cookie = c;
+    });
+  })();
+
   var isEnglish = false;
 
   function doTranslate(toEnglish) {
