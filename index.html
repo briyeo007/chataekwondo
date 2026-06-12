@@ -246,6 +246,7 @@ body { padding-bottom: 56px; }
 @media(max-width:600px){
   .cha-stat { flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); }
   .cha-tab { padding: 8px 18px; font-size: 13px; }
+  .cha-feat-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
 }
 
 :root { --accent: #fcaf3b; --dark: #14171c; }
@@ -383,7 +384,7 @@ body { padding-bottom: 56px; }
 
 
 <section style="padding:64px 20px;background:#fff;">
-  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:center;">
+  <div class="cha-feat-grid" style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:center;">
     <div>
       <div style="font-size:52px;line-height:1;margin-bottom:16px;">⚡</div>
       <h3 style="font-size:18px;font-weight:800;color:#14171c;margin-bottom:10px;">활력 태권도</h3>
