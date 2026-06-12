@@ -147,22 +147,6 @@
 
   var SKIP_KEY = 'cha_skip_translate';
 
-  // If user just requested Korean, skip translate init entirely this load
-  window.googleTranslateElementInit = function () {
-    if (sessionStorage.getItem(SKIP_KEY)) {
-      sessionStorage.removeItem(SKIP_KEY);
-      return;
-    }
-    new google.translate.TranslateElement({
-      pageLanguage: 'ko', includedLanguages: 'en', autoDisplay: false
-    }, 'google_translate_element');
-  };
-
-  var gtScript = document.createElement('script');
-  gtScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-  gtScript.async = true;
-  document.body.appendChild(gtScript);
-
   var isEnglish = false;
 
   function doTranslate(toEnglish) {
@@ -174,9 +158,9 @@
       ev.initEvent('change', true, true);
       select.dispatchEvent(ev);
     } else {
-      // Flag: skip translation init on next load
+      // Set flag BEFORE navigation so it's ready when page loads
       sessionStorage.setItem(SKIP_KEY, '1');
-      // Also clear googtrans cookie just in case
+      // Clear googtrans cookie on all domain variants
       var exp = new Date(0).toUTCString();
       [location.hostname, '.' + location.hostname, ''].forEach(function (d) {
         var c = 'googtrans=; expires=' + exp + '; path=/';
@@ -185,6 +169,22 @@
       });
       window.location.replace(window.location.pathname + window.location.search);
     }
+  }
+
+  // Only load Google Translate script when NOT restoring Korean
+  if (sessionStorage.getItem(SKIP_KEY)) {
+    sessionStorage.removeItem(SKIP_KEY);
+    // Script not loaded — page stays in Korean
+  } else {
+    window.googleTranslateElementInit = function () {
+      new google.translate.TranslateElement({
+        pageLanguage: 'ko', includedLanguages: 'en', autoDisplay: false
+      }, 'google_translate_element');
+    };
+    var gtScript = document.createElement('script');
+    gtScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    gtScript.async = true;
+    document.body.appendChild(gtScript);
   }
 
   var svgGlobe =
