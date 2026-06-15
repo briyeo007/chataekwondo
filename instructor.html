@@ -95,6 +95,29 @@
     .evidence-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,.75)); color: #fff; padding: 40px 20px 20px; font-size: 14px; font-weight: 700; }
     .evidence-tag { position: absolute; top: 16px; left: 16px; background: var(--accent); color: var(--dark); font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 12px; letter-spacing: 1px; text-transform: uppercase; }
 
+    /* CAREER GRID */
+    .career-section { padding: 80px 24px; background: var(--light); }
+    .career-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
+    .career-card { background: #fff; border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .career-card-title { font-size: 13px; font-weight: 800; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+    .career-list { list-style: none; }
+    .career-list li { font-size: 14px; color: #444; line-height: 1.9; padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
+    .career-list li:last-child { border-bottom: none; }
+    .career-list li::before { content: '·'; color: var(--accent); font-weight: 900; margin-right: 8px; }
+
+    /* OVERSEAS */
+    .overseas-section { padding: 80px 24px; background: var(--dark); color: #fff; }
+    .overseas-section .section-title { color: #fff; }
+    .country-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 800px; margin: 0 auto; }
+    .country-tag { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); color: #fff; padding: 10px 22px; border-radius: 30px; font-size: 14px; font-weight: 600; }
+
+    /* AWARDS */
+    .awards-section { padding: 80px 24px; background: #fff; }
+    .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; max-width: 1000px; margin: 0 auto; }
+    .award-item { display: flex; align-items: center; gap: 12px; background: var(--light); border-radius: 12px; padding: 16px 20px; }
+    .award-icon { font-size: 24px; flex-shrink: 0; }
+    .award-text { font-size: 14px; font-weight: 600; color: var(--dark); line-height: 1.4; }
+
     /* FOOTER */
     .cha-footer { background: var(--dark); color: rgba(255,255,255,.55); padding: 48px 24px; text-align: center; font-size: 13px; line-height: 2.2; }
     .cha-footer a { color: var(--accent); }
@@ -146,7 +169,7 @@
 <section class="page-hero">
   <p class="kicker">Instructor Profile</p>
   <h1>지도자 소개</h1>
-  <p>20년 이상의 현장 경험, 국기원 공인 8단, 글로벌 시범단장.<br>차 태권도를 이끄는 사람을 소개합니다.</p>
+  <p>태권도 공인 8단, 한국체대 석사, 국기원 심사평가위원.<br>차 태권도를 이끄는 사람을 소개합니다.</p>
 </section>
 
 <!-- PROFILE SECTION -->
@@ -160,7 +183,7 @@
     </div>
     <div>
       <p class="profile-name" style="margin-top:0;">차동술 관장</p>
-      <p class="profile-title">차 태권도 블루관 · 차 태권도 레드관 대표 관장 / 국기원 8단 / 프랑스 시범단장</p>
+      <p class="profile-title">CHA태권도 블루관 · 레드관 총관장 / 태권도 공인 8단 / 한국체육대학교 석사</p>
 
       <div class="philosophy-quote">
         <blockquote>"태권도는 몸을 단련하는 것이 아니라,<br>사람을 만드는 것입니다."</blockquote>
@@ -179,104 +202,136 @@
         말할 수 있도록 오늘도 최선을 다하겠습니다.
       </p>
       <div class="credential-chips">
-        <span class="chip accent">국기원 태권도 8단</span>
-        <span class="chip">KBS 방송 출연</span>
-        <span class="chip">프랑스 시범단장</span>
-        <span class="chip">15개국 해외 시범</span>
-        <span class="chip">20년+ 지도 경력</span>
-        <span class="chip">대한태권도협회 정회원</span>
+        <span class="chip accent">태권도 공인 8단</span>
+        <span class="chip">한국체대 석사</span>
+        <span class="chip">국기원 심사평가위원</span>
+        <span class="chip">대한태권도협회 심사관리 부위원장</span>
+        <span class="chip">국제사범 1급</span>
+        <span class="chip">노인스포츠 지도사</span>
+        <span class="chip">스쿠버다이빙 강사</span>
+        <span class="chip">서초2동 체육회장</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TIMELINE -->
-<section class="timeline-section">
+<!-- CAREER GRID -->
+<section class="career-section">
   <div class="container">
-    <h2 class="section-title">주요 경력 &amp; 성과</h2>
-    <p class="section-sub">꾸준히 쌓아온 차 태권도의 역사입니다.</p>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-dot">🥋</div>
-        <div class="tl-content">
-          <p class="tl-year">CREDENTIAL</p>
-          <h3 class="tl-title">국기원 태권도 8단 취득</h3>
-          <p class="tl-desc">대한민국 태권도 최고 공인 기관인 국기원에서 수여하는 8단 자격을 취득. 전국적으로도 희귀한 최고 수준의 공인입니다.</p>
-        </div>
+    <h2 class="section-title">주요 경력</h2>
+    <p class="section-sub">태권도 현장과 행정을 아우르는 폭넓은 경력입니다.</p>
+    <div class="career-grid">
+      <div class="career-card">
+        <p class="career-card-title">현직</p>
+        <ul class="career-list">
+          <li>CHA태권도 블루·레드관 총관장</li>
+          <li>국기원 심사평가위원</li>
+          <li>한국체대 대학원 동문회 부회장</li>
+          <li>대한태권도협회 심사관리 부위원장</li>
+          <li>서초2동 주민자치 부위원장</li>
+          <li>서초2동 체육회장</li>
+        </ul>
       </div>
-      <div class="tl-item">
-        <div class="tl-dot">🌍</div>
-        <div class="tl-content">
-          <p class="tl-year">GLOBAL</p>
-          <h3 class="tl-title">15개국 해외 시범 공연 완수</h3>
-          <p class="tl-desc">미국, 프랑스, 독일, 호주 등 전 세계 15개국 이상에서 태권도 시범을 선보였습니다. 현지 관중들로부터 기립 박수를 받은 무대가 다수입니다.</p>
-        </div>
+      <div class="career-card">
+        <p class="career-card-title">전직</p>
+        <ul class="career-list">
+          <li>서울시태권도협회 품새 상임심판</li>
+          <li>서초구태권도협회 사무국장</li>
+          <li>서초구태권도 시범단 감독</li>
+          <li>대한태권도협회 품새 상임심판</li>
+        </ul>
       </div>
-      <div class="tl-item">
-        <div class="tl-dot">📺</div>
-        <div class="tl-content">
-          <p class="tl-year">MEDIA · 2025</p>
-          <h3 class="tl-title">KBS '더갓 스팟' 공식 출연</h3>
-          <p class="tl-desc">KBS 정규 프로그램 '더갓 스팟'에 출연하여 차 태권도의 도전 정신과 성취 가치를 전국에 알렸습니다. 방송 이후 문의가 크게 늘었습니다.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">🇫🇷</div>
-        <div class="tl-content">
-          <p class="tl-year">FRANCE TOUR · 2026</p>
-          <h3 class="tl-title">프랑스 투어 시범단 이끌기</h3>
-          <p class="tl-desc">프랑스 미요(Millau)와 칸-쉬르-메르(Cagnes-sur-Mer)에서 현지 관중을 감동시킨 시범을 선보였습니다. 현지 매체에도 소개된 역사적 무대입니다.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">🏅</div>
-        <div class="tl-content">
-          <p class="tl-year">ACHIEVEMENT · 2025</p>
-          <h3 class="tl-title">수련생 5명 국기원 4품 동시 합격</h3>
-          <p class="tl-desc">2025년 9월 국기원 승품심사에서 차 태권도 수련생 5명이 동시에 4품에 합격하는 쾌거를 달성했습니다. 지도자의 실력이 수련생의 성과로 이어진 결과입니다.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">❤️</div>
-        <div class="tl-content">
-          <p class="tl-year">SOCIAL · 2025</p>
-          <h3 class="tl-title">성인 지적장애인 태권도 수업 진행</h3>
-          <p class="tl-desc">사회적 취약계층을 위한 태권도 수업을 진행하며 태권도의 사회적 가치를 실천했습니다. 참가자 모두가 감동한 순간이었습니다.</p>
-        </div>
+      <div class="career-card">
+        <p class="career-card-title">자격</p>
+        <ul class="career-list">
+          <li>태권도 공인 8단</li>
+          <li>한국체육대학교 석사</li>
+          <li>국제사범 1급</li>
+          <li>노인스포츠 지도사</li>
+          <li>스쿠버다이빙 강사</li>
+          <li>스키강사 레벨1</li>
+          <li>호신술 3급</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EVIDENCE GALLERY -->
-<section class="evidence-section">
+<!-- OVERSEAS -->
+<section class="overseas-section">
   <div class="container">
-    <h2 class="section-title">현장 사진으로 보는 경력</h2>
-    <p class="section-sub">글로 설명하는 것보다 사진 한 장이 더 강합니다.</p>
-    <div class="evidence-grid">
-      <div class="evidence-card">
-        <span class="evidence-tag">🇫🇷 France</span>
-        <img loading="lazy" src="/images/photo-2026-04.jpg" alt="프랑스 미요 시범">
-        <div class="evidence-label">프랑스 미요(Millau) 태권도 시범 — 2026</div>
+    <h2 class="section-title">해외 활동</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.6);">아시아·미주·유럽을 아우르는 순회 시범 및 교류 활동</p>
+    <div class="country-grid">
+      <span class="country-tag">🇺🇸 미국</span>
+      <span class="country-tag">🇦🇺 호주</span>
+      <span class="country-tag">🇨🇦 캐나다</span>
+      <span class="country-tag">🇵🇭 필리핀</span>
+      <span class="country-tag">🇨🇳 중국</span>
+      <span class="country-tag">🇹🇭 태국</span>
+      <span class="country-tag">🇻🇳 베트남</span>
+      <span class="country-tag">🇭🇰 홍콩</span>
+      <span class="country-tag">🇯🇵 일본</span>
+      <span class="country-tag">🇹🇼 대만</span>
+      <span class="country-tag">🇪🇺 유럽 다수</span>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="awards-section">
+  <div class="container">
+    <h2 class="section-title">수상 경력</h2>
+    <p class="section-sub">태권도 지도와 사회 공헌을 인정받아 수여된 표창들입니다.</p>
+    <div class="awards-grid">
+      <div class="award-item">
+        <div class="award-icon">🏛️</div>
+        <div class="award-text">국회의원 다수 표창</div>
       </div>
-      <div class="evidence-card">
-        <span class="evidence-tag">🇫🇷 France</span>
-        <img loading="lazy" src="/images/photo-2026-05.jpg" alt="프랑스 칸-쉬르-메르 시범">
-        <div class="evidence-label">프랑스 칸-쉬르-메르 태권도 화합 — 2026</div>
+      <div class="award-item">
+        <div class="award-icon">🥋</div>
+        <div class="award-text">국기원장 표창</div>
       </div>
-      <div class="evidence-card">
-        <span class="evidence-tag">📺 KBS</span>
-        <img loading="lazy" src="/images/kakao-2025-03.jpg" alt="KBS 더갓 스팟 출연">
-        <div class="evidence-label">KBS '더갓 스팟' 방송 출연 — 2025</div>
+      <div class="award-item">
+        <div class="award-icon">🌍</div>
+        <div class="award-text">세계태권도연맹 표창</div>
       </div>
-      <div class="evidence-card">
-        <span class="evidence-tag">🏅 심사</span>
-        <img loading="lazy" src="/images/img-main.png" alt="국기원 4품 합격">
-        <div class="evidence-label">수련생 5명 국기원 4품 동시 합격 — 2025</div>
+      <div class="award-item">
+        <div class="award-icon">🏅</div>
+        <div class="award-text">대한태권도협회 표창</div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🏅</div>
+        <div class="award-text">서울시태권도협회 표창</div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🏅</div>
+        <div class="award-text">서초구태권도협회 표창</div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🏢</div>
+        <div class="award-text">서초구청장 표창</div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🏆</div>
+        <div class="award-text">서초구 체육회장 표창</div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">👮</div>
+        <div class="award-text">서초경찰서장 표창</div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">👮</div>
+        <div class="award-text">서울경찰청장 표창</div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🏛️</div>
+        <div class="award-text">서울시의회 의장 표창</div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- CTA -->
 <section style="background:var(--dark);padding:72px 24px;text-align:center;color:#fff;">
