@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>국기원 태권도 6단 고단자 심사 합격 (홍이수 사범님) – 차 태권도</title>
+  <link rel="icon" href="/logo-01.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    :root { --accent: #fcaf3b; --dark: #14171c; --light: #f8f8f8; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', 'Outfit', sans-serif; color: #333; line-height: 1.6; background: #fff; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* NAV */
+    .cha-header { background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.08); position: sticky; top: 0; z-index: 1000; }
+    .cha-nav { display: flex; align-items: center; justify-content: space-between; height: 72px; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .cha-logo img { height: 50px; width: auto; }
+    .cha-nav-links { display: flex; align-items: center; gap: 24px; }
+    .cha-nav-links > a { font-size: 14px; font-weight: 600; color: #333; transition: color .2s; }
+    .cha-nav-links > a:hover { color: var(--accent); }
+    .cha-nav-dropdown { position: relative; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; }
+    .cha-nav-dropdown:hover { color: var(--accent); }
+    .cha-dropdown { display: none; position: absolute; top: calc(100% + 12px); left: 0; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.12); border-radius: 10px; min-width: 180px; padding: 8px 0; z-index: 100; }
+    .cha-dropdown::before { content: ""; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+    .cha-nav-dropdown:hover .cha-dropdown { display: block; }
+    .cha-dropdown a { display: block; padding: 10px 20px; font-size: 13px; font-weight: 600; transition: background .15s; }
+    .cha-dropdown a:hover { background: var(--light); color: var(--accent); }
+    .cha-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+    .cha-hamburger span { width: 24px; height: 2px; background: var(--dark); display: block; }
+    @media (max-width: 820px) {
+      .cha-hamburger { display: flex; }
+      .cha-nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: #fff; flex-direction: column; align-items: flex-start; padding: 20px 24px; gap: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.1); border-top: 1px solid #eee; z-index: 999; }
+      .cha-nav-links.open { display: flex; }
+      .cha-dropdown { position: static; box-shadow: none; border-radius: 0; padding-left: 16px; margin-top: 8px; }
+      .cha-nav-dropdown:hover .cha-dropdown { display: none; }
+      .cha-nav-dropdown.open .cha-dropdown { display: block; }
+    }
+
+    /* ARTICLE */
+    .article-wrap { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #888; margin-bottom: 24px; transition: color .2s; }
+    .back-link:hover { color: var(--accent); }
+    .article-cat { display: inline-block; font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .article-title { font-size: clamp(22px, 4vw, 36px); font-weight: 800; color: var(--dark); line-height: 1.3; margin-bottom: 16px; }
+    .article-meta { font-size: 13px; color: #aaa; margin-bottom: 32px; }
+    .article-hero { width: 100%; border-radius: 16px; margin-bottom: 40px; max-height: 520px; object-fit: cover; }
+    .article-body { font-size: 16px; color: #444; line-height: 1.9; }
+    .article-body p { margin-bottom: 20px; }
+    .article-body h2 { font-size: 20px; font-weight: 700; color: var(--dark); margin: 36px 0 14px; }
+    .article-body h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin: 24px 0 10px; }
+
+    /* GALLERY */
+    .gallery-section { margin-top: 56px; }
+    .gallery-section h2 { font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 20px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 600px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform .3s, opacity .3s;
+      cursor: pointer;
+    }
+    .gallery-grid img:hover { transform: scale(1.03); opacity: .9; }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999; align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+    .lightbox-close { position: absolute; top: 20px; right: 28px; font-size: 36px; color: #fff; cursor: pointer; line-height: 1; }
+    .lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); font-size: 32px; color: #fff; cursor: pointer; padding: 16px; user-select: none; }
+    .lightbox-prev { left: 12px; }
+    .lightbox-next { right: 12px; }
+
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 48px; padding: 12px 28px; background: var(--dark); color: #fff; border-radius: 30px; font-size: 14px; font-weight: 700; transition: background .2s; }
+    .back-btn:hover { background: var(--accent); color: var(--dark); }
+
+    /* BLOG LINK BANNER */
+    .blog-banner { display: flex; align-items: center; gap: 14px; background: #f8f3e8; border-left: 4px solid var(--accent); border-radius: 10px; padding: 16px 20px; margin: 32px 0; }
+    .blog-banner-text { font-size: 14px; color: #555; font-weight: 500; }
+    .blog-banner-link { margin-left: auto; white-space: nowrap; font-size: 13px; font-weight: 700; color: var(--accent); border: 2px solid var(--accent); border-radius: 20px; padding: 6px 16px; transition: background .2s, color .2s; }
+    .blog-banner-link:hover { background: var(--accent); color: var(--dark); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="cha-header">
+  <nav class="cha-nav">
+    <a href="index.html" class="cha-logo">
+      <img src="/logo-01.png" alt="차 태권도">
+    </a>
+    <div class="cha-nav-links" id="navLinks">
+      <a href="index.html">HOME</a>
+      <div class="cha-nav-dropdown">
+        <span onclick="this.parentElement.classList.toggle('open')">도장 소개 ▾</span>
+        <div class="cha-dropdown">
+          <a href="instructor.html">지도자 소개</a>
+          <a href="greeting.html">관장님 인사말</a>
+          <a href="philosophy.html">교육 철학</a>
+          <a href="facility.html">시설 안내</a>
+        </div>
+      </div>
+      <a href="gallery.html">갤러리</a>
+      <a href="contact.html">오시는 길</a>
+      <a href="news.html" style="color:var(--accent)">도장 소식</a>
+      <a href="register-adult.html" style="background:var(--accent);color:var(--dark);padding:8px 18px;border-radius:30px;font-weight:800;">가입 신청</a>
+    </div>
+    <button class="cha-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <div class="article-wrap">
+    <a href="news.html" class="back-link">← 도장 소식</a>
+    <div class="article-cat">승단 심사</div>
+    <h1 class="article-title">[경 축] 국기원 태권도 6단 고단자 심사, 당당히 합격! (홍이수 사범님)</h1>
+    <div class="article-meta">2026년 6월 21일 · 차 태권도</div>
+
+    <img src="/images/900_20260621_095603.jpg" alt="국기원 태권도 6단 고단자 심사 현장" class="article-hero">
+
+    <div class="article-body">
+
+      <h2>🥋 홍이수 사범님, 국기원 6단 합격!</h2>
+      <p>안녕하세요, 차 태권도입니다! 오늘 우리 도장에 정말 가슴 벅차고 기쁜 소식이 있어 한달음에 달려왔습니다.</p>
+      <p>늘 열정적인 지도와 따뜻한 마음으로 우리 아이들을 이끌어주는 <strong>홍이수 사범님</strong>이 이번 국기원 태권도 6단 고단자 심사에 당당히 합격하였습니다! ✨</p>
+
+      <h2>🥋 '6단 고단자 심사'란?</h2>
+      <p>태권도에서 6단부터는 '고단자'로 분류되며, 심사의 기준과 과정이 이전과는 비교할 수 없을 정도로 엄격하고 까다롭습니다. 단순한 기술의 숙련도를 넘어, 수십 년간 쌓아온 태권도의 깊은 내공과 품새의 정확성, 겨루기 능력, 격파 그리고 태권도인으로서의 품격까지 종합적으로 평가받는 자리입니다.</p>
+      <p>그 높은 벽을 홍이수 사범님은 그동안 흘린 땀방울과 흔들림 없는 실력으로 당당히 통과했습니다. 아이를 낳고 키우며 건강상의 여러 이유로 10여 년이 훨씬 지나서야 도전했기에, 합격 소식은 더욱 큰 의미로 다가왔습니다.</p>
+
+      <h2>🔥 지도진의 끊임없는 도전이 곧 아이들의 교육이 됩니다</h2>
+      <p>"말보다 행동으로 가르치는 교육." 사범님은 바쁜 일정 속에서도 불굴의 의지로 스스로 한계를 깨뜨리며 도전하는 모습 그 자체로 아이들에게 큰 가르침이자 동기부여가 되었습니다.</p>
+      <p>정확한 발차기와 품새, 국기원이 인정한 최고의 전문성으로 더욱 깊이 있게 지도합니다. 그리고 포기하지 않고 노력하면 결실을 맺는다는 것을 사범님이 직접 증명해 보였습니다.</p>
+
+      <h2>🤝 더 깊어진 전문성으로 보답하겠습니다</h2>
+      <p>관장님은 8단, 그리고 이번 홍이수 사범님의 6단 합격으로 저희 차 태권도의 지도력은 한층 더 견고하고 단단해졌습니다. 사범님이 흘린 땀방울의 가치를 우리 수련생들에게 그대로 전할 수 있도록, 앞으로도 더 체계적이고 올바른 태권도 교육으로 보답하겠습니다.</p>
+      <p>도장에서 홍이수 사범님을 만나시면 "사범님, 6단 합격을 축하드립니다!" 하고 따뜻한 축하의 인사 한마디씩 건네주세요! 우리 아이들에게 큰 힘이 될 것입니다. 😊</p>
+
+    </div>
+
+    <div class="blog-banner">
+      <span class="blog-banner-text">📝 블로그에서 더 많은 이야기를 확인하세요</span>
+      <a href="https://m.blog.naver.com/PostView.naver?blogId=cdstkd&logNo=224334549251&navType=by" target="_blank" rel="noopener" class="blog-banner-link">블로그 보기 →</a>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="gallery-section">
+      <h2>📷 현장 스케치</h2>
+      <div class="gallery-grid" id="galleryGrid">
+        <img src="/images/900_20260621_095603.jpg" alt="국기원 6단 심사 현장" loading="lazy">
+        <img src="/images/900_20260621_095311.jpg" alt="국기원 6단 심사 현장" loading="lazy">
+        <img src="/images/900_Screenshot_20260628_143533_Gallery.jpg" alt="국기원 6단 심사 현장" loading="lazy">
+        <img src="/images/900_Screenshot_20260628_143447_Gallery.jpg" alt="국기원 6단 심사 현장" loading="lazy">
+        <img src="/images/900_Screenshot_20260628_144119_Gallery.jpg" alt="국기원 6단 심사 현장" loading="lazy">
+        <img src="/images/900_Screenshot_20260628_144211_Gallery.jpg" alt="국기원 6단 심사 현장" loading="lazy">
+        <img src="/images/900_Screenshot_20260628_144044_Gallery.jpg" alt="국기원 6단 심사 현장" loading="lazy">
+        <img src="/images/900_1782273510024.png" alt="홍이수 사범님 6단 합격 축하" loading="lazy">
+      </div>
+    </div>
+
+    <a href="news.html" class="back-btn">← 목록으로 돌아가기</a>
+  </div>
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lbClose">&times;</span>
+  <span class="lightbox-prev" id="lbPrev">&#8249;</span>
+  <img id="lbImg" src="" alt="">
+  <span class="lightbox-next" id="lbNext">&#8250;</span>
+</div>
+
+<div id="cha-footer-placeholder"></div>
+<script src="footer.js"></script>
+<script src="animations.js"></script>
+<script>
+  (function () {
+    var imgs = Array.from(document.querySelectorAll('#galleryGrid img'));
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lbImg');
+    var current = 0;
+
+    function show(i) {
+      current = (i + imgs.length) % imgs.length;
+      lbImg.src = imgs[current].src;
+      lb.classList.add('open');
+    }
+
+    imgs.forEach(function (img, i) {
+      img.addEventListener('click', function () { show(i); });
+    });
+
+    document.getElementById('lbClose').addEventListener('click', function () { lb.classList.remove('open'); });
+    document.getElementById('lbPrev').addEventListener('click', function () { show(current - 1); });
+    document.getElementById('lbNext').addEventListener('click', function () { show(current + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) lb.classList.remove('open'); });
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+      if (e.key === 'Escape') lb.classList.remove('open');
+    });
+  })();
+</script>
+</body>
+</html>

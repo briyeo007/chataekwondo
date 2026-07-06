@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>국기원 대회 시범단 초등부 종합시범 3위 – 차 태권도</title>
+  <link rel="icon" href="/logo-01.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    :root { --accent: #fcaf3b; --dark: #14171c; --light: #f8f8f8; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', 'Outfit', sans-serif; color: #333; line-height: 1.6; background: #fff; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* NAV */
+    .cha-header { background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.08); position: sticky; top: 0; z-index: 1000; }
+    .cha-nav { display: flex; align-items: center; justify-content: space-between; height: 72px; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .cha-logo img { height: 50px; width: auto; }
+    .cha-nav-links { display: flex; align-items: center; gap: 24px; }
+    .cha-nav-links > a { font-size: 14px; font-weight: 600; color: #333; transition: color .2s; }
+    .cha-nav-links > a:hover { color: var(--accent); }
+    .cha-nav-dropdown { position: relative; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; }
+    .cha-nav-dropdown:hover { color: var(--accent); }
+    .cha-dropdown { display: none; position: absolute; top: calc(100% + 12px); left: 0; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.12); border-radius: 10px; min-width: 180px; padding: 8px 0; z-index: 100; }
+    .cha-dropdown::before { content: ""; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+    .cha-nav-dropdown:hover .cha-dropdown { display: block; }
+    .cha-dropdown a { display: block; padding: 10px 20px; font-size: 13px; font-weight: 600; transition: background .15s; }
+    .cha-dropdown a:hover { background: var(--light); color: var(--accent); }
+    .cha-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+    .cha-hamburger span { width: 24px; height: 2px; background: var(--dark); display: block; }
+    @media (max-width: 820px) {
+      .cha-hamburger { display: flex; }
+      .cha-nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: #fff; flex-direction: column; align-items: flex-start; padding: 20px 24px; gap: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.1); border-top: 1px solid #eee; z-index: 999; }
+      .cha-nav-links.open { display: flex; }
+      .cha-dropdown { position: static; box-shadow: none; border-radius: 0; padding-left: 16px; margin-top: 8px; }
+      .cha-nav-dropdown:hover .cha-dropdown { display: none; }
+      .cha-nav-dropdown.open .cha-dropdown { display: block; }
+    }
+
+    /* ARTICLE */
+    .article-wrap { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #888; margin-bottom: 24px; transition: color .2s; }
+    .back-link:hover { color: var(--accent); }
+    .article-cat { display: inline-block; font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .article-title { font-size: clamp(22px, 4vw, 36px); font-weight: 800; color: var(--dark); line-height: 1.3; margin-bottom: 16px; }
+    .article-meta { font-size: 13px; color: #aaa; margin-bottom: 32px; }
+    .article-hero { width: 100%; border-radius: 16px; margin-bottom: 40px; max-height: 520px; object-fit: cover; }
+    .article-body { font-size: 16px; color: #444; line-height: 1.9; }
+    .article-body p { margin-bottom: 20px; }
+    .article-body h2 { font-size: 20px; font-weight: 700; color: var(--dark); margin: 36px 0 14px; }
+    .article-body h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin: 24px 0 10px; }
+
+    /* GALLERY */
+    .gallery-section { margin-top: 56px; }
+    .gallery-section h2 { font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 20px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 600px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform .3s, opacity .3s;
+      cursor: pointer;
+    }
+    .gallery-grid img:hover { transform: scale(1.03); opacity: .9; }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999; align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+    .lightbox-close { position: absolute; top: 20px; right: 28px; font-size: 36px; color: #fff; cursor: pointer; line-height: 1; }
+    .lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); font-size: 32px; color: #fff; cursor: pointer; padding: 16px; user-select: none; }
+    .lightbox-prev { left: 12px; }
+    .lightbox-next { right: 12px; }
+
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 48px; padding: 12px 28px; background: var(--dark); color: #fff; border-radius: 30px; font-size: 14px; font-weight: 700; transition: background .2s; }
+    .back-btn:hover { background: var(--accent); color: var(--dark); }
+
+    /* BLOG LINK BANNER */
+    .blog-banner { display: flex; align-items: center; gap: 14px; background: #f8f3e8; border-left: 4px solid var(--accent); border-radius: 10px; padding: 16px 20px; margin: 32px 0; }
+    .blog-banner-text { font-size: 14px; color: #555; font-weight: 500; }
+    .blog-banner-link { margin-left: auto; white-space: nowrap; font-size: 13px; font-weight: 700; color: var(--accent); border: 2px solid var(--accent); border-radius: 20px; padding: 6px 16px; transition: background .2s, color .2s; }
+    .blog-banner-link:hover { background: var(--accent); color: var(--dark); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="cha-header">
+  <nav class="cha-nav">
+    <a href="index.html" class="cha-logo">
+      <img src="/logo-01.png" alt="차 태권도">
+    </a>
+    <div class="cha-nav-links" id="navLinks">
+      <a href="index.html">HOME</a>
+      <div class="cha-nav-dropdown">
+        <span onclick="this.parentElement.classList.toggle('open')">도장 소개 ▾</span>
+        <div class="cha-dropdown">
+          <a href="instructor.html">지도자 소개</a>
+          <a href="greeting.html">관장님 인사말</a>
+          <a href="philosophy.html">교육 철학</a>
+          <a href="facility.html">시설 안내</a>
+        </div>
+      </div>
+      <a href="gallery.html">갤러리</a>
+      <a href="contact.html">오시는 길</a>
+      <a href="news.html" style="color:var(--accent)">도장 소식</a>
+      <a href="register-adult.html" style="background:var(--accent);color:var(--dark);padding:8px 18px;border-radius:30px;font-weight:800;">가입 신청</a>
+    </div>
+    <button class="cha-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <div class="article-wrap">
+    <a href="news.html" class="back-link">← 도장 소식</a>
+    <div class="article-cat">대회</div>
+    <h1 class="article-title">[국기원 대회] 차태권도 시범단, 세계태권도본부 '국기원' 무대에 서다! (초등부 종합시범 3위) 🏆</h1>
+    <div class="article-meta">2026년 6월 27일 · 차 태권도</div>
+
+    <img src="/images/900_1782529669779.jpg" alt="국기원 대회 차태권도 시범단 단체 사진" class="article-hero">
+
+    <div class="article-body">
+
+      <h2>🏆 국기원 무대에 서다</h2>
+      <p>안녕하세요, 차태권도입니다! 😊 오늘은 우리 차태권도 시범단 아이들과 함께 정말 뜻깊고 가슴 벅찬 도전을 하고 온 소식을 전해드리려고 합니다.</p>
+      <p>지난 6월 27일, 세계 태권도의 본부이자 성지라고 불리는 <strong>'국기원 경기장'</strong>에서 아주 특별한 대회가 열렸습니다. 바로 <strong>[제1회 국기원과 서울 강남이 함께하는 아마추어 태권도대회]</strong>였습니다.</p>
+
+      <h2>🥋 초등부 종합시범 3위의 쾌거</h2>
+      <p>우리 차태권도 시범단도 이번 대회 종합시범 부문에 당당히 출전해 그동안 땀 흘려 연습한 기량을 마음껏 펼치고 왔습니다! 쟁쟁한 실력을 가진 전국의 수많은 팀들이 모인 자리에서, 우리 차태권도 시범단 어린이들이 당당하게 <strong>초등학교 부문 종합 3위</strong>라는 멋진 성적을 거두었습니다! 👏👏👏</p>
+      <p>큰 무대라 긴장할 법도 한데, 음악이 나오는 순간 매서운 눈빛으로 돌변해 절도 있는 동작과 화려한 격파를 성공시키는 아이들의 모습에 정말 가슴이 뭉클했습니다. 서로 호흡을 맞추며 하나의 완벽한 시범을 완성하기까지 우리 아이들이 흘린 땀방울이 빛을 발하는 순간이었습니다.</p>
+
+      <h2>🌟 순위보다 빛난 '국기원 무대'의 가치</h2>
+      <p>사실 이번 대회에서 얻은 가장 큰 수확은 '3위'라는 순위 그 자체보다, 태권도의 심장인 '국기원' 무대에 직접 서보았다는 사실입니다.</p>
+      <p>태권도를 수련하는 사람이라면 누구나 한 번쯤 꿈꾸는 상징적인 공간, 세계 태권도의 본부인 국기원 경기장에서 관중들의 환호성을 받으며 시범을 보였다는 경험은 우리 아이들의 인생에서 평생 잊지 못할 자산이자 엄청난 성장의 발판이 될 것입니다.</p>
+
+      <h2>💌 감사의 인사</h2>
+      <p>큰 무대에서도 기죽지 않고 멋지게 활약해 준 우리 차태권도 시범단 단원들, 그리고 뒤에서 늘 믿고 응원해 주시며 아낌없는 격려를 보내주신 부모님들께 진심으로 감사드립니다.</p>
+      <p>이번 대회를 통해 아이들은 실력뿐만 아니라 자신감과 동료애, 그리고 도전 정신까지 한 뼘 더 성장했습니다. 앞으로도 우리 차태권도는 아이들이 더 큰 꿈을 향해 나아갈 수 있도록 든든한 버팀목이 되겠습니다. 다음 도전도 더 멋지게 준비하겠습니다. 차태권도 시범단 화이팅! 🥋❤️</p>
+
+    </div>
+
+    <div class="blog-banner">
+      <span class="blog-banner-text">📝 블로그에서 더 많은 이야기를 확인하세요</span>
+      <a href="https://m.blog.naver.com/PostView.naver?blogId=cdstkd&logNo=224330898937&navType=by" target="_blank" rel="noopener" class="blog-banner-link">블로그 보기 →</a>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="gallery-section">
+      <h2>📷 현장 스케치</h2>
+      <div class="gallery-grid" id="galleryGrid">
+        <img src="/images/900_1782529823823.jpg"   alt="국기원 대회 현장" loading="lazy">
+        <img src="/images/900_1782529669779.jpg"    alt="국기원 대회 현장" loading="lazy">
+        <img src="/images/900_20260627_075352.jpg"  alt="국기원 대회 현장" loading="lazy">
+        <img src="/images/900_20260627_081533.jpg"  alt="국기원 대회 현장" loading="lazy">
+        <img src="/images/900_1782533412529.jpg"    alt="국기원 대회 현장" loading="lazy">
+        <img src="/images/900_1782533406587.jpg"    alt="국기원 대회 현장" loading="lazy">
+        <img src="/images/900_1782533399890.jpg"    alt="국기원 대회 현장" loading="lazy">
+        <img src="/images/900_20260627_101639.jpg"  alt="국기원 대회 현장" loading="lazy">
+        <img src="/images/900_20260627_101608.jpg"  alt="국기원 대회 현장" loading="lazy">
+        <img src="/images/900_20260627_102124.jpg"  alt="국기원 대회 현장" loading="lazy">
+        <img src="/images/900_20260627_115957.jpg"  alt="국기원 대회 현장" loading="lazy">
+      </div>
+    </div>
+
+    <a href="news.html" class="back-btn">← 목록으로 돌아가기</a>
+  </div>
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lbClose">&times;</span>
+  <span class="lightbox-prev" id="lbPrev">&#8249;</span>
+  <img id="lbImg" src="" alt="">
+  <span class="lightbox-next" id="lbNext">&#8250;</span>
+</div>
+
+<div id="cha-footer-placeholder"></div>
+<script src="footer.js"></script>
+<script src="animations.js"></script>
+<script>
+  (function () {
+    var imgs = Array.from(document.querySelectorAll('#galleryGrid img'));
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lbImg');
+    var current = 0;
+
+    function show(i) {
+      current = (i + imgs.length) % imgs.length;
+      lbImg.src = imgs[current].src;
+      lb.classList.add('open');
+    }
+
+    imgs.forEach(function (img, i) {
+      img.addEventListener('click', function () { show(i); });
+    });
+
+    document.getElementById('lbClose').addEventListener('click', function () { lb.classList.remove('open'); });
+    document.getElementById('lbPrev').addEventListener('click', function () { show(current - 1); });
+    document.getElementById('lbNext').addEventListener('click', function () { show(current + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) lb.classList.remove('open'); });
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+      if (e.key === 'Escape') lb.classList.remove('open');
+    });
+  })();
+</script>
+</body>
+</html>
