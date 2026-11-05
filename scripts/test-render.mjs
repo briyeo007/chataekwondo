@@ -10,7 +10,7 @@ const base = extractAll();
 const dataFile = join(ROOT, '.cms', 'test-data.json');
 mkdirSync(join(ROOT, '.cms'), { recursive: true });
 process.env.CMS_LOCAL_DATA = dataFile;
-delete process.env.KV_REST_API_URL;
+delete process.env.SUPABASE_URL;
 
 const { default: handler } = await import('../api/render.js');
 const { resetLocalCache } = await import('../api/_lib/data.js');

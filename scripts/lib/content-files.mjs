@@ -6,7 +6,7 @@
 //   posts/<slug>.json       글 정보 (새 파일 = 새 글)
 //   posts/<slug>.body.html  글 본문
 //   posts/<slug>.after.html 본문 아래 영역 (블로그 링크·현장 사진)
-//   media/...               관장님이 올린 사진 사본 (원본은 Vercel Blob)
+//   media/...               관장님이 올린 사진 사본 (원본은 Supabase Storage)
 //   _충돌/                   동시에 수정되어 반영하지 못한 내 수정본
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';

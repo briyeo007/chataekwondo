@@ -1,6 +1,6 @@
 // 통합 테스트: 로컬 테스트 저장소로 개발 서버를 띄워 관리자 로그인·수정·충돌 방지·업로드·복구·동기화를 실제로 시험한다.
 //   npm test
-//   npm run test:storage → 실제 Upstash Redis·Vercel Blob 으로 같은 시험 (.cms/vercel-dev.env 의 연결 정보 사용).
+//   npm run test:storage → 실제 Supabase(데이터베이스·Storage)로 같은 시험 (.cms/vercel-dev.env 의 연결 정보 사용).
 //     모든 키·파일에 임의 접두사를 붙여 운영 데이터와 분리하고, 끝나면 시험 데이터를 모두 지운다.
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
@@ -22,7 +22,6 @@ const RUN_ID = randomBytes(4).toString('hex');
 const KEY_PREFIX = `cmstest-${RUN_ID}:`;
 const MEDIA_PREFIX = `_cmstest-${RUN_ID}/`;
 let realEnv = null;
-let redis = null;
 let prodKeysBefore = null;
 let server;
 let cookie = '';
@@ -45,32 +44,48 @@ async function startServer(env, port = PORT) {
 }
 
 /* ── 실제 저장소 모드 도우미 ─────────────────────────────── */
-async function scanKeys(match) {
-  const keys = [];
-  let cursor = '0';
-  do {
-    const [next, batch] = await redis.scan(cursor, { match, count: 500 });
-    keys.push(...batch);
-    cursor = String(next);
-  } while (cursor !== '0');
-  return keys;
+async function supa(method, path, body) {
+  const { supabaseHeaders } = await import('../api/_lib/supabase.js');
+  const res = await fetch(realEnv.SUPABASE_URL.replace(/\/+$/, '') + path, {
+    method, headers: supabaseHeaders(realEnv.SUPABASE_SECRET_KEY, { 'Content-Type': 'application/json' }), body: body && JSON.stringify(body),
+  });
+  const text = await res.text();
+  if (!res.ok) throw new Error(`Supabase ${method} ${path} ${res.status}: ${text}`);
+  return text ? JSON.parse(text) : null;
+}
+// 키·변경 기록 (pattern 의 * 는 임의 문자열)
+const kvRows = (pattern = '*') => supa('GET', `/rest/v1/cms_kv?select=key,value&key=like.${encodeURIComponent(pattern)}&order=key`);
+const revRows = (pattern = '*') => supa('GET', `/rest/v1/cms_revisions?select=list_key,value&list_key=like.${encodeURIComponent(pattern)}&order=id`);
+/** 버킷 안 폴더의 모든 파일 경로 (하위 폴더 포함) */
+async function storageFiles(bucket, folder) {
+  const out = [];
+  const items = await supa('POST', `/storage/v1/object/list/${bucket}`, { prefix: folder, limit: 1000, offset: 0 });
+  for (const it of items) {
+    if (it.id) out.push(`${folder}/${it.name}`);
+    else out.push(...await storageFiles(bucket, `${folder}/${it.name}`));
+  }
+  return out;
 }
 /** 이번 시험이 만든 키·파일 모두 삭제 */
 async function cleanupReal() {
-  const keys = await scanKeys(`${KEY_PREFIX}*`);
-  for (let i = 0; i < keys.length; i += 100) await redis.del(...keys.slice(i, i + 100));
-  const { list, del } = await import('@vercel/blob');
-  const opts = { token: realEnv.BLOB_READ_WRITE_TOKEN };
-  let blobs = (await list({ prefix: MEDIA_PREFIX, limit: 1000, ...opts })).blobs;
+  const pattern = encodeURIComponent(`${KEY_PREFIX}*`);
+  const keys = (await kvRows(`${KEY_PREFIX}*`)).length;
+  await supa('DELETE', `/rest/v1/cms_kv?key=like.${pattern}`);
+  await supa('DELETE', `/rest/v1/cms_revisions?list_key=like.${pattern}`);
   let files = 0;
-  while (blobs.length) {
-    files += blobs.length;
-    await del(blobs.map(b => b.url), opts);
-    blobs = (await list({ prefix: MEDIA_PREFIX, limit: 1000, ...opts })).blobs;
+  for (const bucket of ['cms-media', 'cms-backups']) {
+    const paths = await storageFiles(bucket, MEDIA_PREFIX.replace(/\/$/, ''));
+    files += paths.length;
+    if (paths.length) await supa('DELETE', `/storage/v1/object/${bucket}`, { prefixes: paths });
   }
-  return { keys: keys.length, files, left: (await scanKeys(`${KEY_PREFIX}*`)).length };
+  const left = (await kvRows(`${KEY_PREFIX}*`)).length + (await revRows(`${KEY_PREFIX}*`)).length;
+  return { keys, files, left };
 }
-const otherKeys = async () => (await scanKeys('*')).filter(k => !k.startsWith('cmstest-')).sort();
+const otherKeys = async () => {
+  const keys = (await kvRows()).filter(r => !r.key.startsWith('cmstest-')).map(r => `${r.key}=${r.value.length}`);
+  const revs = (await revRows()).filter(r => !r.list_key.startsWith('cmstest-')).length;
+  return [...keys, `revisions=${revs}`];
+};
 
 before(async () => {
   mkdirSync(WORK, { recursive: true });
@@ -80,14 +95,11 @@ before(async () => {
     if (!existsSync(REAL)) throw new Error(`연결 정보 파일이 없습니다: ${REAL}`);
     const { parseEnv } = await import('node:util');
     realEnv = parseEnv(readFileSync(REAL, 'utf8'));
-    const url = realEnv.KV_REST_API_URL || realEnv.UPSTASH_REDIS_REST_URL;
-    const token = realEnv.KV_REST_API_TOKEN || realEnv.UPSTASH_REDIS_REST_TOKEN;
-    if (!url || !token || !realEnv.BLOB_READ_WRITE_TOKEN) throw new Error(`${REAL} 에 KV_REST_API_URL / KV_REST_API_TOKEN / BLOB_READ_WRITE_TOKEN 이 없습니다`);
-    const { Redis } = await import('@upstash/redis');
-    redis = new Redis({ url, token, automaticDeserialization: false });
+    if (process.env.CMS_TEST_SUPABASE_URL) realEnv.SUPABASE_URL = process.env.CMS_TEST_SUPABASE_URL; // 주소만 바꿔서 시험할 때
+    if (!realEnv.SUPABASE_URL || !realEnv.SUPABASE_SECRET_KEY) throw new Error(`${REAL} 에 SUPABASE_URL / SUPABASE_SECRET_KEY 가 없습니다`);
     prodKeysBefore = await otherKeys();
-    console.log(`실제 저장소 시험 — 키 접두사 ${KEY_PREFIX}, 사진 폴더 ${MEDIA_PREFIX}, 기존 키 ${prodKeysBefore.length}개`);
-    lines.push(`KV_REST_API_URL=${url}`, `KV_REST_API_TOKEN=${token}`, `BLOB_READ_WRITE_TOKEN=${realEnv.BLOB_READ_WRITE_TOKEN}`,
+    console.log(`실제 저장소 시험 — 키 접두사 ${KEY_PREFIX}, 사진 폴더 ${MEDIA_PREFIX}, 기존 항목 ${prodKeysBefore.length - 1}개`);
+    lines.push(`SUPABASE_URL=${realEnv.SUPABASE_URL}`, `SUPABASE_SECRET_KEY=${realEnv.SUPABASE_SECRET_KEY}`,
       `CMS_KEY_PREFIX=${KEY_PREFIX}`, `CMS_MEDIA_PREFIX=${MEDIA_PREFIX}`);
   } else {
     lines.push(`CMS_STORE_DIR=${STORE.replace(/\\/g, '/')}`);
@@ -134,7 +146,7 @@ const runSync = (extraEnv = {}) => spawnSync(process.execPath, [join(ROOT, 'scri
 test('Vercel 실행 환경 호환: 서버 함수 로딩', () => {
   const url = f => 'file:///' + join(ROOT, f).replace(/\\/g, '/');
   const code = ['api/render.js', 'api/admin.js', 'api/sync.js'].map(f => `await import(${JSON.stringify(url(f))});`).join('')
-    + "await import('@vercel/blob'); await import('@upstash/redis');";
+    + "await import('sanitize-html'); await import('parse5');";
   const r = spawnSync(process.execPath, ['--no-experimental-require-module', '--input-type=module', '-e', code], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(r.status, 0, r.stderr);
 });
@@ -174,8 +186,7 @@ test('비밀번호 설정 전 로그인 불가 · 일회용 링크로 설정', a
 
 test('비밀번호는 해시로만 저장', async () => {
   const kv = REAL
-    ? (await Promise.all((await scanKeys(`${KEY_PREFIX}*`)).map(async k =>
-      `${k}=${(await redis.type(k)) === 'list' ? (await redis.lrange(k, 0, -1)).join() : await redis.get(k)}`))).join('\n')
+    ? [...await kvRows(`${KEY_PREFIX}*`), ...await revRows(`${KEY_PREFIX}*`)].map(r => `${r.key || r.list_key}=${r.value}`).join('\n')
     : readFileSync(join(STORE, 'kv.json'), 'utf8');
   assert.doesNotMatch(kv, new RegExp(PASSWORD));
   assert.doesNotMatch(kv, new RegExp(recoveryCode));
@@ -205,7 +216,7 @@ test('사진 업로드: JPEG만 허용, 업로드한 사진 열람 가능', asyn
   const jpeg = Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), randomBytes(500)]);
   const up = await admin('POST', 'upload?folder=gallery', jpeg, { raw: true, headers: { 'Content-Type': 'image/jpeg' } });
   assert.equal(up.status, 200);
-  if (REAL) assert.ok(up.data.url.startsWith('https://') && up.data.url.includes(`.public.blob.vercel-storage.com/${MEDIA_PREFIX}`), up.data.url);
+  if (REAL) assert.ok(up.data.url.startsWith(`${realEnv.SUPABASE_URL.replace(/\/+$/, '')}/storage/v1/object/public/cms-media/${MEDIA_PREFIX}`), up.data.url);
   const img = await fetch(new URL(up.data.url, SITE));
   assert.equal(img.status, 200);
   const g = await admin('POST', 'gallery', { rows: [{ pane: 'daily', src: up.data.url, storage_path: up.data.path, caption: '새 사진', title: '새 사진', sort: -1 }] });
@@ -223,6 +234,22 @@ test('새 글 작성 → 페이지 생성, 휴지통 → 404', async () => {
   assert.match((await page('/news.html')).html, new RegExp(`post-${r.data.slug}`));
   await admin('PATCH', 'post', { id: r.data.id, version: r.data.version, patch: { deleted_at: new Date().toISOString() } });
   assert.equal((await page(`/post-${r.data.slug}.html`)).status, 404);
+});
+
+test('매일 자동 백업: 암호화 저장 → 목록 → 내려받기', async () => {
+  const r = await sync('GET', 'cron-backup');
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  const list = (await sync('GET', 'backups')).data;
+  const item = list.find(b => b.pathname === `backups/${r.data.saved}.json.enc`);
+  assert.ok(item, JSON.stringify(list));
+  const file = await fetch(new URL(item.url, SITE));
+  assert.equal(file.status, 200);
+  const buf = Buffer.from(await file.arrayBuffer());
+  assert.doesNotMatch(buf.toString('latin1'), /index\.hero/); // 암호화되어 내용이 보이지 않음
+  if (REAL) { // 비공개 버킷: 서명 없는 주소로는 열리지 않음
+    const plain = item.url.replace('/object/sign/', '/object/public/').split('?')[0];
+    assert.notEqual((await fetch(plain)).status, 200);
+  }
 });
 
 test('변경 기록으로 되돌리기', async () => {

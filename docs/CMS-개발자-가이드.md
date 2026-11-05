@@ -1,15 +1,15 @@
 # 차 태권도 CMS 개발자 가이드
 
 관장님은 관리자 페이지(`/admin`)에서 콘텐츠를 수정합니다. 개발자는 지금처럼 VS Code와 Claude Code로 사이트를 관리하고 Vercel에 직접 배포합니다.
-관장님이 저장한 내용은 내 PC의 `content/` 폴더로 자동 동기화됩니다. **Supabase와 GitHub는 사용하지 않습니다.**
+관장님이 저장한 내용은 내 PC의 `content/` 폴더로 자동 동기화됩니다. 서버 저장소는 **Supabase 하나**(데이터베이스 + 사진 저장소)입니다.
 
 ---
 
 ## 1. 구조
 
 ```
-관장님 ──▶ /admin (아이디 master) ──▶ /api/admin/* ──▶ Upstash Redis(글·문구·갤러리·계정·변경 기록)
-                                                      └▶ Vercel Blob(사진, 매일 암호화 백업)
+관장님 ──▶ /admin (아이디 master) ──▶ /api/admin/* ──▶ Supabase 데이터베이스(글·문구·갤러리·계정·변경 기록)
+                                                      └▶ Supabase Storage(사진, 매일 암호화 백업)
                                                             ▲  콘텐츠 단일 원본
 방문자 ──▶ /api/render ──▶ 원본 HTML + 저장소 콘텐츠 ─────────┘
                            (저장소 장애 → 배포에 포함된 content/ 사본 → 원본 HTML)
@@ -22,7 +22,7 @@
 | 무엇 | 원본 | 수정 방법 |
 |---|---|---|
 | 디자인, CSS, JS, 레이아웃, 메뉴, 수정 영역 지정(`data-cms`) | **내 PC의 소스코드** | VS Code → Vercel 배포 |
-| `data-cms` 영역의 문구·사진, 도장 소식, 갤러리 | **서버 저장소 (Upstash Redis + Vercel Blob)** | 관리자 페이지, 또는 `content/` 파일 수정(자동 업로드) |
+| `data-cms` 영역의 문구·사진, 도장 소식, 갤러리 | **서버 저장소 (Supabase)** | 관리자 페이지, 또는 `content/` 파일 수정(자동 업로드) |
 | `content/` 폴더 | 서버 콘텐츠의 **사본** (자동 동기화) | 직접 고쳐도 됨 → 서버에 올라감 |
 
 > ⚠ `data-cms`가 붙은 요소 안의 글자를 **HTML 파일에서** 고쳐도 홈페이지에 반영되지 않습니다 (서버 값이 우선).
@@ -35,7 +35,8 @@
 api/render.js        방문자 페이지 렌더링
 api/admin.js         관리자 API (로그인·콘텐츠·사진 업로드)
 api/sync.js          동기화·개발자 명령 API (CMS_SYNC_TOKEN), 매일 자동 백업 (Cron)
-api/_lib/            저장소(kv, media), 콘텐츠, 인증, 렌더링 로직
+api/_lib/            저장소(kv, media, supabase), 콘텐츠, 인증, 렌더링 로직
+supabase/schema.sql  Supabase 테이블·함수·버킷 설정 (SQL Editor에서 한 번 실행)
 admin/               관리자 페이지
 content/             콘텐츠 사본 (동기화 프로그램이 관리)
 cms/post-extras.*    기존 글에 사진 묶음·유튜브를 새로 추가할 때만 쓰는 보충 CSS/JS
@@ -47,17 +48,23 @@ vercel.json          라우팅·보안 헤더·Cron
 
 ## 2. 최초 설정 (한 번만)
 
-### 2-1. Vercel에서 저장소 2개 연결
-Vercel → 프로젝트 `chataekwondo` → **Storage** 탭
-1. **Create Database → Upstash (Redis)** → 무료 플랜, 지역 **Tokyo(ap-northeast-1)** 또는 가장 가까운 곳 → 프로젝트에 연결
-   → 환경변수 `KV_REST_API_URL`, `KV_REST_API_TOKEN` 자동 추가
-2. **Create → Blob** → 프로젝트에 연결 → 환경변수 `BLOB_READ_WRITE_TOKEN` 자동 추가
+### 2-1. Supabase 설정
+1. Supabase 프로젝트의 **SQL Editor**에 `supabase/schema.sql` 파일 **내용 전체**를 붙여넣고 **Run**
+   → 테이블 `cms_kv`, `cms_revisions`, 함수 `cms_cas`, 버킷 `cms-media`(공개 읽기)·`cms-backups`(비공개) 생성.
+   여러 번 실행해도 안전하고, 기존 데이터를 지우지 않습니다.
+2. **Settings → API**(또는 API Keys)에서 **Project URL**과 **secret 키**(`sb_secret_…` 또는 예전 service_role 키) 확인.
+   secret 키는 서버 전용입니다. 브라우저 코드·채팅·GitHub에 절대 넣지 마세요.
 
-### 2-2. 비밀값 환경변수 추가
-Vercel → Settings → Environment Variables (Production, Preview, Development 모두)
+보안: 모든 테이블에 RLS가 켜져 있고 정책이 없어서, 공개키(anon/publishable)로는 읽기·쓰기가 모두 막힙니다.
+서버(Vercel 함수)만 secret 키로 접근합니다.
+
+### 2-2. Vercel 환경변수 추가
+Vercel → Settings → Environment Variables
 
 | 이름 | 값 |
 |---|---|
+| `SUPABASE_URL` | Project URL (`https://<프로젝트ID 20자>.supabase.co`) |
+| `SUPABASE_SECRET_KEY` | secret 키 |
 | `SESSION_SECRET` | 임의 문자열 32자 이상 (로그인 쿠키 서명) |
 | `CMS_SYNC_TOKEN` | 임의 문자열 32자 이상 (내 PC 동기화용) |
 | `BACKUP_KEY` | 임의 문자열 32자 이상 (자동 백업 암호화) |
@@ -68,6 +75,9 @@ Vercel → Settings → Environment Variables (Production, Preview, Development 
 node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
 ```
 `CMS_SYNC_TOKEN`과 `BACKUP_KEY`는 비밀번호 관리자에도 보관하세요. 환경변수를 추가한 뒤에는 **재배포**해야 적용됩니다.
+
+> 운영 전 시험: 저장소 변수를 **Development에만** 넣고 `npx vercel env pull .cms/vercel-dev.env --environment development` 후
+> `npm run test:storage` → 실제 Supabase에 임의 접두사(`cmstest-…`)로 전체 시나리오를 실행하고 시험 데이터를 모두 지웁니다. 운영 데이터와 섞이지 않습니다.
 
 ### 2-3. 내 PC 설정
 ```bash
@@ -172,7 +182,7 @@ npm run sync:uninstall         # 자동 실행 해제
 | 백업 | 주기 | 위치 |
 |---|---|---|
 | 변경 기록 | 저장할 때마다 (최근 500건) | 서버. 관리자 페이지 "변경 기록"에서 되돌리기 |
-| 서버 자동 백업 | 매일 03:00 (30일 보관, 암호화) | Vercel Blob `backups/` |
+| 서버 자동 백업 | 매일 03:00 (30일 보관, 암호화) | Supabase Storage `cms-backups` 버킷 (비공개) |
 | PC 자동 백업 | 동기화 프로그램이 하루 한 번 (30일 보관) | `.cms/backups/daily-<날짜>/` |
 | 수동 백업 | 필요할 때 | `npm run cms:backup` → `.cms/backups/manual-<날짜시간>/` (사진 포함) |
 
@@ -207,8 +217,8 @@ npm run admin -- logout-all   # 모든 기기 강제 로그아웃 (도용 의심
 
 | 서비스 | 무료 한도 (변동 가능, Vercel 대시보드 Usage에서 확인) | 이 사이트 사용 방식 |
 |---|---|---|
-| Upstash Redis | 저장 용량·월 명령 수 한도 | 콘텐츠 문서 1개 + 글 본문. 페이지 조회는 CDN 30초 캐시와 서버 5초 캐시로 호출 최소화 |
-| Vercel Blob | 저장 용량·전송량·작업 수 한도 | 사진은 긴 변 2000px JPEG로 줄여서 저장. 기존 `/images` 사진은 그대로 정적 파일 |
+| Supabase 데이터베이스 | 500MB, **1주일간 요청이 없으면 일시정지** | 콘텐츠 문서 1개 + 글 본문. 페이지 조회는 CDN 30초 캐시와 서버 5초 캐시로 호출 최소화. 매일 자동 백업이 접속하므로 정지되지 않음 (정지돼도 홈페이지는 `content/` 사본으로 표시) |
+| Supabase Storage | 1GB, 월 전송량 한도 | 관장님이 올린 사진만 저장 (긴 변 2000px JPEG). 기존 `/images` 사진은 그대로 Vercel 정적 파일 |
 | Vercel Functions | Hobby 한도 | 함수 3개 (render, admin, sync) |
 | Vercel Cron | Hobby: 하루 1회 | 자동 백업 1개 |
 
@@ -222,7 +232,7 @@ npm run admin -- logout-all   # 모든 기기 강제 로그아웃 (도용 의심
 
 | 주기 | 할 일 |
 |---|---|
-| 월 1회 | Vercel → Storage / Usage 확인, `npm run sync -- --status` |
+| 월 1회 | Supabase → Usage, Vercel → Usage 확인, `npm run sync -- --status` |
 | 분기 1회 | `npm run cms:backup`으로 사진 포함 백업, `--cloud` 목록 확인 |
 | 라이브러리 업데이트 | `npm update` → `npm run vendor` → `npm test` |
 | 디자인 변경 후 | `npm run check:render` |
@@ -230,6 +240,7 @@ npm run admin -- logout-all   # 모든 기기 강제 로그아웃 (도용 의심
 | 증상 | 확인 |
 |---|---|
 | 응답 헤더 `X-CMS` | `db` 정상 / `content-files` 저장소 연결 실패(사본 표시 중) / `static` 저장소·사본 모두 없음 |
-| 관리자 페이지 "설정이 필요합니다" | Vercel 환경변수 (KV, Blob, SESSION_SECRET) 확인 후 재배포 |
+| 관리자 페이지 "설정이 필요합니다" | Vercel 환경변수 (`SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `SESSION_SECRET`) 확인 후 재배포 |
+| `X-CMS: content-files` 가 계속됨 | Supabase 프로젝트 일시정지 여부(대시보드에서 Restore), `SUPABASE_URL` 오타 확인 |
 | 동기화 실패 | `.cms/sync.log` 확인. `.env.local`의 주소·토큰이 Vercel과 같은지 |
 | 링크를 쓸 수 없다고 나옴 | 24시간이 지났거나 이미 사용한 링크 → `npm run admin -- link` |
