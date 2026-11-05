@@ -1,0 +1,8 @@
+# 배포에 필요 없는 개발 전용 파일 (홈페이지에서 열람되지 않도록 제외)
+scripts/
+docs/
+.cms/
+.env.example
+# 동기화된 사진 사본은 내 PC 보관용 (원본은 Vercel Blob)
+content/media/
+content/_충돌/

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "regions": [
+    "icn1"
+  ],
+  "functions": {
+    "api/render.js": {
+      "includeFiles": "{*.html,api/_lib/*.html,content/**}",
+      "maxDuration": 10
+    },
+    "api/admin.js": {
+      "maxDuration": 30
+    },
+    "api/sync.js": {
+      "maxDuration": 60
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/sync/cron-backup",
+      "schedule": "0 18 * * *"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/admin(?:/.*)?",
+      "headers": {
+        "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self'; frame-src https://www.youtube.com https://www.youtube-nocookie.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'",
+        "X-Robots-Tag": "noindex, nofollow, noarchive",
+        "X-Frame-Options": "DENY",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "no-referrer",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+        "Cache-Control": "no-cache"
+      },
+      "continue": true
+    },
+    {
+      "src": "/api/(.*)",
+      "headers": {
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "continue": true
+    },
+    {
+      "src": "/admin/?",
+      "dest": "/admin/index.html"
+    },
+    {
+      "src": "/(api/_lib/.*|content/.*|package(-lock)?\\.json|vercel\\.json)",
+      "status": 404
+    },
+    {
+      "src": "/api/admin/([a-z-]+)",
+      "dest": "/api/admin?path=$1"
+    },
+    {
+      "src": "/api/sync/([a-z-]+)",
+      "dest": "/api/sync?path=$1"
+    },
+    {
+      "src": "/(?:index\\.html)?",
+      "dest": "/api/render?page=index"
+    },
+    {
+      "src": "/(news|gallery|greeting|instructor|philosophy)\\.html",
+      "dest": "/api/render?page=$1"
+    },
+    {
+      "src": "/post-([a-z0-9-]+)\\.html",
+      "dest": "/api/render?post=$1"
+    },
+    {
+      "handle": "filesystem"
+    }
+  ]
+}
