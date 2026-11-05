@@ -23,7 +23,8 @@ const PASSWORD = 'Taekwondo2026';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function startServer(env, port = PORT) {
-  const p = spawn(process.execPath, [join(ROOT, 'scripts', 'dev-server.mjs'), '--env', env.file], {
+  // Vercel 함수처럼 ES 모듈 require() 미지원 조건으로 실행
+  const p = spawn(process.execPath, ['--no-experimental-require-module', join(ROOT, 'scripts', 'dev-server.mjs'), '--env', env.file], {
     env: { ...process.env, PORT: String(port), CMS_DOC_CACHE_MS: '0', ...env.extra }, stdio: ['ignore', 'pipe', 'pipe'],
   });
   await new Promise((resolve, reject) => {
@@ -71,6 +72,16 @@ const runSync = (extraEnv = {}) => spawnSync(process.execPath, [join(ROOT, 'scri
 });
 
 /* ── 테스트 ─────────────────────────────────────────────── */
+
+// Vercel 함수 실행 환경은 CommonJS 모듈에서 ES 모듈을 require() 할 수 없다 (2026-11-05 운영 500 오류 원인).
+// 같은 조건으로 서버 함수와 저장소 라이브러리를 불러와 본다.
+test('Vercel 실행 환경 호환: 서버 함수 로딩', () => {
+  const url = f => 'file:///' + join(ROOT, f).replace(/\\/g, '/');
+  const code = ['api/render.js', 'api/admin.js', 'api/sync.js'].map(f => `await import(${JSON.stringify(url(f))});`).join('')
+    + "await import('@vercel/blob'); await import('@upstash/redis');";
+  const r = spawnSync(process.execPath, ['--no-experimental-require-module', '--input-type=module', '-e', code], { cwd: ROOT, encoding: 'utf8' });
+  assert.equal(r.status, 0, r.stderr);
+});
 
 test('설정 상태 · 토큰 없는 동기화 요청 차단', async () => {
   assert.equal((await admin('GET', 'status')).data.configured, true);
