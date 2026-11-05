@@ -3,6 +3,7 @@ scripts/
 docs/
 .cms/
 .env.example
-# 동기화된 사진 사본은 내 PC 보관용 (원본은 Vercel Blob)
+# 동기화된 사진 사본은 내 PC 보관용 (원본은 Supabase Storage)
 content/media/
 content/_충돌/
+supabase/
