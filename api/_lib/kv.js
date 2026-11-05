@@ -27,19 +27,21 @@ if nr > 0 then redis.call('LTRIM', KEYS[3], 0, ${MAX_REVS - 1}) end
 return nv
 `;
 
-async function redisBackend(url, token) {
+// CMS_KEY_PREFIX: 운영 저장소에서 시험할 때 운영 키와 겹치지 않도록 모든 키 앞에 붙임 (운영에서는 비워 둠)
+async function redisBackend(url, token, prefix = '') {
   const { Redis } = await import('@upstash/redis');
   const r = new Redis({ url, token, automaticDeserialization: false });
+  const p = k => prefix + k;
   return {
     name: 'redis',
-    get: k => r.get(k),
-    mget: keys => (keys.length ? r.mget(...keys) : []),
-    set: (k, v, ttl) => (ttl ? r.set(k, v, { ex: ttl }) : r.set(k, v)),
-    del: k => r.del(k),
-    lrange: (k, a, b) => r.lrange(k, a, b),
+    get: k => r.get(p(k)),
+    mget: keys => (keys.length ? r.mget(...keys.map(p)) : []),
+    set: (k, v, ttl) => (ttl ? r.set(p(k), v, { ex: ttl }) : r.set(p(k), v)),
+    del: k => r.del(p(k)),
+    lrange: (k, a, b) => r.lrange(p(k), a, b),
     async casDoc({ expectVer, doc, sets = {}, dels = [], revisions = [] }) {
       const setKeys = Object.keys(sets);
-      const keys = [VER, DOC, REVS, ...setKeys, ...dels];
+      const keys = [VER, DOC, REVS, ...setKeys, ...dels].map(p);
       const args = [String(expectVer), doc, String(setKeys.length), String(dels.length), String(revisions.length),
         ...setKeys.map(k => sets[k]), ...revisions];
       const nv = await r.eval(CAS_SCRIPT, keys, args);
@@ -92,7 +94,7 @@ export async function kv() {
   if (cached) return cached;
   const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (url && token) cached = await redisBackend(url, token);
+  if (url && token) cached = await redisBackend(url, token, process.env.CMS_KEY_PREFIX || '');
   else if (process.env.CMS_STORE_DIR) cached = fileBackend(process.env.CMS_STORE_DIR);
   return cached;
 }

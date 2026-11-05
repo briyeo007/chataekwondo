@@ -5,6 +5,8 @@ import { mkdirSync, writeFileSync, rmSync, existsSync, readFileSync } from 'node
 import { join, dirname } from 'node:path';
 
 const LOCAL_PREFIX = '/cms-media/';
+// CMS_MEDIA_PREFIX: 운영 Blob 에서 시험할 때 파일을 별도 폴더에 둠 (운영에서는 비워 둠)
+const blobPath = path => (process.env.CMS_MEDIA_PREFIX || '') + path;
 
 export function mediaConfigured() {
   return !!(process.env.BLOB_READ_WRITE_TOKEN || process.env.CMS_STORE_DIR);
@@ -14,7 +16,7 @@ export function mediaConfigured() {
 export async function putMedia(path, buffer, contentType, { overwrite = false } = {}) {
   if (process.env.BLOB_READ_WRITE_TOKEN) {
     const { put } = await import('@vercel/blob');
-    const r = await put(path, buffer, {
+    const r = await put(blobPath(path), buffer, {
       access: 'public',
       contentType,
       addRandomSuffix: false,
@@ -46,8 +48,9 @@ export async function listMedia(prefix) {
     const out = [];
     let cursor;
     do {
-      const r = await list({ prefix, cursor, limit: 1000 });
-      out.push(...r.blobs.map(b => ({ pathname: b.pathname, url: b.url, uploadedAt: b.uploadedAt })));
+      const r = await list({ prefix: blobPath(prefix), cursor, limit: 1000 });
+      const cut = blobPath('').length;
+      out.push(...r.blobs.map(b => ({ pathname: b.pathname.slice(cut), url: b.url, uploadedAt: b.uploadedAt })));
       cursor = r.hasMore ? r.cursor : undefined;
     } while (cursor);
     return out;

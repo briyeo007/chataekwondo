@@ -1,5 +1,7 @@
 // 통합 테스트: 로컬 테스트 저장소로 개발 서버를 띄워 관리자 로그인·수정·충돌 방지·업로드·복구·동기화를 실제로 시험한다.
 //   npm test
+//   npm run test:storage → 실제 Upstash Redis·Vercel Blob 으로 같은 시험 (.cms/vercel-dev.env 의 연결 정보 사용).
+//     모든 키·파일에 임의 접두사를 붙여 운영 데이터와 분리하고, 끝나면 시험 데이터를 모두 지운다.
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn, spawnSync } from 'node:child_process';
@@ -15,6 +17,13 @@ const STORE = join(WORK, 'store');
 const CONTENT = join(WORK, 'content');
 const ENV_FILE = join(WORK, 'test.env');
 const TOKEN = randomBytes(32).toString('base64url');
+const REAL = process.env.CMS_TEST_STORAGE || (process.argv.includes('--storage') ? join(ROOT, '.cms', 'vercel-dev.env') : null);
+const RUN_ID = randomBytes(4).toString('hex');
+const KEY_PREFIX = `cmstest-${RUN_ID}:`;
+const MEDIA_PREFIX = `_cmstest-${RUN_ID}/`;
+let realEnv = null;
+let redis = null;
+let prodKeysBefore = null;
 let server;
 let cookie = '';
 let recoveryCode = '';
@@ -35,15 +44,62 @@ async function startServer(env, port = PORT) {
   return p;
 }
 
+/* ── 실제 저장소 모드 도우미 ─────────────────────────────── */
+async function scanKeys(match) {
+  const keys = [];
+  let cursor = '0';
+  do {
+    const [next, batch] = await redis.scan(cursor, { match, count: 500 });
+    keys.push(...batch);
+    cursor = String(next);
+  } while (cursor !== '0');
+  return keys;
+}
+/** 이번 시험이 만든 키·파일 모두 삭제 */
+async function cleanupReal() {
+  const keys = await scanKeys(`${KEY_PREFIX}*`);
+  for (let i = 0; i < keys.length; i += 100) await redis.del(...keys.slice(i, i + 100));
+  const { list, del } = await import('@vercel/blob');
+  const opts = { token: realEnv.BLOB_READ_WRITE_TOKEN };
+  let blobs = (await list({ prefix: MEDIA_PREFIX, limit: 1000, ...opts })).blobs;
+  let files = 0;
+  while (blobs.length) {
+    files += blobs.length;
+    await del(blobs.map(b => b.url), opts);
+    blobs = (await list({ prefix: MEDIA_PREFIX, limit: 1000, ...opts })).blobs;
+  }
+  return { keys: keys.length, files, left: (await scanKeys(`${KEY_PREFIX}*`)).length };
+}
+const otherKeys = async () => (await scanKeys('*')).filter(k => !k.startsWith('cmstest-')).sort();
+
 before(async () => {
   mkdirSync(WORK, { recursive: true });
-  writeFileSync(ENV_FILE, [
-    `CMS_SITE_URL=${SITE}`, `CMS_SYNC_TOKEN=${TOKEN}`, `SESSION_SECRET=${randomBytes(32).toString('base64url')}`,
-    `BACKUP_KEY=${randomBytes(32).toString('base64url')}`, `CMS_STORE_DIR=${STORE.replace(/\\/g, '/')}`,
-  ].join('\n'));
+  const lines = [`CMS_SITE_URL=${SITE}`, `CMS_SYNC_TOKEN=${TOKEN}`, `SESSION_SECRET=${randomBytes(32).toString('base64url')}`,
+    `BACKUP_KEY=${randomBytes(32).toString('base64url')}`];
+  if (REAL) {
+    if (!existsSync(REAL)) throw new Error(`연결 정보 파일이 없습니다: ${REAL}`);
+    const { parseEnv } = await import('node:util');
+    realEnv = parseEnv(readFileSync(REAL, 'utf8'));
+    const url = realEnv.KV_REST_API_URL || realEnv.UPSTASH_REDIS_REST_URL;
+    const token = realEnv.KV_REST_API_TOKEN || realEnv.UPSTASH_REDIS_REST_TOKEN;
+    if (!url || !token || !realEnv.BLOB_READ_WRITE_TOKEN) throw new Error(`${REAL} 에 KV_REST_API_URL / KV_REST_API_TOKEN / BLOB_READ_WRITE_TOKEN 이 없습니다`);
+    const { Redis } = await import('@upstash/redis');
+    redis = new Redis({ url, token, automaticDeserialization: false });
+    prodKeysBefore = await otherKeys();
+    console.log(`실제 저장소 시험 — 키 접두사 ${KEY_PREFIX}, 사진 폴더 ${MEDIA_PREFIX}, 기존 키 ${prodKeysBefore.length}개`);
+    lines.push(`KV_REST_API_URL=${url}`, `KV_REST_API_TOKEN=${token}`, `BLOB_READ_WRITE_TOKEN=${realEnv.BLOB_READ_WRITE_TOKEN}`,
+      `CMS_KEY_PREFIX=${KEY_PREFIX}`, `CMS_MEDIA_PREFIX=${MEDIA_PREFIX}`);
+  } else {
+    lines.push(`CMS_STORE_DIR=${STORE.replace(/\\/g, '/')}`);
+  }
+  writeFileSync(ENV_FILE, lines.join('\n'));
   server = await startServer({ file: ENV_FILE });
 });
-after(() => { server?.kill(); rmSync(WORK, { recursive: true, force: true }); });
+after(async () => {
+  server?.kill();
+  rmSync(WORK, { recursive: true, force: true });
+  if (REAL) await cleanupReal().catch(e => console.error(`✗ 시험 데이터 정리 실패 (접두사 ${KEY_PREFIX}):`, e.message));
+});
 
 /* ── 요청 도우미 ─────────────────────────────────────────── */
 async function admin(method, path, body, { headers = {}, raw } = {}) {
@@ -117,7 +173,10 @@ test('비밀번호 설정 전 로그인 불가 · 일회용 링크로 설정', a
 });
 
 test('비밀번호는 해시로만 저장', async () => {
-  const kv = readFileSync(join(STORE, 'kv.json'), 'utf8');
+  const kv = REAL
+    ? (await Promise.all((await scanKeys(`${KEY_PREFIX}*`)).map(async k =>
+      `${k}=${(await redis.type(k)) === 'list' ? (await redis.lrange(k, 0, -1)).join() : await redis.get(k)}`))).join('\n')
+    : readFileSync(join(STORE, 'kv.json'), 'utf8');
   assert.doesNotMatch(kv, new RegExp(PASSWORD));
   assert.doesNotMatch(kv, new RegExp(recoveryCode));
   assert.match(kv, /scrypt\$/);
@@ -146,7 +205,8 @@ test('사진 업로드: JPEG만 허용, 업로드한 사진 열람 가능', asyn
   const jpeg = Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), randomBytes(500)]);
   const up = await admin('POST', 'upload?folder=gallery', jpeg, { raw: true, headers: { 'Content-Type': 'image/jpeg' } });
   assert.equal(up.status, 200);
-  const img = await fetch(SITE + up.data.url);
+  if (REAL) assert.ok(up.data.url.startsWith('https://') && up.data.url.includes(`.public.blob.vercel-storage.com/${MEDIA_PREFIX}`), up.data.url);
+  const img = await fetch(new URL(up.data.url, SITE));
   assert.equal(img.status, 200);
   const g = await admin('POST', 'gallery', { rows: [{ pane: 'daily', src: up.data.url, storage_path: up.data.path, caption: '새 사진', title: '새 사진', sort: -1 }] });
   assert.equal(g.status, 200);
@@ -263,4 +323,13 @@ test('저장소 장애 시 content/ 사본으로 표시', async () => {
 test('모든 기기에서 로그아웃', async () => {
   assert.equal((await admin('POST', 'logout-all', {})).status, 200);
   assert.equal((await admin('GET', 'me')).status, 401);
+});
+
+test('실제 저장소: 시험 데이터 정리, 기존 키 변화 없음', { skip: !REAL }, async () => {
+  server.kill();
+  const r = await cleanupReal();
+  console.log(`정리: 키 ${r.keys}개, 사진 ${r.files}개 삭제`);
+  assert.ok(r.keys > 0);
+  assert.equal(r.left, 0);
+  assert.deepEqual(await otherKeys(), prodKeysBefore);
 });

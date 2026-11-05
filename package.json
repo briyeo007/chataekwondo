@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node scripts/dev-server.mjs",
     "test": "node --test scripts/test-render.mjs scripts/test-api.mjs",
+    "test:storage": "node scripts/test-api.mjs --storage",
     "check:render": "node scripts/check-render.mjs",
     "sync": "node scripts/cms-sync.mjs",
     "sync:install": "node scripts/sync-install.mjs",
