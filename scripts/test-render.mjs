@@ -120,6 +120,8 @@ test('잘못된 이미지 주소(javascript:)는 무시', async () => {
 test('DB 미설정 시 원본 그대로', async () => {
   const saved = process.env.CMS_LOCAL_DATA;
   delete process.env.CMS_LOCAL_DATA;
+  process.env.CMS_CONTENT_DIR = join(ROOT, '.cms', 'no-content'); // 프로젝트의 동기화된 content/ 사본도 없는 상태
+  resetLocalCache();
   let body = '';
   const res = { statusCode: 200, headers: {}, setHeader(k, v) { this.headers[k] = v; }, end(b) { body = b; } };
   await handler({ url: '/api/render?page=greeting' }, res);

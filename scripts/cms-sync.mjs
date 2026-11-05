@@ -165,22 +165,21 @@ async function dailyBackup() {
 
 /* ── 한 번 실행 ─────────────────────────────────────────────── */
 let running = false;
-let writingUntil = 0;
+let again = false; // 실행 중에 들어온 요청 → 끝나면 한 번 더 (그 사이 고친 파일을 놓치지 않도록)
 async function cycle(reason = '') {
-  if (running) return;
+  if (running) { again = true; return; }
   running = true;
   try {
     let state = loadState();
     if (state && state.site !== site) { log(`대상 사이트가 바뀌어 처음부터 다시 받습니다 (${state.site} → ${site})`); state = null; }
     const { touched, pushed } = await pushLocal(state);
-    writingUntil = Date.now() + 3000;
     await pull(state, touched, pushed > 0);
-    writingUntil = Date.now() + 3000;
     await dailyBackup();
   } catch (e) {
     log(`✗ 동기화 실패${reason ? ` (${reason})` : ''}: ${e.message} — 다음에 다시 시도합니다.`);
   } finally {
     running = false;
+    if (again) { again = false; setTimeout(() => cycle('파일 수정'), 1000); }
   }
 }
 
@@ -207,10 +206,11 @@ await cycle('시작');
 setInterval(() => cycle(), INTERVAL_MS);
 
 // content/ 파일을 고치면 5초 뒤 바로 올림
+// (동기화 프로그램이 직접 쓴 파일도 감지되지만, 다음 실행에서 바뀐 것이 없으면 아무것도 하지 않고 끝남)
 let timer = null;
 mkdirSync(CONTENT, { recursive: true });
 watch(CONTENT, { recursive: true }, (event, file) => {
-  if (!file || Date.now() < writingUntil) return;
+  if (!file) return;
   if (/^(media|_충돌)[\\/]|README\.md$/.test(file)) return;
   clearTimeout(timer);
   timer = setTimeout(() => cycle('파일 수정'), 5000);
