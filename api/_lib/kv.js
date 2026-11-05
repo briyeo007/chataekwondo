@@ -24,7 +24,8 @@ function supabaseBackend(url, key, prefix = '') {
       method,
       headers: supabaseHeaders(key, { 'Content-Type': 'application/json', ...(prefer ? { Prefer: prefer } : {}) }),
       body: body === undefined ? undefined : JSON.stringify(body),
-      signal: AbortSignal.timeout(15_000),
+      // 읽기는 짧게: 저장소가 느리면 방문자 페이지가 기다리지 않고 바로 사본·원본으로 표시 (render 함수 제한 10초)
+      signal: AbortSignal.timeout(method === 'GET' ? 4_000 : 15_000),
     });
     const text = await res.text();
     if (!res.ok) throw new Error(`Supabase ${method} ${path.split('?')[0]} ${res.status}: ${text.slice(0, 200)}`);
