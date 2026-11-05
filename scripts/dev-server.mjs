@@ -69,7 +69,7 @@ createServer(async (req, res) => {
   let path = url.pathname;
   const params = new URLSearchParams(url.search);
   try {
-    // 로컬 테스트 저장소의 사진 (운영에서는 Vercel Blob 주소)
+    // 로컬 테스트 저장소의 사진 (운영에서는 Supabase Storage 주소)
     if (path.startsWith('/cms-media/')) {
       const buf = readLocalMedia(decodeURIComponent(path.slice('/cms-media/'.length)));
       if (!buf) { res.statusCode = 404; return res.end('Not found'); }

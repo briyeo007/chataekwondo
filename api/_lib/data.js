@@ -1,5 +1,5 @@
 // 방문자 페이지 렌더링용 콘텐츠 조회.
-// 우선순위: ① 저장소(Upstash Redis / 로컬 테스트 저장소) → ② 배포에 포함된 content/ 파일(내 PC가 동기화한 사본)
+// 우선순위: ① 저장소(Supabase / 로컬 테스트 저장소) → ② 배포에 포함된 content/ 파일(내 PC가 동기화한 사본)
 //          → ③ 둘 다 없으면 null (호출 측이 원본 HTML 그대로 표시)
 import { readFile, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
