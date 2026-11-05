@@ -1,0 +1,482 @@
+[
+  {
+    "id": "37fbf124-414d-482d-8318-bef37e313753",
+    "pane": "all",
+    "src": "/images/france-5.jpg",
+    "title": "프랑스 미요(Millau) 태권도 시범 — 2026",
+    "caption": "🇫🇷 프랑스 미요 시범 — 2026",
+    "alt": "프랑스 미요 시범",
+    "big": true,
+    "sort": 0
+  },
+  {
+    "id": "fc592c53-78e6-4fe9-a4ea-cb17bfa76d94",
+    "pane": "all",
+    "src": "/images/france-1.jpg",
+    "title": "프랑스 칸-쉬르-메르 태권도 화합 — 2026",
+    "caption": "🇫🇷 칸-쉬르-메르 화합 — 2026",
+    "alt": "프랑스 칸-쉬르-메르 시범",
+    "big": false,
+    "sort": 1
+  },
+  {
+    "id": "92e265db-d651-42a2-a3a9-34f2f40b7902",
+    "pane": "all",
+    "src": "/images/kbs-1.png",
+    "title": "KBS 더갓 스팟 출연 — 2025",
+    "caption": "📺 KBS 더갓 스팟 — 2025",
+    "alt": "KBS 방송 출연",
+    "big": false,
+    "sort": 2
+  },
+  {
+    "id": "fa692afb-bdd6-4e46-9ad5-8bbc21edaff7",
+    "pane": "all",
+    "src": "/images/4th-degree-1.jpg",
+    "title": "국기원 4품 동시 합격 — 2025",
+    "caption": "🏅 국기원 4품 동시 합격 — 2025",
+    "alt": "국기원 4품 합격",
+    "big": false,
+    "sort": 3
+  },
+  {
+    "id": "b82b068d-69d6-4bf6-a1ee-56f280eb83fa",
+    "pane": "all",
+    "src": "/images/water-1.jpg",
+    "title": "수상레저스포츠 체험 — 2025",
+    "caption": "🏄 수상레저 체험 — 2025",
+    "alt": "수상레저스포츠 체험",
+    "big": false,
+    "sort": 4
+  },
+  {
+    "id": "c676cacf-f858-494a-aac2-782b1691c088",
+    "pane": "all",
+    "src": "/images/disability-1.jpg",
+    "title": "성인 지적장애인 태권도 수업 — 2025",
+    "caption": "❤️ 특별 성인 수업 — 2025",
+    "alt": "특별 수업",
+    "big": false,
+    "sort": 5
+  },
+  {
+    "id": "4c5f2eb5-ca6f-4b43-8d93-40b7f7106fd8",
+    "pane": "all",
+    "src": "/images/poomsae-1.jpg",
+    "title": "품새 한마당 대회 — 2025",
+    "caption": "🏅 품새 한마당 대회 — 2025",
+    "alt": "품새 한마당 대회",
+    "big": false,
+    "sort": 6
+  },
+  {
+    "id": "834ccf3c-2a93-4ce7-8bda-4510ae30a856",
+    "pane": "all",
+    "src": "/images/water-3.jpg",
+    "title": "수상레저스포츠 체험 — 2025",
+    "caption": "🏄 수상레저 체험 — 2025",
+    "alt": "수상레저스포츠 체험",
+    "big": false,
+    "sort": 7
+  },
+  {
+    "id": "e35ee14a-f003-4269-8975-d0e8c1d15923",
+    "pane": "all",
+    "src": "/images/france-14.png",
+    "title": "프랑스 투어 단체사진 — 2026",
+    "caption": "🇫🇷 프랑스 투어 단체사진 — 2026",
+    "alt": "프랑스 투어 단체사진",
+    "big": false,
+    "sort": 8
+  },
+  {
+    "id": "0d4e9240-440c-4e33-b396-532810d37777",
+    "pane": "all",
+    "src": "/images/france-7.jpg",
+    "title": "프랑스 미요 시범 — 2026",
+    "caption": "🇫🇷 미요 시범 현장 — 2026",
+    "alt": "프랑스 미요 시범",
+    "big": false,
+    "sort": 9
+  },
+  {
+    "id": "33fe92db-0f32-496d-8fe0-160ca862ae98",
+    "pane": "all",
+    "src": "/images/disability-2.jpg",
+    "title": "성인 지적장애인 수업 — 2025",
+    "caption": "❤️ 특별 성인 수업 — 2025",
+    "alt": "특별 수업",
+    "big": false,
+    "sort": 10
+  },
+  {
+    "id": "69d51d0d-7cbb-4f58-8649-6333d1a9122b",
+    "pane": "all",
+    "src": "/images/4th-degree-2.png",
+    "title": "국기원 4품 합격 — 2025",
+    "caption": "🏅 국기원 4품 합격 — 2025",
+    "alt": "국기원 4품 합격",
+    "big": false,
+    "sort": 11
+  },
+  {
+    "id": "3c0b059b-d81a-4536-8c4b-b6b7a9a8bf92",
+    "pane": "all",
+    "src": "/images/water-7.jpg",
+    "title": "수상레저스포츠 체험 — 2025",
+    "caption": "🏄 수상레저 체험 — 2025",
+    "alt": "수상레저스포츠 체험",
+    "big": false,
+    "sort": 12
+  },
+  {
+    "id": "05345f99-3ba5-4464-8519-f65e5dd929c3",
+    "pane": "broadcast",
+    "src": "/images/kbs-1.png",
+    "title": "KBS 더갓 스팟 출연 — 2025",
+    "caption": "📺 KBS 더갓 스팟 출연 — 2025",
+    "alt": "KBS 출연",
+    "big": true,
+    "sort": 0
+  },
+  {
+    "id": "ec80f86e-12d6-4430-8bd3-c4ca73da5b21",
+    "pane": "broadcast",
+    "src": "/images/disability-1.jpg",
+    "title": "성인 지적장애인 수업 — 2025",
+    "caption": "❤️ 성인 지적장애인 수업 — 2025",
+    "alt": "특별 수업",
+    "big": false,
+    "sort": 1
+  },
+  {
+    "id": "41c7d3cd-5843-4f51-9a88-71b99238ffd0",
+    "pane": "broadcast",
+    "src": "/images/kbs-2.png",
+    "title": "KBS 더갓 스팟 출연 — 2025",
+    "caption": "📺 KBS 더갓 스팟 — 2025",
+    "alt": "KBS 방송 출연",
+    "big": false,
+    "sort": 2
+  },
+  {
+    "id": "8cae4bc2-3d75-4910-89c6-ffee9232dbca",
+    "pane": "broadcast",
+    "src": "/images/kbs-3.png",
+    "title": "KBS 더갓 스팟 출연 — 2025",
+    "caption": "📺 KBS 더갓 스팟 — 2025",
+    "alt": "KBS 방송 출연",
+    "big": false,
+    "sort": 3
+  },
+  {
+    "id": "3b087977-fc6e-4a5d-86a2-0130404e151e",
+    "pane": "broadcast",
+    "src": "/images/disability-2.jpg",
+    "title": "성인 지적장애인 수업 — 2025",
+    "caption": "❤️ 성인 지적장애인 수업 — 2025",
+    "alt": "특별 수업",
+    "big": false,
+    "sort": 4
+  },
+  {
+    "id": "baf78056-8aaa-4781-8d4a-bd2bc71f7111",
+    "pane": "broadcast",
+    "src": "/images/disability-3.jpg",
+    "title": "성인 지적장애인 수업 — 2025",
+    "caption": "❤️ 성인 지적장애인 수업 — 2025",
+    "alt": "특별 수업",
+    "big": false,
+    "sort": 5
+  },
+  {
+    "id": "54946277-3209-4dad-a8ff-ffb83c2e5987",
+    "pane": "daily",
+    "src": "/images/water-1.jpg",
+    "title": "수상레저스포츠 체험 — 2025",
+    "caption": "🏄 수상레저 체험 — 2025",
+    "alt": "수상레저스포츠 체험",
+    "big": true,
+    "sort": 0
+  },
+  {
+    "id": "bdf0f3e5-45a0-4f2a-8f40-f9ce339bc37b",
+    "pane": "daily",
+    "src": "/images/water-2.jpg",
+    "title": "수상레저스포츠 체험",
+    "caption": "🏄 수상레저 체험",
+    "alt": "수상레저스포츠 체험",
+    "big": false,
+    "sort": 1
+  },
+  {
+    "id": "a7a8f1c2-1c9a-49c2-880a-159d2d0a5c22",
+    "pane": "daily",
+    "src": "/images/water-4.jpg",
+    "title": "수상레저스포츠 체험",
+    "caption": "🏄 수상레저 체험",
+    "alt": "수상레저스포츠 체험",
+    "big": false,
+    "sort": 2
+  },
+  {
+    "id": "9a6012b7-ab64-4f79-80d9-622176a3158b",
+    "pane": "daily",
+    "src": "/images/water-5.jpg",
+    "title": "수상레저스포츠 체험",
+    "caption": "🏄 수상레저 체험",
+    "alt": "수상레저스포츠 체험",
+    "big": false,
+    "sort": 3
+  },
+  {
+    "id": "d38ca42f-c562-4561-8946-aaee20b5dbc0",
+    "pane": "daily",
+    "src": "/images/water-6.jpg",
+    "title": "수상레저스포츠 체험",
+    "caption": "🏄 수상레저 체험",
+    "alt": "수상레저스포츠 체험",
+    "big": false,
+    "sort": 4
+  },
+  {
+    "id": "22291c04-55a1-483d-8ca6-3a58b6d74e82",
+    "pane": "daily",
+    "src": "/images/water-3.jpg",
+    "title": "수상레저스포츠 체험",
+    "caption": "🏄 수상레저 체험",
+    "alt": "수상레저스포츠 체험",
+    "big": false,
+    "sort": 5
+  },
+  {
+    "id": "ecc69536-2a2b-45b7-8846-f70edd01dbf2",
+    "pane": "daily",
+    "src": "/images/water-7.jpg",
+    "title": "수상레저스포츠 체험",
+    "caption": "🏄 수상레저 체험",
+    "alt": "수상레저스포츠 체험",
+    "big": false,
+    "sort": 6
+  },
+  {
+    "id": "32bcb20a-d8c3-4126-9dde-26f704379212",
+    "pane": "daily",
+    "src": "/images/water-8.jpg",
+    "title": "수상레저스포츠 체험",
+    "caption": "🏄 수상레저 체험",
+    "alt": "수상레저스포츠 체험",
+    "big": false,
+    "sort": 7
+  },
+  {
+    "id": "91e524f0-0b3a-4b58-baab-2c97b4896c05",
+    "pane": "exam",
+    "src": "/images/4th-degree-1.jpg",
+    "title": "국기원 4품 동시 합격 — 2025",
+    "caption": "🏅 국기원 4품 동시 합격 5명 — 2025",
+    "alt": "4품 합격",
+    "big": true,
+    "sort": 0
+  },
+  {
+    "id": "1643dc16-9aae-49a1-be43-4a42afdb186a",
+    "pane": "exam",
+    "src": "/images/poomsae-1.jpg",
+    "title": "승급 심사",
+    "caption": "🎖️ 승급 심사",
+    "alt": "승급 심사",
+    "big": false,
+    "sort": 1
+  },
+  {
+    "id": "6f9d1a63-b6b0-44cd-a32b-851000661e02",
+    "pane": "exam",
+    "src": "/images/poomsae-2.jpg",
+    "title": "승급 심사 현장",
+    "caption": "🎖️ 승급 심사 현장",
+    "alt": "심사 현장",
+    "big": false,
+    "sort": 2
+  },
+  {
+    "id": "26e7e59c-a3c1-4368-a2cd-c95e5c4875b7",
+    "pane": "exam",
+    "src": "/images/poomsae-3.jpg",
+    "title": "수련생 성과",
+    "caption": "🏅 수련생 성과",
+    "alt": "수련 성과",
+    "big": false,
+    "sort": 3
+  },
+  {
+    "id": "d8e574e9-c0c4-4348-8674-53fa893cfcca",
+    "pane": "exam",
+    "src": "/images/poomsae-4.jpg",
+    "title": "품새 한마당 대회 — 2025",
+    "caption": "🎖️ 품새 한마당 대회 — 2025",
+    "alt": "품새 한마당 대회",
+    "big": false,
+    "sort": 4
+  },
+  {
+    "id": "2731a838-f60c-4cd2-a193-aef63d2e3df0",
+    "pane": "exam",
+    "src": "/images/4th-degree-2.png",
+    "title": "국기원 4품 합격 — 2025",
+    "caption": "🏅 국기원 4품 합격 — 2025",
+    "alt": "국기원 4품 합격",
+    "big": false,
+    "sort": 5
+  },
+  {
+    "id": "da0b93fe-ea5d-4143-9f98-e85fda9d2182",
+    "pane": "exam",
+    "src": "/images/4th-degree-3.png",
+    "title": "국기원 4품 합격 — 2025",
+    "caption": "🏅 국기원 4품 합격 — 2025",
+    "alt": "국기원 4품 합격",
+    "big": false,
+    "sort": 6
+  },
+  {
+    "id": "eb62ef9f-1233-4611-9783-b33a8f7b28e2",
+    "pane": "france",
+    "src": "/images/france-5.jpg",
+    "title": "프랑스 미요(Millau) 태권도 시범 — 2026",
+    "caption": "🇫🇷 프랑스 미요(Millau) 시범 — 2026",
+    "alt": "프랑스 미요",
+    "big": true,
+    "sort": 0
+  },
+  {
+    "id": "5126cae5-b4a1-4de2-bd35-f0284de4d546",
+    "pane": "france",
+    "src": "/images/france-1.jpg",
+    "title": "프랑스 칸-쉬르-메르 — 2026",
+    "caption": "🇫🇷 칸-쉬르-메르 태권도 화합 — 2026",
+    "alt": "프랑스 칸",
+    "big": false,
+    "sort": 1
+  },
+  {
+    "id": "5752ffe7-ef20-4de1-b78a-4af2b20eab18",
+    "pane": "france",
+    "src": "/images/france-14.png",
+    "title": "프랑스 투어 현장",
+    "caption": "🇫🇷 프랑스 투어 현장",
+    "alt": "투어 현장",
+    "big": false,
+    "sort": 2
+  },
+  {
+    "id": "c392a24b-25c0-4d69-824d-1e4571aeebff",
+    "pane": "france",
+    "src": "/images/france-4.jpg",
+    "title": "글로벌 태권도 교류",
+    "caption": "🌍 글로벌 태권도 교류",
+    "alt": "글로벌 교류",
+    "big": false,
+    "sort": 3
+  },
+  {
+    "id": "1f411dc9-6cd2-47a7-9de5-62c095217cea",
+    "pane": "france",
+    "src": "/images/france-2.jpg",
+    "title": "프랑스 투어 현장 — 2026",
+    "caption": "🇫🇷 프랑스 투어 현장 — 2026",
+    "alt": "프랑스 투어",
+    "big": false,
+    "sort": 4
+  },
+  {
+    "id": "2e90cc5b-a944-4a7a-a0a1-32c99089cda4",
+    "pane": "france",
+    "src": "/images/france-3.jpg",
+    "title": "프랑스 투어 현장 — 2026",
+    "caption": "🇫🇷 프랑스 투어 현장 — 2026",
+    "alt": "프랑스 투어",
+    "big": false,
+    "sort": 5
+  },
+  {
+    "id": "3e248fb8-4a57-4679-b1a4-d9ac14b8fc59",
+    "pane": "france",
+    "src": "/images/france-6.jpg",
+    "title": "프랑스 미요 시범 — 2026",
+    "caption": "🇫🇷 미요 시범 현장 — 2026",
+    "alt": "프랑스 미요 시범",
+    "big": false,
+    "sort": 6
+  },
+  {
+    "id": "d0f83315-11c9-4d85-8366-c0897920fa77",
+    "pane": "france",
+    "src": "/images/france-7.jpg",
+    "title": "프랑스 미요 시범 — 2026",
+    "caption": "🇫🇷 미요 시범 현장 — 2026",
+    "alt": "프랑스 미요 시범",
+    "big": false,
+    "sort": 7
+  },
+  {
+    "id": "ca1a72b6-c775-40bb-9b27-bda5bf6415dc",
+    "pane": "france",
+    "src": "/images/france-8.jpg",
+    "title": "프랑스 투어 — 2026",
+    "caption": "🇫🇷 프랑스 투어 — 2026",
+    "alt": "프랑스 투어",
+    "big": false,
+    "sort": 8
+  },
+  {
+    "id": "afbac4f0-238f-44b6-9c94-3a291a34ca3c",
+    "pane": "france",
+    "src": "/images/france-9.jpg",
+    "title": "프랑스 투어 — 2026",
+    "caption": "🇫🇷 프랑스 투어 — 2026",
+    "alt": "프랑스 투어",
+    "big": false,
+    "sort": 9
+  },
+  {
+    "id": "ea847f99-21cb-4aa4-949a-84b8369d533d",
+    "pane": "france",
+    "src": "/images/france-10.jpg",
+    "title": "프랑스 투어 — 2026",
+    "caption": "🇫🇷 프랑스 투어 — 2026",
+    "alt": "프랑스 투어",
+    "big": false,
+    "sort": 10
+  },
+  {
+    "id": "c80d3a72-70af-4f84-ad75-1e3ed81cd0c5",
+    "pane": "france",
+    "src": "/images/france-11.jpg",
+    "title": "프랑스 투어 — 2026",
+    "caption": "🇫🇷 프랑스 투어 — 2026",
+    "alt": "프랑스 투어",
+    "big": false,
+    "sort": 11
+  },
+  {
+    "id": "556a3193-b8c8-418b-b32c-cf9d548952e9",
+    "pane": "france",
+    "src": "/images/france-12.jpg",
+    "title": "프랑스 투어 — 2026",
+    "caption": "🇫🇷 프랑스 투어 — 2026",
+    "alt": "프랑스 투어",
+    "big": false,
+    "sort": 12
+  },
+  {
+    "id": "3ddb28e7-cd52-4e2d-a263-4df622685093",
+    "pane": "france",
+    "src": "/images/france-13.jpg",
+    "title": "프랑스 투어 — 2026",
+    "caption": "🇫🇷 프랑스 투어 — 2026",
+    "alt": "프랑스 투어",
+    "big": false,
+    "sort": 13
+  }
+]

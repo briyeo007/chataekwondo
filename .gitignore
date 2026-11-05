@@ -11,3 +11,7 @@ node_modules/
 
 # Vercel
 .vercel/
+
+# 동기화 사본 중 내 PC 보관용 (사진 사본·충돌 보관본은 커밋하지 않음)
+content/media/
+content/_충돌/
